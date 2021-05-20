@@ -31,7 +31,7 @@ app.use(helmet({
   }));
 // Set the _csrf token and create req.csrfToken method
 app.use(
-    csurf({
+    csurf({ //also makes the XSRF-TOKEN cookie
       cookie: {
         secure: isProduction,
         sameSite: isProduction && "Lax",
