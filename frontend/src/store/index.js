@@ -3,8 +3,6 @@
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
-
-
 //root reducer
 const rootReducer = combineReducers({
 });

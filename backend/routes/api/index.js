@@ -44,8 +44,9 @@ router.use('/users', usersRouter);
     // }));
 
 //code for testing initial connection to server
-    // router.post('/test', function(req, res) {
-    //     res.json({ requestBody: req.body });
-    // });
+//required for part 2
+// router.post('/test', function(req, res) {
+//     res.json({ requestBody: req.body });
+// });
 
 module.exports = router;
