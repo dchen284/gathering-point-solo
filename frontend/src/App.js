@@ -4,6 +4,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 //internal imports
 import LoginFormPage from './components/LoginFormPage';
+import Navigation from "./components/Navigation";
 import SignupFormPage from './components/SignupFormPage';
 import { restoreSessionUser } from './store/session';
 
@@ -20,8 +21,7 @@ function App() {
   return isLoaded && (
     <>
       <h1>Hello from App</h1>
-      <Link to="/login">Log-In</Link>
-
+      <Navigation isLoaded={isLoaded} />
 
       <Switch>
         <Route path="/login">
