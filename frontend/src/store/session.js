@@ -47,7 +47,7 @@ const initialState = { user: null };
 
 export default function sessionReducer(state = initialState, action) {
     // The reducer normally looks at the action type field to decide what happens
-    let newState;
+    // let newState;
     switch (action.type) {
       // Do something here based on the different types of actions
       case SET_SESSION_USER:
