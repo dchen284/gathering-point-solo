@@ -20,6 +20,7 @@ export const login = (userData) => async (dispatch) => {
     if (res.ok) {
         // console.log('returned data', data);
         dispatch(setSessionUser(data.user));
+        return data.user;
     }
     else {
         throw res;
@@ -47,19 +48,19 @@ const initialState = { user: null };
 
 export default function sessionReducer(state = initialState, action) {
     // The reducer normally looks at the action type field to decide what happens
-    // let newState;
+    let newState;
     switch (action.type) {
       // Do something here based on the different types of actions
       case SET_SESSION_USER:
-        // newState = Object.assign({}, state);
-        // newState.user = action.payload;
-        // return newState;
-        return { user: action.payload };
+        newState = Object.assign({}, state);
+        newState.user = action.payload;
+        return newState;
+        // return { user: action.payload };
       case REMOVE_SESSION_USER:
         // newState = Object.assign({}, state);
         // newState.user = null;
         // return newState;
-        return initialState;
+        return {...initialState};
       default:
         // If this reducer doesn't recognize the action type, or doesn't
         // care about this specific action, return the existing state unchanged
