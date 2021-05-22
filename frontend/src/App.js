@@ -1,8 +1,9 @@
 //external imports
 import { useEffect, useState } from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 //internal imports
+import EventCard from './components/EventCard';
 import LoginFormPage from './components/LoginFormPage';
 import Navigation from "./components/Navigation";
 import SignupFormPage from './components/SignupFormPage';
@@ -18,20 +19,32 @@ function App() {
     dispatch(restoreSessionUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  return isLoaded && (
+  return (
     <>
       <h1>Hello from App</h1>
       <Navigation isLoaded={isLoaded} />
-
-      <Switch>
-        <Route path="/login">
-          <LoginFormPage />
-        </Route>
-        <Route path="/signup">
-          <SignupFormPage />
-        </Route>
-      </Switch>
-    </>
+      {isLoaded && (
+        <Switch>
+          <Route path="/login">
+            <LoginFormPage />
+          </Route>
+          <Route path="/signup">
+            <SignupFormPage />
+          </Route>
+        </Switch>
+      )}
+        <div className="eventCardDisplay">
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+          <EventCard />
+        </div>
+      </>
   );
 }
 
