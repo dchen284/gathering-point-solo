@@ -11,4 +11,8 @@ module.exports = {
       secret: process.env.JWT_SECRET,
       expiresIn: process.env.JWT_EXPIRES_IN,
     },
+    demouser: {
+      credential: process.env.DEMOUSER_CREDENTIAL,
+      password: process.env.DEMOUSER_PASSWORD,
+    },
 }

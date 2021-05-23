@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 //internal imports
 import './Navigation.css';
+import DemoUserButton from '../DemoUserButton';
 import LoginFormModal from '../LoginFormModal';
 import ProfileButton from '../ProfileButton';
 import SignupFormModal from '../SignupFormModal';
@@ -21,6 +22,7 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <>
+        <DemoUserButton />
         <LoginFormModal />
         <SignupFormModal />
       </>
