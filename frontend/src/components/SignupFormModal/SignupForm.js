@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 //internal imports
 import './SignupForm.css';
 import * as sessionActions from "../../store/session";
+import DemoUserButton from "../DemoUserButton";
 
 
 function SignupForm() {
@@ -73,6 +74,7 @@ function SignupForm() {
         />
       </label>
       <button className="pure-button" type="submit">Sign Up</button>
+      <DemoUserButton />
     </form>
   );
 }

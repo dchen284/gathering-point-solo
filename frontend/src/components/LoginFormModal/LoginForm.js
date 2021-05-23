@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 //internal imports
 import './LoginForm.css';
 import * as sessionActions from "../../store/session";
+import DemoUserButton from "../DemoUserButton";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function LoginForm() {
         />
       </label>
       <button className="pure-button" type="submit">Log In</button>
+      <DemoUserButton />
     </form>
   );
 }
