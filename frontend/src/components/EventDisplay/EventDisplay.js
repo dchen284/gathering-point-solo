@@ -18,12 +18,11 @@ export default function EventDisplay() {
 
     //useEffects
     useEffect( () => {
-        dispatch(eventActions.fetchEvents()).then(() => setIsLoaded(true));
+        dispatch(eventActions.fetchEventById(eventId)).then(() => setIsLoaded(true));
     }, [dispatch]);
 
     //get the event
     const event = useSelector( state => state.events[eventId] );
-    console.log('event', event);
 
     return (
         <>

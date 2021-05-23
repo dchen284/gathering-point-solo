@@ -7,8 +7,13 @@ const LOAD_EVENTS = 'event/LOAD_EVENTS';
 export const fetchEvents = () => async (dispatch) => {
     const res = await fetch('/api/events');
     const data = await res.json();
-    // console.log('data', data);
     dispatch(loadEvents(data));
+}
+
+export const fetchEventById = (eventId) => async (dispatch) => {
+  const res = await fetch(`/api/events/${eventId}`);
+  const data = await res.json();
+  dispatch(loadEvents([data]));
 }
 
 //action creators
