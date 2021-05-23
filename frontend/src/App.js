@@ -1,9 +1,10 @@
 //external imports
 import { useEffect, useState } from 'react';
-import { Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 //internal imports
 import EventCardDisplay from './components/EventCardDisplay';
+import EventDisplay from './components/EventDisplay';
 import Footer from './components/Footer';
 // import LoginFormPage from './components/LoginFormPage';
 import Navigation from "./components/Navigation";
@@ -26,16 +27,18 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          {/* <Route path="/login">
-            <LoginFormPage />
-          </Route> */}
-          {/* <Route path="/signup">
-            <SignupFormPage />
-          </Route> */}
+          <Route exact path={`/`}>
+            <EventCardDisplay />
+          </Route>
+          <Route path={`/events/:eventId`}>
+            <EventDisplay />
+          </Route>
+          <Route>
+            <div>404: Not Found</div>
+          </Route>
         </Switch>
       )}
-        <EventCardDisplay />
-        <Footer />
+      <Footer />
     </>
   );
 }
