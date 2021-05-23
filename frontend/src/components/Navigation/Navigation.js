@@ -32,7 +32,9 @@ function Navigation({ isLoaded }){
   return (
     <ul>
       <li>
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/">
+          <button className="pure-button">Home</button>
+        </NavLink>
         {isLoaded && sessionLinks}
       </li>
     </ul>
