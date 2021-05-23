@@ -13,7 +13,13 @@ export const fetchEvents = () => async (dispatch) => {
 export const fetchEventById = (eventId) => async (dispatch) => {
   const res = await fetch(`/api/events/${eventId}`);
   const data = await res.json();
-  dispatch(loadEvents([data]));
+  if (res.ok) {
+    dispatch(loadEvents([data]));
+  }
+  else {
+    throw res;
+    //how to display this error on the page?
+  }
 }
 
 //action creators
