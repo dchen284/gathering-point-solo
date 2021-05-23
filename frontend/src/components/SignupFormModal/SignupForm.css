@@ -1,3 +1,7 @@
 .green {
     color: green;
 }
+
+.errors {
+    color: red;
+}
