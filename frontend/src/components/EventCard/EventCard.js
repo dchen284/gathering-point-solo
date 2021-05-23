@@ -1,18 +1,17 @@
 import BookmarkButton from "../BookmarkButton";
 import { Link } from "react-router-dom";
 
-export default function EventCard() {
+export default function EventCard({event}) {
     return (
-        <Link to={`/signup`}>
+        <Link key={event.id} to={`/events/${event.id}`}>
             <div className="eventCard">
                 <div>
                     <img alt="standard" src="https://developer.mozilla.org/static/img/favicon144.png" />
                 </div>
-                <BookmarkButton />
-                <p>Title: FNM at Card Corner</p>
-                <p>Format: Standard</p>
-                <p>Organizer: Card Corner</p>
-                <p>Start Time: Friday, May 30, 2021, 5 PM</p>
+                <BookmarkButton key={event.id}/>
+                <p>Title: {event.title}</p>
+                <p>Organizer: {event.organizerName}</p>
+                <p>Start Time: {event.startTime}</p>
             </div>
         </Link>
 

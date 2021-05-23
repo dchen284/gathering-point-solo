@@ -1,12 +1,13 @@
 //external imports
 import { useEffect, useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 //internal imports
-import EventCard from './components/EventCard';
+import EventCardDisplay from './components/EventCardDisplay';
+import Footer from './components/Footer';
 // import LoginFormPage from './components/LoginFormPage';
 import Navigation from "./components/Navigation";
-import SignupFormPage from './components/SignupFormPage';
+// import SignupFormPage from './components/SignupFormPage';
 import { restoreSessionUser } from './store/session';
 
 function App() {
@@ -28,23 +29,14 @@ function App() {
           {/* <Route path="/login">
             <LoginFormPage />
           </Route> */}
-          <Route path="/signup">
+          {/* <Route path="/signup">
             <SignupFormPage />
-          </Route>
+          </Route> */}
         </Switch>
       )}
-        <div className="eventCardDisplay">
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
-          <EventCard />
-        </div>
-      </>
+        <EventCardDisplay />
+        <Footer />
+    </>
   );
 }
 

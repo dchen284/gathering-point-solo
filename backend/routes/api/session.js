@@ -23,6 +23,7 @@ const validateLogin = [
 
 //Routes
 
+
 // Log out
 router.delete(
     '/',

@@ -7,13 +7,14 @@ const { requireAuth } = require('../../utils/auth.js');
 const { setTokenCookie } = require('../../utils/auth.js');
 const { User } = require('../../db/models');
     //routers
+
+const eventsRouter = require('./events.js');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 
 //Routes, sorted by path name
-
+router.use('/events', eventsRouter);
 router.use('/session', sessionRouter);
-
 router.use('/users', usersRouter);
 
 //code for testing user auth middleware routes
