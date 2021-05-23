@@ -19,7 +19,7 @@ export default function EventDisplay() {
     //useEffects
     useEffect( () => {
         dispatch(eventActions.fetchEventById(eventId)).then(() => setIsLoaded(true));
-    }, [dispatch]);
+    }, [dispatch, eventId]);
 
     //get the event
     const event = useSelector( state => state.events[eventId] );

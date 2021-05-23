@@ -41,12 +41,16 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
         include: [ User ],
     });
 
+    console.log('fetchedEvent', fetchedEvent);
+
     if (!fetchedEvent) {
         const err = new Error('Login failed');
         err.status = 401;
         err.title = 'No event found';
         err.errors = ['No event was found.'];
-        return next(err);
+        console.log('err', err);
+        return err;
+        // return next(err);
       }
 
     return res.json(fetchedEvent);

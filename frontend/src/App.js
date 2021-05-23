@@ -30,7 +30,7 @@ function App() {
           <Route exact path={`/`}>
             <EventCardDisplay />
           </Route>
-          <Route path={`/events/:eventId`}>
+          <Route path={`/events/:eventId(\\d+)`}>
             <EventDisplay />
           </Route>
           <Route>

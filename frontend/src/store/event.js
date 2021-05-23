@@ -12,11 +12,14 @@ export const fetchEvents = () => async (dispatch) => {
 
 export const fetchEventById = (eventId) => async (dispatch) => {
   const res = await fetch(`/api/events/${eventId}`);
+  console.log('before data');
   const data = await res.json();
+  console.log('after data');
   if (res.ok) {
     dispatch(loadEvents([data]));
   }
   else {
+    console.log('got here');
     throw res;
     //how to display this error on the page?
   }
