@@ -1,17 +1,6 @@
 /* TODO Add site wide styles */
 
-.bookmark-button {
-    background-color: red;
-    color: white;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    position: relative;
-    bottom: 20px;
-}
+
 
 .pure-button {
     margin: 2px;
@@ -21,14 +10,6 @@ ul {
     list-style-type: none;
 }
 
-.eventCard {
-    /* width: 50%; */
-    background-color: grey;
-    padding: 5px 10px;
-    margin: 5px;
-    overflow: hidden;
-    /* height: 300px; */
-}
 
 .eventCardDisplay {
     display: flex;

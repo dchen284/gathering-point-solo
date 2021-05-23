@@ -1,5 +1,10 @@
-import BookmarkButton from "../BookmarkButton";
+
+//external imports
 import { Link } from "react-router-dom";
+
+//interal imports
+import './EventCard.css';
+import BookmarkButton from "../BookmarkButton";
 
 export default function EventCard({event}) {
     return (
@@ -8,7 +13,7 @@ export default function EventCard({event}) {
                 <div>
                     <img alt="standard" src="https://developer.mozilla.org/static/img/favicon144.png" />
                 </div>
-                <BookmarkButton key={event.id}/>
+                <BookmarkButton className='bookmark-button' key={event.id}/>
                 <p>Title: {event.title}</p>
                 <p>Organizer: {event.organizerName}</p>
                 <p>Start Time: {event.startTime}</p>
