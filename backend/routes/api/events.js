@@ -33,14 +33,25 @@ router.get('/', asyncHandler( async (req, res) => {
 }));
 
 //fetching an event by id
-router.get('/:eventId', asyncHandler( async (req, res) => {
+router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
 
     const eventId = req.params.eventId;
 
     const fetchedEvent = await Event.findByPk(eventId, {
         include: [ User ],
     });
+
+    if (!fetchedEvent) {
+        const err = new Error('Login failed');
+        err.status = 401;
+        err.title = 'No event found';
+        err.errors = ['No event was found.'];
+        return next(err);
+      }
+
     return res.json(fetchedEvent);
+
+
 }));
 
 // router.post('/', asyncHandler( async (req, res) => {
