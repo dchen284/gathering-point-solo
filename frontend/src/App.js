@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 // import LoginFormPage from './components/LoginFormPage';
 import Navigation from "./components/Navigation";
 // import SignupFormPage from './components/SignupFormPage';
-import { restoreSessionUser } from './store/session';
+import * as sessionActions from './store/session';
 
 function App() {
 
@@ -18,7 +18,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect( () => {
-    dispatch(restoreSessionUser()).then(() => setIsLoaded(true));
+    dispatch(sessionActions.restoreSessionUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (

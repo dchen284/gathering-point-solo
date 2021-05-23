@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 
 //internal imports
 import * as eventActions from '../../store/event';
+import BookmarkButton from '../BookmarkButton';
 
 export default function EventDisplay() {
 
@@ -26,11 +27,15 @@ export default function EventDisplay() {
 
     return (
         <>
-            <div>gab</div>
             {isLoaded && (
                 <>
-                    <div>heyo {event.id}</div>
-                    <div>gee {event.title}</div>
+                    <div>{event.title}</div>
+                    <div>{event.organizerName}</div>
+                    <div>{event.eventBody}</div>
+                    <div>{event.startTime}</div>
+                    <div>{event.endTime}</div>
+                    <div>Register Here</div>
+                    <BookmarkButton />
                 </>
             )}
         </>
