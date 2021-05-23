@@ -21,6 +21,6 @@ export default function DemoUserButton() {
     }
 
     return (
-        <button onClick={loginDemoUser} >Demo User</button>
+        <button className="pure-button" onClick={loginDemoUser} >Demo User</button>
     )
 }
