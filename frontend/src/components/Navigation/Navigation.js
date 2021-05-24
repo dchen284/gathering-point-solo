@@ -13,13 +13,13 @@ import ProfileButton from '../ProfileButton';
 import SignupFormModal from '../SignupFormModal';
 
 function Navigation({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
+const sessionUser = useSelector(state => state.session.user);
 
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
       <>
-        <EventFormModal />
+        <EventFormModal formAction='Create' />
         <ProfileButton user={sessionUser} />
       </>
     );

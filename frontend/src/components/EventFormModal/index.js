@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import EventForm from './EventForm';
 
-function EventFormModal() {
+function EventFormModal({ formAction }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button className="pure-button" onClick={() => setShowModal(true)}>Create Event</button>
+      <button className="pure-button" onClick={() => setShowModal(true)}>{`${formAction} Event`}</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <EventForm />
+          <EventForm formAction={formAction} />
         </Modal>
       )}
     </>

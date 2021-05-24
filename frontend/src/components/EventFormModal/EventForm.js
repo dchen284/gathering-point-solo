@@ -1,6 +1,7 @@
 //external imports
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 //internal imports
 import './EventForm.css';
@@ -8,11 +9,20 @@ import * as eventsActions from "../../store/events";
 // import * as sessionActions from "../../store/session";
 // import DemoUserButton from "../DemoUserButton";
 
-function EventForm() {
+function EventForm({ formAction }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const { eventId } = useParams();
+  const eventOnDisplay = useSelector( (state) => state.events[eventId]);
 
+  // console.log('>>>>>', eventOnDisplay);
   // const nowDate = Date.now();
+
+  if (eventOnDisplay) {
+    console.log(`got event with ID ${eventOnDisplay.id}, and I am trying to ${formAction}`);
+  }
+
+
 
   const [formTitle, setFormTitle] = useState('');
   const [formEventBody, setFormEventBody] = useState('');
@@ -124,7 +134,7 @@ function EventForm() {
           onChange={(e) => setFormOrganizerName(e.target.value)}
         />
       </label>
-      <button className="pure-button" type="submit">Create Event</button>
+      <button className="pure-button" type="submit">{`${formAction} Event`}</button>
     </form>
   );
 // const dispatch = useDispatch();
