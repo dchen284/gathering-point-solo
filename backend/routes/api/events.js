@@ -64,13 +64,13 @@ router.post('/', asyncHandler( async (req, res) => {
 
     await Event.create(req.body);
 
-    const fetchedEvents = await Event.findAll({
+    const fetchedNewestEvent = await Event.findOne({
         // limit: 6,
         include: [ User ],
         order: [ ['id', 'DESC'] ],
     });
 
-    return res.json(fetchedEvents);
+    return res.json(fetchedNewestEvent);
 
     // return fetchEventsForEventCardDisplay();
     // might not need a return, either addOne action creator, or force a load action

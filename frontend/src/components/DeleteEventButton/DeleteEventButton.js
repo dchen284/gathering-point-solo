@@ -12,17 +12,21 @@ export default function DeleteEventButton() {
     const dispatch = useDispatch();
     const history = useHistory();
     const { eventId } = useParams();
-    // const [isLoaded, setIsLoaded] = useState(false);
+    // const [isDeleted, setIsDeleted] = useState(false);
 
     function activateDeleteButton() {
         dispatch(eventsActions.fetchEventToDelete(eventId));
         history.push('/');
+        // setIsDeleted(true);
     }
 
     return (
-        <button
-            className={`pure-button`}
-            onClick={activateDeleteButton}
-        >Delete Event</button>
+        <>
+            {/* { isDeleted ? <Redirect to={`/`}/> : null } */}
+            <button
+                className={`pure-button`}
+                onClick={activateDeleteButton}
+            >Delete Event</button>
+        </>
     );
 }

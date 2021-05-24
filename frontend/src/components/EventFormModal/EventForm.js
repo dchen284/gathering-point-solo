@@ -12,12 +12,12 @@ function EventForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
 
-  const nowDate = Date.now();
+  // const nowDate = Date.now();
 
   const [formTitle, setFormTitle] = useState('');
   const [formEventBody, setFormEventBody] = useState('');
-  const [formStartTime, setFormStartTime] = useState(nowDate);
-  const [formEndTime, setFormEndTime] = useState(nowDate);
+  const [formStartTime, setFormStartTime] = useState(new Date());
+  const [formEndTime, setFormEndTime] = useState(new Date());
   const [formImgUrl, setFormImgUrl] = useState('');
   const [formOrganizerName, setFormOrganizerName] = useState('');
   const [errors, setErrors] = useState([]);

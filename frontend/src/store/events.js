@@ -19,7 +19,7 @@ export const fetchEventToAdd = (objNewEvent) => async (dispatch) => {
   });
   const data = await res.json();
   if (res.ok) {
-    dispatch(fetchEvents(data));
+    dispatch(addEvent(data));
     return data;
   }
 }
@@ -31,7 +31,7 @@ export const fetchEventToDelete = (eventId) => async (dispatch) => {
   });
   const data = await res.json();
   if (res.ok) {
-    dispatch(ZaddEvent(data));
+    dispatch(deleteEvent(data));
     return data;
   }
 }
@@ -60,7 +60,7 @@ export const fetchEventById = (eventId) => async (dispatch) => {
 
 //action creators
 
-export const ZaddEvent = (event) => {
+export const addEvent = (event) => {
   return {
     type: ADD_EVENT,
     payload: event,
