@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 //internal imports
 import * as eventsActions from '../../store/events';
 import BookmarkButton from '../BookmarkButton';
+import DeleteEventButton from '../DeleteEventButton';
 
 export default function EventDisplay() {
 
@@ -34,6 +35,8 @@ export default function EventDisplay() {
                     <div>{event.startTime}</div>
                     <div>{event.endTime}</div>
                     <div>Register Here</div>
+                    <button className={`pure-button`}>Update Event</button>
+                    <DeleteEventButton />
                     <BookmarkButton />
                 </>
             )}

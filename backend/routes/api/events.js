@@ -43,7 +43,7 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
         include: [ User ],
     });
 
-    console.log('fetchedEvent', fetchedEvent);
+    // console.log('fetchedEvent', fetchedEvent);
 
     if (!fetchedEvent) {
         const err = new Error('Login failed');
@@ -62,13 +62,7 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
 
 router.post('/', asyncHandler( async (req, res) => {
 
-    const thing = req.body;
-
-    console.log('thing>>>>>>>>>', thing);
-
-    const eventToPost = thing;
-
-    await Event.create(eventToPost);
+    await Event.create(req.body);
 
     const fetchedEvents = await Event.findAll({
         limit: 6,
@@ -80,6 +74,29 @@ router.post('/', asyncHandler( async (req, res) => {
 
     // return fetchEventsForEventCardDisplay();
     // might not need a return, either addOne action creator, or force a load action
+}));
+
+router.delete('/:eventId(\\d+)', asyncHandler( async (req, res) => {
+
+    const eventId = req.params.eventId;
+    // console.log('eventId>>>>', eventId);
+
+    const eventToDestroy = await Event.findByPk(eventId, {});
+
+    // console.log('eventToDestroy>>>>>', eventToDestroy);
+
+    if (!eventToDestroy) {
+        const err = new Error('No event found');
+        err.status = 401;
+        err.title = 'No event found';
+        err.errors = ['No event with that ID found.'];
+        return next(err);
+    }
+    else {
+        await eventToDestroy.destroy();
+        return res.json({message: 'deletion successful'});
+    }
+
 }));
 
 module.exports = router;

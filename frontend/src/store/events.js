@@ -10,14 +10,25 @@ const LOAD_EVENTS = 'event/LOAD_EVENTS';
 export const addEvent = (objNewEvent) => async (dispatch) => {
   const res = await csrfFetch('/api/events/', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    // headers: {
+    //   'Content-Type': 'application/json',
+    // },
     body: JSON.stringify(objNewEvent),
   });
-
+  const data = await res.json();
   if (res.ok) {
-    const data = await res.json();
+    dispatch(fetchEvents(data));
+    return data;
+  }
+}
+
+export const deleteEvent = (eventId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/events/${eventId}`, {
+    method: 'DELETE',
+    body: JSON.stringify({}),
+  });
+  const data = await res.json();
+  if (res.ok) {
     dispatch(fetchEvents(data));
     return data;
   }
@@ -27,6 +38,7 @@ export const fetchEvents = () => async (dispatch) => {
     const res = await csrfFetch('/api/events');
     const data = await res.json();
     dispatch(loadEvents(data));
+    return;
 }
 
 export const fetchEventById = (eventId) => async (dispatch) => {
