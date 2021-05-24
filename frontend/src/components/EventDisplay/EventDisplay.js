@@ -17,14 +17,20 @@ export default function EventDisplay() {
     const { eventId } = useParams();
     const [isLoaded, setIsLoaded] = useState(false);
 
+    //get the event
+    const sessionUser = useSelector(state => state.session.user);
+    const event = useSelector( state => state.events[eventId] );
 
     //useEffects
     useEffect( () => {
         dispatch(eventsActions.fetchEventById(eventId)).then(() => setIsLoaded(true));
     }, [dispatch, eventId]);
 
-    //get the event
-    const event = useSelector( state => state.events[eventId] );
+    let boolOwnsEvent = false;
+    if (sessionUser) {
+        if (sessionUser.id === event.ownerId)
+            {boolOwnsEvent = true}
+    }
 
     return (
         <>
@@ -36,8 +42,14 @@ export default function EventDisplay() {
                     <div>Event Start Time: {event.startTime}</div>
                     <div>Event End Time: {event.endTime}</div>
                     <div>Register Here</div>
-                    <EventFormModal formAction='Update'/>
-                    <DeleteEventButton />
+                    {
+                        boolOwnsEvent ?
+                        <>
+                            <EventFormModal formAction='Update'/>
+                            <DeleteEventButton />
+                        </>
+                        : null
+                    }
                     <BookmarkButton />
                 </>
             )}
