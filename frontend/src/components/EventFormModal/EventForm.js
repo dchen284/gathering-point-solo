@@ -15,21 +15,27 @@ function EventForm({ formAction }) {
   const { eventId } = useParams();
   const eventOnDisplay = useSelector( (state) => state.events[eventId]);
 
-  // console.log('>>>>>', eventOnDisplay);
-  // const nowDate = Date.now();
+  let initialStateForForm = {
+    title: '',
+    eventBody: '',
+    startTime: new Date(),
+    endTime: new Date(),
+    imgUrl: '',
+    organizerName: '',
+  };
 
   if (eventOnDisplay) {
-    console.log(`got event with ID ${eventOnDisplay.id}, and I am trying to ${formAction}`);
+    initialStateForForm = {...eventOnDisplay};
   }
 
+  // console.log('ini', initialStateForForm)
 
-
-  const [formTitle, setFormTitle] = useState('');
-  const [formEventBody, setFormEventBody] = useState('');
-  const [formStartTime, setFormStartTime] = useState(new Date());
-  const [formEndTime, setFormEndTime] = useState(new Date());
-  const [formImgUrl, setFormImgUrl] = useState('');
-  const [formOrganizerName, setFormOrganizerName] = useState('');
+  const [formTitle, setFormTitle] = useState(initialStateForForm.title);
+  const [formEventBody, setFormEventBody] = useState(initialStateForForm.eventBody);
+  const [formStartTime, setFormStartTime] = useState(initialStateForForm.startTime);
+  const [formEndTime, setFormEndTime] = useState(initialStateForForm.endTime);
+  const [formImgUrl, setFormImgUrl] = useState(initialStateForForm.imgUrl);
+  const [formOrganizerName, setFormOrganizerName] = useState(initialStateForForm.organizerName);
   const [errors, setErrors] = useState([]);
 
 //   if (sessionUser) return <Redirect to="/" />;
