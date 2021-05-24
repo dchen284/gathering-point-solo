@@ -94,7 +94,7 @@ router.delete('/:eventId(\\d+)', asyncHandler( async (req, res) => {
     }
     else {
         await eventToDestroy.destroy();
-        return res.json({message: 'deletion successful'});
+        return res.json(eventToDestroy);
     }
 
 }));

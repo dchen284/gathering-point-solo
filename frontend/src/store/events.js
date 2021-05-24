@@ -3,6 +3,8 @@ import { csrfFetch } from "./csrf";
 
 //actions
 
+const ADD_EVENT = 'event/ADD_EVENT';
+const DELETE_EVENT = 'event/DELETE_EVENT';
 const LOAD_EVENTS = 'event/LOAD_EVENTS';
 
 //thunk action creators
@@ -22,14 +24,14 @@ export const addEvent = (objNewEvent) => async (dispatch) => {
   }
 }
 
-export const deleteEvent = (eventId) => async (dispatch) => {
+export const fetchEventToDelete = (eventId) => async (dispatch) => {
   const res = await csrfFetch(`/api/events/${eventId}`, {
     method: 'DELETE',
     body: JSON.stringify({}),
   });
   const data = await res.json();
   if (res.ok) {
-    dispatch(fetchEvents(data));
+    dispatch(deleteEvent(data));
     return data;
   }
 }
@@ -58,10 +60,24 @@ export const fetchEventById = (eventId) => async (dispatch) => {
 
 //action creators
 
+export const ZaddEvent = (event) => {
+  return {
+    type: ADD_EVENT,
+    payload: event,
+  }
+}
+
+export const deleteEvent = (event) => {
+  return {
+    type: DELETE_EVENT,
+    payload: event,
+  }
+}
+
 export const loadEvents = (events) => {
     return {
       type: LOAD_EVENTS,
-      payload: events
+      payload: events,
     }
   }
 
@@ -75,6 +91,16 @@ const initialState = {}
     let newState;
     switch (action.type) {
       // Do something here based on the different types of actions
+      case ADD_EVENT:
+        newState = {...state};
+        const eventToAdd = action.payload;
+        newState[eventToAdd.id] = eventToAdd;
+        return newState;
+      case DELETE_EVENT:
+        newState = {...state};
+        const eventToDelete = action.payload;
+        delete newState[eventToDelete.id];
+        return newState;
       case LOAD_EVENTS:
         newState = {...state};
         (action.payload).forEach( event => {

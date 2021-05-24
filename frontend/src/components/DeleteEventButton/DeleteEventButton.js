@@ -15,7 +15,7 @@ export default function DeleteEventButton() {
     // const [isLoaded, setIsLoaded] = useState(false);
 
     function activateDeleteButton() {
-        dispatch(eventsActions.deleteEvent(eventId));
+        dispatch(eventsActions.fetchEventToDelete(eventId));
         history.push('/');
     }
 
