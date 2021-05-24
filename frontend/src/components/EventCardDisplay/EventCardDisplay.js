@@ -4,23 +4,23 @@ import { useDispatch, useSelector } from 'react-redux';
 
 //internal imports
 import EventCard from '../EventCard';
-import * as eventActions from '../../store/event';
+import * as eventsActions from '../../store/events';
 
 export default function EventCardDisplay() {
 
     //hooks
     const dispatch = useDispatch();
     const arrEvents = useSelector((state) => Object.values(state.events) )
-
+    const reversed = arrEvents.reverse();
 
     useEffect( () => {
-        dispatch(eventActions.fetchEvents());
+        dispatch(eventsActions.fetchEvents());
     }, [dispatch])
 
 
     return (
         <div className="eventCardDisplay">
-            {arrEvents.map( (event) => {
+            {reversed.map( (event) => {
                 return <EventCard key={`${event.id}`} event={event}/>
             })}
         </div>

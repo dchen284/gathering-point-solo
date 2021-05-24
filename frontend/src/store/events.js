@@ -1,17 +1,36 @@
+//internal imports
+import { csrfFetch } from "./csrf";
+
 //actions
 
 const LOAD_EVENTS = 'event/LOAD_EVENTS';
 
 //thunk action creators
 
+export const addEvent = (objNewEvent) => async (dispatch) => {
+  const res = await csrfFetch('/api/events/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(objNewEvent),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    // dispatch(fetchEvents(data));
+    // return data;
+  }
+}
+
 export const fetchEvents = () => async (dispatch) => {
-    const res = await fetch('/api/events');
+    const res = await csrfFetch('/api/events');
     const data = await res.json();
     dispatch(loadEvents(data));
 }
 
 export const fetchEventById = (eventId) => async (dispatch) => {
-  const res = await fetch(`/api/events/${eventId}`);
+  const res = await csrfFetch(`/api/events/${eventId}`);
   console.log('before data');
   const data = await res.json();
   console.log('after data');
@@ -39,7 +58,7 @@ export const loadEvents = (events) => {
 const initialState = {}
 
   // Use the initialState as a default value
-  export default function eventReducer(state = initialState, action) {
+  export default function eventsReducer(state = initialState, action) {
     // The reducer normally looks at the action type field to decide what happens
     let newState;
     switch (action.type) {

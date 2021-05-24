@@ -14,6 +14,7 @@ export default function EventCard({event}) {
                     <img alt="standard" src="https://developer.mozilla.org/static/img/favicon144.png" />
                 </div>
                 <BookmarkButton className='bookmark-button' key={event.id}/>
+                <p>ID: {event.id}</p>
                 <p>Title: {event.title}</p>
                 <p>Organizer: {event.organizerName}</p>
                 <p>Start Time: {event.startTime}</p>

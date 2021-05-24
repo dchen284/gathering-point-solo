@@ -28,7 +28,9 @@ router.get('/', asyncHandler( async (req, res) => {
     const fetchedEvents = await Event.findAll({
         limit: 6,
         include: [ User ],
+        order: [ ['id', 'DESC'] ],
     });
+    // console.log(JSON.stringify(fetchedEvents, null, 4));
     return res.json(fetchedEvents);
 }));
 
@@ -58,16 +60,16 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
 
 }));
 
-// router.post('/', asyncHandler( async (req, res) => {
+router.post('/', asyncHandler( async (req, res) => {
 
-//     const { thing } = req.body;
+    const { thing } = req.body;
 
-//     const eventToPost = { thing }
+    const eventToPost = { thing }
 
-//     await eventToPost.save();
+    await eventToPost.save();
 
-//     // return fetchEventsForEventCardDisplay();
-//     // might not need a return, either addOne action creator, or force a load action
-// }));
+    // return fetchEventsForEventCardDisplay();
+    // might not need a return, either addOne action creator, or force a load action
+}));
 
 module.exports = router;

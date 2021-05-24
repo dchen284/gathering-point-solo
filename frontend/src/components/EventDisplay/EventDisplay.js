@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 //internal imports
-import * as eventActions from '../../store/event';
+import * as eventsActions from '../../store/events';
 import BookmarkButton from '../BookmarkButton';
 
 export default function EventDisplay() {
@@ -18,7 +18,7 @@ export default function EventDisplay() {
 
     //useEffects
     useEffect( () => {
-        dispatch(eventActions.fetchEventById(eventId)).then(() => setIsLoaded(true));
+        dispatch(eventsActions.fetchEventById(eventId)).then(() => setIsLoaded(true));
     }, [dispatch, eventId]);
 
     //get the event
