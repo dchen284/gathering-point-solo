@@ -30,7 +30,7 @@ router.get('/', asyncHandler( async (req, res) => {
         include: [ User ],
         order: [ ['id', 'DESC'] ],
     });
-    // console.log(JSON.stringify(fetchedEvents, null, 4));
+
     return res.json(fetchedEvents);
 }));
 
@@ -62,11 +62,21 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
 
 router.post('/', asyncHandler( async (req, res) => {
 
-    const { thing } = req.body;
+    const thing = req.body;
 
-    const eventToPost = { thing }
+    console.log('thing>>>>>>>>>', thing);
 
-    await eventToPost.save();
+    const eventToPost = thing;
+
+    await Event.create(eventToPost);
+
+    const fetchedEvents = await Event.findAll({
+        limit: 6,
+        include: [ User ],
+        order: [ ['id', 'DESC'] ],
+    });
+
+    return res.json(fetchedEvents);
 
     // return fetchEventsForEventCardDisplay();
     // might not need a return, either addOne action creator, or force a load action

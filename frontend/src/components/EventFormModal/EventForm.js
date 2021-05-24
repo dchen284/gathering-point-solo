@@ -54,6 +54,7 @@ function EventForm() {
         {errorsToPrint.push('Please provide an organizer name that is between 3 and 255 letters long.')}
 
     if (errorsToPrint.length === 0) {
+      console.log(newEventData);
       const createdEvent = await dispatch(eventsActions.addEvent(newEventData));
     }
 

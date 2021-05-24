@@ -18,8 +18,8 @@ export const addEvent = (objNewEvent) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
-    // dispatch(fetchEvents(data));
-    // return data;
+    dispatch(fetchEvents(data));
+    return data;
   }
 }
 
