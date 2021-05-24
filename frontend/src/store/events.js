@@ -9,7 +9,7 @@ const LOAD_EVENTS = 'event/LOAD_EVENTS';
 
 //thunk action creators
 
-export const addEvent = (objNewEvent) => async (dispatch) => {
+export const fetchEventToAdd = (objNewEvent) => async (dispatch) => {
   const res = await csrfFetch('/api/events/', {
     method: 'POST',
     // headers: {
@@ -31,7 +31,7 @@ export const fetchEventToDelete = (eventId) => async (dispatch) => {
   });
   const data = await res.json();
   if (res.ok) {
-    dispatch(deleteEvent(data));
+    dispatch(ZaddEvent(data));
     return data;
   }
 }

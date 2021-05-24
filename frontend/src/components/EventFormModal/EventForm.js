@@ -57,7 +57,7 @@ function EventForm() {
 
     if (errorsToPrint.length === 0) {
       // console.log(newEventData);
-      return dispatch(eventsActions.addEvent(newEventData)).catch(
+      return dispatch(eventsActions.fetchEventToAdd(newEventData)).catch(
         async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
