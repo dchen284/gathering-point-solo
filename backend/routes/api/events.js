@@ -99,4 +99,31 @@ router.delete('/:eventId(\\d+)', asyncHandler( async (req, res) => {
 
 }));
 
+router.put('/:eventId(\\d+)', asyncHandler( async (req, res) => {
+
+    const newData = req.body;
+
+    console.log('newData', newData);
+
+    console.log('eventId', newData.id);
+
+    const eventToUpdate = await Event.findByPk(newData.id, {});
+
+    console.log('eventToUpdate', JSON.stringify(eventToUpdate, null, 4));
+
+    if (!eventToUpdate) {
+        const err = new Error('No event found');
+        err.status = 401;
+        err.title = 'No event found';
+        err.errors = ['No event with that ID found.'];
+        return next(err);
+    }
+    else {
+        const updatedEvent = await eventToUpdate.update(newData);
+        console.log('updatedEvent', JSON.stringify(updatedEvent, null, 4));
+        return res.json(updatedEvent);
+    }
+
+}));
+
 module.exports = router;

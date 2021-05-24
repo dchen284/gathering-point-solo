@@ -30,7 +30,7 @@ function EventForm({ formAction, setShowModal }) {
     initialStateForForm = {...eventOnDisplay};
   }
 
-  console.log('>>> before submit', initialStateForForm);
+  // console.log('>>> before submit', initialStateForForm);
 
   const [formTitle, setFormTitle] = useState(initialStateForForm.title);
   const [formEventBody, setFormEventBody] = useState(initialStateForForm.eventBody);
@@ -42,9 +42,43 @@ function EventForm({ formAction, setShowModal }) {
 
 //   if (sessionUser) return <Redirect to="/" />;
 
-  const handleSubmit = async (e) => {
+  const handleSubmitForUpdate = async (e) => {
     e.preventDefault();
 
+    console.log('inside update!')
+    const updatedEventData = {
+      id: initialStateForForm.id,
+      title: formTitle,
+      eventBody: formEventBody,
+      startTime: formStartTime,
+      endTime: formEndTime,
+      imgUrl: formImgUrl,
+      organizerName: formOrganizerName,
+      ownerId: sessionUser.id,
+    };
+
+    console.log('updatedEventData', updatedEventData);
+
+    let errorsToPrint = [];
+
+    if (errorsToPrint.length === 0) {
+      // console.log(newEventData);
+
+      setShowModal(false);
+
+      return dispatch(eventsActions.fetchEventToUpdate(updatedEventData)).catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        }
+      );
+    }
+  }
+
+
+  const handleSubmitForPost = async (e) => {
+    e.preventDefault();
+    console.log('inside post!')
     const newEventData = {
         title: formTitle,
         eventBody: formEventBody,
@@ -55,11 +89,8 @@ function EventForm({ formAction, setShowModal }) {
         ownerId: sessionUser.id,
     }
 
-    if (initialStateForForm.id) {
-      newEventData.id = initialStateForForm.id
-    }
 
-    console.log('>>> after submit', newEventData);
+    // console.log('>>> after submit', newEventData);
     // alert(newEventData);
 
     //validators
@@ -95,12 +126,16 @@ function EventForm({ formAction, setShowModal }) {
 
   };
 
+  let cb;
+  if (formAction === 'Update') {cb = handleSubmitForUpdate}
+  if (formAction === 'Create') {cb = handleSubmitForPost}
+
   return (
     <>
       {formAction === 'Update' ?
         <div>Update</div> :
         <div>Create</div>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={cb}>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
