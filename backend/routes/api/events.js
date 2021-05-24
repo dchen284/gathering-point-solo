@@ -26,7 +26,7 @@ const { Event, User } = require('../../db/models')
 router.get('/', asyncHandler( async (req, res) => {
 
     const fetchedEvents = await Event.findAll({
-        limit: 6,
+        // limit: 6,
         include: [ User ],
         order: [ ['id', 'DESC'] ],
     });
@@ -65,7 +65,7 @@ router.post('/', asyncHandler( async (req, res) => {
     await Event.create(req.body);
 
     const fetchedEvents = await Event.findAll({
-        limit: 6,
+        // limit: 6,
         include: [ User ],
         order: [ ['id', 'DESC'] ],
     });
