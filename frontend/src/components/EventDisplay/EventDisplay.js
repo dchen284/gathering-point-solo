@@ -30,11 +30,11 @@ export default function EventDisplay() {
         <>
             {isLoaded && (
                 <>
-                    <div>{event.title}</div>
-                    <div>{event.organizerName}</div>
-                    <div>{event.eventBody}</div>
-                    <div>{event.startTime}</div>
-                    <div>{event.endTime}</div>
+                    <div>Event Title: {event.title}</div>
+                    <div>Organizer Name: {event.organizerName}</div>
+                    <div>Event Description: {event.eventBody}</div>
+                    <div>Event Start Time: {event.startTime}</div>
+                    <div>Event End Time: {event.endTime}</div>
                     <div>Register Here</div>
                     <EventFormModal formAction='Update'/>
                     <DeleteEventButton />

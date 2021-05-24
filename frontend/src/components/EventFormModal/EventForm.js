@@ -9,7 +9,7 @@ import * as eventsActions from "../../store/events";
 // import * as sessionActions from "../../store/session";
 // import DemoUserButton from "../DemoUserButton";
 
-function EventForm({ formAction }) {
+function EventForm({ formAction, setShowModal }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const { eventId } = useParams();
@@ -24,11 +24,13 @@ function EventForm({ formAction }) {
     organizerName: '',
   };
 
+
+
   if (eventOnDisplay) {
     initialStateForForm = {...eventOnDisplay};
   }
 
-  // console.log('ini', initialStateForForm)
+  console.log('>>> before submit', initialStateForForm);
 
   const [formTitle, setFormTitle] = useState(initialStateForForm.title);
   const [formEventBody, setFormEventBody] = useState(initialStateForForm.eventBody);
@@ -53,6 +55,11 @@ function EventForm({ formAction }) {
         ownerId: sessionUser.id,
     }
 
+    if (initialStateForForm.id) {
+      newEventData.id = initialStateForForm.id
+    }
+
+    console.log('>>> after submit', newEventData);
     // alert(newEventData);
 
     //validators
@@ -73,6 +80,9 @@ function EventForm({ formAction }) {
 
     if (errorsToPrint.length === 0) {
       // console.log(newEventData);
+
+      setShowModal(false);
+
       return dispatch(eventsActions.fetchEventToAdd(newEventData)).catch(
         async (res) => {
           const data = await res.json();
@@ -86,62 +96,67 @@ function EventForm({ formAction }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
-      <label>
-        Title
-        <input
-          type="text"
-          value={formTitle}
-          onChange={(e) => setFormTitle(e.target.value)}
-          required
-        />
-      </label>
-      <label className="green">
-        Event Description (optional)
-        <textarea
-          value={formEventBody}
-          onChange={(e) => setFormEventBody(e.target.value)}
-        />
-      </label>
-      <label>
-        Start Time:
-        <input
-          type="datetime-local"
-          value={formStartTime}
-          onChange={(e) => setFormStartTime(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        End Time:
-        <input
-          type="datetime-local"
-          value={formEndTime}
-          onChange={(e) => setFormEndTime(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Image URL (optional):
-        <input
-          type="url"
-          value={formImgUrl}
-          onChange={(e) => setFormImgUrl(e.target.value)}
-        />
-      </label>
-      <label>
-        Organizer Name:
-        <input
-          type="text"
-          value={formOrganizerName}
-          onChange={(e) => setFormOrganizerName(e.target.value)}
-        />
-      </label>
-      <button className="pure-button" type="submit">{`${formAction} Event`}</button>
-    </form>
+    <>
+      {formAction === 'Update' ?
+        <div>Update</div> :
+        <div>Create</div>}
+      <form onSubmit={handleSubmit}>
+        <ul>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+        <label>
+          Title
+          <input
+            type="text"
+            value={formTitle}
+            onChange={(e) => setFormTitle(e.target.value)}
+            required
+          />
+        </label>
+        <label className="green">
+          Event Description (optional)
+          <textarea
+            value={formEventBody}
+            onChange={(e) => setFormEventBody(e.target.value)}
+          />
+        </label>
+        <label>
+          Start Time:
+          <input
+            type="datetime-local"
+            value={formStartTime}
+            onChange={(e) => setFormStartTime(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          End Time:
+          <input
+            type="datetime-local"
+            value={formEndTime}
+            onChange={(e) => setFormEndTime(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Image URL (optional):
+          <input
+            type="url"
+            value={formImgUrl}
+            onChange={(e) => setFormImgUrl(e.target.value)}
+          />
+        </label>
+        <label>
+          Organizer Name:
+          <input
+            type="text"
+            value={formOrganizerName}
+            onChange={(e) => setFormOrganizerName(e.target.value)}
+          />
+        </label>
+        <button className="pure-button" type="submit">{`${formAction} Event`}</button>
+      </form>
+    </>
   );
 // const dispatch = useDispatch();
 // const [credential, setCredential] = useState("");

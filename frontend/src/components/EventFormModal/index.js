@@ -10,7 +10,7 @@ function EventFormModal({ formAction }) {
       <button className="pure-button" onClick={() => setShowModal(true)}>{`${formAction} Event`}</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <EventForm formAction={formAction} />
+          <EventForm formAction={formAction} setShowModal={setShowModal}/>
         </Modal>
       )}
     </>
