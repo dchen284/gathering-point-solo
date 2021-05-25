@@ -31,15 +31,15 @@ function EventForm({ formAction, setShowModal }) {
   if (eventOnDisplay) {
     initialStateForForm = {...eventOnDisplay};
 
-    let startTimeFromDb = eventOnDisplay.startTime;
-    let startTimeWithoutZ = startTimeFromDb.slice(0, startTimeFromDb.length -1);
-    console.log ('startTimeWithoutZ', startTimeWithoutZ);
-    initialStateForForm.startTime = startTimeWithoutZ;
+    // let startTimeFromDb = eventOnDisplay.startTime;
+    // let startTimeWithoutZ = startTimeFromDb.slice(0, startTimeFromDb.length -1);
+    // console.log ('startTimeWithoutZ', startTimeWithoutZ);
+    // initialStateForForm.startTime = startTimeWithoutZ;
 
-    let endTimeFromDb = eventOnDisplay.endTime;
-    let endTimeWithoutZ = endTimeFromDb.slice(0, endTimeFromDb.length -1);
-    console.log ('endTimeWithoutZ', endTimeWithoutZ);
-    initialStateForForm.endTime = endTimeWithoutZ;
+    // let endTimeFromDb = eventOnDisplay.endTime;
+    // let endTimeWithoutZ = endTimeFromDb.slice(0, endTimeFromDb.length -1);
+    // console.log ('endTimeWithoutZ', endTimeWithoutZ);
+    // initialStateForForm.endTime = endTimeWithoutZ;
   }
 
   // console.log('>>> before submit', initialStateForForm);

@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
     },
     startTime: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     endTime: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     imgUrl: {

@@ -17,11 +17,11 @@ module.exports = {
       },
       startTime: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       endTime: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       imgUrl: {
         type: Sequelize.STRING
