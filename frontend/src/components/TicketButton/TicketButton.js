@@ -3,9 +3,9 @@
 // import { useSelector } from 'react-redux';
 //internal imports
 
-export default function TicketButton() {
+export default function TicketButton({ticketId}) {
 
-
+    
 
     return (
         <button className={`pure-button`}>TicketButton</button>

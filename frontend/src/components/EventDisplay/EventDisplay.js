@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 
 //internal imports
 import * as eventsActions from '../../store/events';
+import * as ticketsActions from '../../store/tickets';
 import BookmarkButton from '../BookmarkButton';
 import DeleteEventButton from '../DeleteEventButton';
 import EventFormModal from '../EventFormModal';
@@ -18,14 +19,38 @@ export default function EventDisplay() {
     const { eventId } = useParams();
     const [isLoaded, setIsLoaded] = useState(false);
 
-    //get the event
+    //state
     const sessionUser = useSelector(state => state.session.user);
     const event = useSelector( state => state.events[eventId] );
+    const arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
+
+    // console.log('aaaaaaaa', sessionUser, arrTicketsOfSessionUser);
 
     //useEffects
     useEffect( () => {
         dispatch(eventsActions.fetchEventById(eventId)).then(() => setIsLoaded(true));
     }, [dispatch, eventId]);
+
+    useEffect( () => {
+        dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser));
+    }, [dispatch, sessionUser])
+
+    //JavaScript
+
+
+    let boolSessionUserHasTicket = false;
+    let ticketId = null;
+
+    if (sessionUser && arrTicketsOfSessionUser) {
+        // console.log('blah', arrTicketsOfSessionUser);
+        arrTicketsOfSessionUser.forEach( ticket => {
+            // console.log('ticket.eventId', ticket.eventId);
+            // console.log('eventId', eventId);
+            if (+ticket.eventId === +eventId) {ticketId = ticket.id}
+        });
+    }
+
+    // console.log('ticketId', ticketId);
 
     let boolOwnsEvent = false;
     if (sessionUser && event) {
@@ -42,7 +67,7 @@ export default function EventDisplay() {
                     <div>Event Description: {event.eventBody}</div>
                     <div>Event Start Time: {event.startTime}</div>
                     <div>Event End Time: {event.endTime}</div>
-                    <TicketButton />
+                    <TicketButton ticketId={ticketId}/>
                     {
                         boolOwnsEvent ?
                         <>

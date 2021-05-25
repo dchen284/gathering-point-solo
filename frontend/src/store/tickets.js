@@ -17,11 +17,11 @@ export function fetchTicketsOfSessionUser(user) {
 
     return async function (dispatch) {
         if (user) {
-            console.log('got here');
+            // console.log('got here');
             const res = await csrfFetch(`/api/users/${user.id}/tickets`);
             if (res.ok) {
                 const data = await res.json();
-                console.log('data', data);
+                // console.log('data', data);
                 dispatch(loadTickets(data));
                 return data;
             } else {

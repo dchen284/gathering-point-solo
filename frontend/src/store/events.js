@@ -64,7 +64,7 @@ export const fetchEventById = (eventId) => async (dispatch) => {
     dispatch(loadEvents([data]));
   }
   else {
-    console.log('got here');
+    // console.log('got here');
     throw res;
     //how to display this error on the page?
   }

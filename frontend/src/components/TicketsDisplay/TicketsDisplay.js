@@ -11,13 +11,13 @@ export default function TicketsDisplay() {
     //hooks
     const dispatch = useDispatch();
     const sessionUser = useSelector( (state) => state.session.user );
-    const arrTickets = useSelector( (state) => Object.values(state.tickets) );
+    const arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
 
-    console.log('>>>>>>', arrTickets);
+    // console.log('>>>>>>', arrTicketsOfSessionUser);
 
-    //useEffects
+    // useEffects
     useEffect( () => {
-        console.log(dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser)));
+        dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser));
     }, [dispatch, sessionUser])
 
     //HTML
@@ -29,7 +29,7 @@ export default function TicketsDisplay() {
     else {
         return (
             <>
-                <table class="pure-table pure-table-bordered">
+                <table className="pure-table pure-table-bordered">
                     <thead>
                         <tr>
                             <th>Ticket ID#</th>
@@ -38,12 +38,12 @@ export default function TicketsDisplay() {
                         </tr>
                     </thead>
                     <tbody>
-                    {arrTickets.map( (ticket) => {
+                    {arrTicketsOfSessionUser.map( (ticket) => {
                         return (
-                            <tr>
+                            <tr key={`${ticket.id}`}>
                                 <td>{ticket.id}</td>
                                 <td>{ticket.Event.title}</td>
-                                <td><TicketButton /></td>
+                                <td><TicketButton ticketId={ticket.id} /></td>
                             </tr>
                         )
                     })}
