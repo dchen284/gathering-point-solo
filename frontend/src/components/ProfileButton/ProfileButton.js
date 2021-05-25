@@ -39,13 +39,13 @@ function ProfileButton({ user }) {
           <li>{user.username}</li>
           <li>{user.email}</li>
           <li>
-            <NavLink to={`/events/2`}>My Events</NavLink>
-          </li>
-          <li>
-            <NavLink to={`/events/2`}>My Events</NavLink>
+            <NavLink to={`/users/${user.id}/tickets`}>My Tickets</NavLink>
           </li>
           <li>
             <NavLink to={`/events/2`}>My Bookmarks</NavLink>
+          </li>
+          <li>
+            <NavLink to={`/events/2`}>Events Created By Me</NavLink>
           </li>
           <li>
             <button className="pure-button" onClick={logout}>Log Out</button>

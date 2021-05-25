@@ -8,6 +8,7 @@ import EventDisplay from './components/EventDisplay';
 import Footer from './components/Footer';
 // import LoginFormPage from './components/LoginFormPage';
 import Navigation from "./components/Navigation";
+import TicketsDisplay from "./components/TicketsDisplay";
 // import SignupFormPage from './components/SignupFormPage';
 import * as sessionActions from './store/session';
 
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route path={`/events/:eventId(\\d+)`}>
             <EventDisplay />
+          </Route>
+          <Route path={`/users/:userId(\\d+)/tickets`}>
+            <TicketsDisplay />
           </Route>
           <Route>
             <div>404: Not Found</div>
