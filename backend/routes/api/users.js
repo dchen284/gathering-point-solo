@@ -67,7 +67,7 @@ router.get('/:userId/tickets', asyncHandler( async (req, res) => {
 
 }));
 
-router.post('/:userId/tickets/:eventId', asyncHandler( async (req, res) => {
+router.post('/:userId/events/:eventId/tickets', asyncHandler( async (req, res) => {
 
   const { eventId, userId } = req.params;
   console.log('eventId', eventId, 'userId', userId)
