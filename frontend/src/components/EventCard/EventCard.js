@@ -11,7 +11,7 @@ export default function EventCard({event}) {
         <Link key={event.id} to={`/events/${event.id}`}>
             <div className="eventCard">
                 <div>
-                    <img alt="standard" src="https://developer.mozilla.org/static/img/favicon144.png" />
+                    <img alt="standard" src="https://i.imgur.com/k9ut0YI.png" />
                 </div>
                 <BookmarkButton className='bookmark-button' key={event.id}/>
                 <p>ID: {event.id}</p>

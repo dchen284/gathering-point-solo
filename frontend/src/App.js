@@ -18,6 +18,7 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
+  //state that is loaded when the app is loaded
   useEffect( () => {
     dispatch(sessionActions.restoreSessionUser()).then(() => setIsLoaded(true));
   }, [dispatch]);

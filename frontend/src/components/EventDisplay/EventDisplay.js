@@ -9,6 +9,7 @@ import * as eventsActions from '../../store/events';
 import BookmarkButton from '../BookmarkButton';
 import DeleteEventButton from '../DeleteEventButton';
 import EventFormModal from '../EventFormModal';
+import TicketButton from '../TicketButton';
 
 export default function EventDisplay() {
 
@@ -41,7 +42,7 @@ export default function EventDisplay() {
                     <div>Event Description: {event.eventBody}</div>
                     <div>Event Start Time: {event.startTime}</div>
                     <div>Event End Time: {event.endTime}</div>
-                    <div>Register Here</div>
+                    <TicketButton />
                     {
                         boolOwnsEvent ?
                         <>

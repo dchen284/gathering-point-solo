@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import * as ticketActions from '../../store/tickets';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    dispatch(ticketActions.clearTicketsOnLogOut())
   };
 
   return (

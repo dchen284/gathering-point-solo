@@ -37,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
   Event.associate = function(models) {
     // associations can be defined here
     Event.belongsTo( models.User, {foreignKey: 'ownerId'} );
+
     Event.belongsToMany(
       models.User,
       {
@@ -45,6 +46,7 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'userId',
       }
     );
+
     Event.belongsToMany(
       models.User,
       {
@@ -53,6 +55,7 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'userId',
       }
     );
+
     Event.belongsToMany(
       models.Category,
       {
@@ -61,6 +64,8 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'categoryId',
       }
     );
+
+    Event.hasMany( models.UserTicket, {foreignKey: 'eventId'});
   };
   return Event;
 };

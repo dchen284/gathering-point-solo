@@ -7,7 +7,7 @@ const { check } = require('express-validator');
 //internal require/imports
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth, setTokenCookie } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, UserTicket } = require('../../db/models');
 
 //Validations
 
@@ -50,5 +50,20 @@ router.post(
       });
     }),
   );
+
+//user tickets routes
+
+router.get('/:userId/tickets', asyncHandler( async (req, res) => {
+  const userId = req.params.userId;
+
+  const userTicketsOfSession = await UserTicket.findAll({
+    attributes: ['id', 'userId', 'eventId'],
+    where: { userId: userId },
+  })
+  // console.log('userTicketsOfSession', JSON.stringify(userTicketsOfSession, null, 4));
+  return res.json(userTicketsOfSession);
+
+}));
+
 
 module.exports = router;

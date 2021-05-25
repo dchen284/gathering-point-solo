@@ -6,11 +6,13 @@ import thunk from 'redux-thunk';
 //internal imports
 import eventsReducer from './events';
 import sessionReducer from './session';
+import ticketsReducer from './tickets';
 
 //root reducer
 const rootReducer = combineReducers({
   events: eventsReducer,
   session: sessionReducer,
+  tickets: ticketsReducer,
 });
 
 //enhancers

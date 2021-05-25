@@ -21,3 +21,8 @@
     position: relative;
     bottom: 20px;
 }
+
+img {
+    width: 220px;
+    height: 100px;
+}
