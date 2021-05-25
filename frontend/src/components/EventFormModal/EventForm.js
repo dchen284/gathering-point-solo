@@ -15,11 +15,13 @@ function EventForm({ formAction, setShowModal }) {
   const { eventId } = useParams();
   const eventOnDisplay = useSelector( (state) => state.events[eventId]);
 
+  console.log('eventOnDisplay', eventOnDisplay)
+
   let initialStateForForm = {
     title: '',
     eventBody: '',
-    startTime: new Date(),
-    endTime: new Date(),
+    startTime: '',
+    endTime: '',
     imgUrl: '',
     organizerName: '',
   };
@@ -28,6 +30,16 @@ function EventForm({ formAction, setShowModal }) {
 
   if (eventOnDisplay) {
     initialStateForForm = {...eventOnDisplay};
+
+    let startTimeFromDb = eventOnDisplay.startTime;
+    let startTimeWithoutZ = startTimeFromDb.slice(0, startTimeFromDb.length -1);
+    console.log ('startTimeWithoutZ', startTimeWithoutZ);
+    initialStateForForm.startTime = startTimeWithoutZ;
+
+    let endTimeFromDb = eventOnDisplay.endTime;
+    let endTimeWithoutZ = endTimeFromDb.slice(0, endTimeFromDb.length -1);
+    console.log ('endTimeWithoutZ', endTimeWithoutZ);
+    initialStateForForm.endTime = endTimeWithoutZ;
   }
 
   // console.log('>>> before submit', initialStateForForm);
@@ -45,7 +57,7 @@ function EventForm({ formAction, setShowModal }) {
   const handleSubmitForUpdate = async (e) => {
     e.preventDefault();
 
-    console.log('inside update!')
+    // console.log('inside update!')
     const updatedEventData = {
       id: initialStateForForm.id,
       title: formTitle,
@@ -78,7 +90,7 @@ function EventForm({ formAction, setShowModal }) {
 
   const handleSubmitForPost = async (e) => {
     e.preventDefault();
-    console.log('inside post!')
+    // console.log('inside post!')
     const newEventData = {
         title: formTitle,
         eventBody: formEventBody,
@@ -160,7 +172,10 @@ function EventForm({ formAction, setShowModal }) {
           <input
             type="datetime-local"
             value={formStartTime}
-            onChange={(e) => setFormStartTime(e.target.value)}
+            onChange={(e) => {
+              console.log('time change', e.target.value)
+              setFormStartTime(e.target.value)
+            }}
             required
           />
         </label>
