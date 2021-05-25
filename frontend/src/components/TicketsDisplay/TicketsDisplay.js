@@ -11,6 +11,9 @@ export default function TicketsDisplay() {
     //hooks
     const dispatch = useDispatch();
     const sessionUser = useSelector( (state) => state.session.user );
+    const arrTickets = useSelector( (state) => Object.values(state.tickets) );
+
+    console.log('>>>>>>', arrTickets);
 
     //useEffects
     useEffect( () => {
@@ -26,8 +29,27 @@ export default function TicketsDisplay() {
     else {
         return (
             <>
-                <div>TicketsDisplay {sessionUser.id}</div>
-                <TicketButton />
+                <table class="pure-table pure-table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ticket ID#</th>
+                            <th>Event Title</th>
+                            <th>Cancel Ticket</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {arrTickets.map( (ticket) => {
+                        return (
+                            <tr>
+                                <td>{ticket.id}</td>
+                                <td>{ticket.Event.title}</td>
+                                <td><TicketButton /></td>
+                            </tr>
+                        )
+                    })}
+                    </tbody>
+                </table>
+
             </>
         );
     }
