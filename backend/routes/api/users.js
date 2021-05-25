@@ -56,16 +56,39 @@ router.post(
 router.get('/:userId/tickets', asyncHandler( async (req, res) => {
   const userId = req.params.userId;
 
-  const userTicketsOfSession = await UserTicket.findAll({
+  const userTicketsOfSessionUser = await UserTicket.findAll({
     // attributes: ['id', 'userId', 'eventId'],
     attributes: { include: ['id'] },
     where: { userId: userId },
     include: [ Event ],
   })
   // console.log('userTicketsOfSession', JSON.stringify(userTicketsOfSession, null, 4));
-  return res.json(userTicketsOfSession);
+  return res.json(userTicketsOfSessionUser);
 
 }));
 
+router.post('/:userId/tickets/:eventId', asyncHandler( async (req, res) => {
+
+  const { eventId, userId } = req.params;
+  console.log('eventId', eventId, 'userId', userId)
+
+  const checkForExistingTicket = await UserTicket.findOne({
+    where: { userId, eventId }
+  })
+
+  console.log('existing ticket', checkForExistingTicket);
+
+  if (!checkForExistingTicket) {
+    console.log('good, no existing ticket');
+    const userTicketToAdd = await UserTicket.create( { eventId, userId } );
+    const ticketThatWasJustAdded = await UserTicket.findOne({
+      where: { userId, eventId },
+      attributes: { include: ['id'] },
+      include: [ Event ],
+    })
+    return res.json(ticketThatWasJustAdded);
+  }
+
+}));
 
 module.exports = router;

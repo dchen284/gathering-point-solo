@@ -38,14 +38,11 @@ export default function EventDisplay() {
     //JavaScript
 
 
-    let boolSessionUserHasTicket = false;
+    // let boolSessionUserHasTicket = false;
     let ticketId = null;
 
     if (sessionUser && arrTicketsOfSessionUser) {
-        // console.log('blah', arrTicketsOfSessionUser);
         arrTicketsOfSessionUser.forEach( ticket => {
-            // console.log('ticket.eventId', ticket.eventId);
-            // console.log('eventId', eventId);
             if (+ticket.eventId === +eventId) {ticketId = ticket.id}
         });
     }
@@ -67,7 +64,11 @@ export default function EventDisplay() {
                     <div>Event Description: {event.eventBody}</div>
                     <div>Event Start Time: {event.startTime}</div>
                     <div>Event End Time: {event.endTime}</div>
-                    <TicketButton ticketId={ticketId}/>
+                    <TicketButton
+                        eventId={eventId}
+                        ticketId={ticketId}
+                        userId={sessionUser.id}
+                    />
                     {
                         boolOwnsEvent ?
                         <>

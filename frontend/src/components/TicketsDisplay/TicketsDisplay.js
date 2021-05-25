@@ -43,7 +43,13 @@ export default function TicketsDisplay() {
                             <tr key={`${ticket.id}`}>
                                 <td>{ticket.id}</td>
                                 <td>{ticket.Event.title}</td>
-                                <td><TicketButton ticketId={ticket.id} /></td>
+                                <td>
+                                    <TicketButton
+                                        eventId={ticket.eventId}
+                                        ticketId={ticket.id}
+                                        userId={sessionUser.id}
+                                    />
+                                </td>
                             </tr>
                         )
                     })}

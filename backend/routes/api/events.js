@@ -30,7 +30,7 @@ router.get('/', asyncHandler( async (req, res) => {
         include: [ User ],
         order: [ ['id', 'DESC'] ],
     });
-    console.log('fetchedEvents', JSON.stringify(fetchedEvents, null, 4));
+    // console.log('fetchedEvents', JSON.stringify(fetchedEvents, null, 4));
     return res.json(fetchedEvents);
 }));
 

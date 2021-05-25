@@ -34,29 +34,30 @@ export function fetchTicketsOfSessionUser(user) {
     }
 }
 
-export function fetchTicketById(userId, eventId) {
-    return async function (dispatch) {
-        const res = await csrfFetch(`/users/${userId}/tickets/${eventId}`);
-        if (res.ok) {
-            const data = res.json();
-            dispatch(addTicket(data));
-            return data;
-        } else {
-            throw res;
-        }
-    }
-}
+// export function fetchTicketById(userId, eventId) {
+//     return async function (dispatch) {
+//         const res = await csrfFetch(`/users/${userId}/tickets/${eventId}`);
+//         if (res.ok) {
+//             const data = res.json();
+//             dispatch(addTicket(data));
+//             return data;
+//         } else {
+//             throw res;
+//         }
+//     }
+// }
 
-export function fetchTicketToAdd(userId, eventId) {
+export function fetchTicketToAdd(eventId, userId) {
     return async function (dispatch) {
-        const res = await csrfFetch(`/users/${userId}/tickets/${eventId}`,
+        console.log('here here');
+        const res = await csrfFetch(`/api/users/${userId}/tickets/${eventId}`,
             {
                 method: 'POST',
                 body: JSON.stringify({userId, eventId}),
             }
         );
         if (res.ok) {
-            const data = res.json();
+            const data = await res.json();
             dispatch(addTicket(data));
             return data;
         } else {
@@ -67,7 +68,7 @@ export function fetchTicketToAdd(userId, eventId) {
 
 export function fetchTicketToRemove(userId, eventId) {
     return async function (dispatch) {
-        const res = await csrfFetch(`/users/${userId}/tickets/${eventId}`,
+        const res = await csrfFetch(`/api/users/${userId}/tickets/${eventId}`,
             {
                 method: 'DELETE',
                 body: JSON.stringify({userId, eventId}),
