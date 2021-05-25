@@ -10,6 +10,7 @@ import * as ticketsActions from '../../store/tickets';
 import BookmarkButton from '../BookmarkButton';
 import DeleteEventButton from '../DeleteEventButton';
 import EventFormModal from '../EventFormModal';
+import LoginFormModal from '../LoginFormModal';
 import TicketButton from '../TicketButton';
 
 export default function EventDisplay() {
@@ -64,11 +65,19 @@ export default function EventDisplay() {
                     <div>Event Description: {event.eventBody}</div>
                     <div>Event Start Time: {event.startTime}</div>
                     <div>Event End Time: {event.endTime}</div>
+                    {sessionUser ?
                     <TicketButton
                         eventId={eventId}
                         ticketId={ticketId}
                         userId={sessionUser.id}
                     />
+                    :
+                    <>
+                        <div>Login to Register!</div>
+                        <LoginFormModal />
+                    </>
+                    }
+
                     {
                         boolOwnsEvent ?
                         <>
