@@ -27,7 +27,7 @@ export default function EventDisplay() {
     }, [dispatch, eventId]);
 
     let boolOwnsEvent = false;
-    if (sessionUser) {
+    if (sessionUser && event) {
         if (sessionUser.id === event.ownerId)
             {boolOwnsEvent = true}
     }

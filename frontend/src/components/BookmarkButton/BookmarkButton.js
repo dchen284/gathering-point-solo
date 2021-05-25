@@ -1,4 +1,4 @@
-
+import './BookmarkButton.css'
 
 export default function BookmarkButton() {
     return (
