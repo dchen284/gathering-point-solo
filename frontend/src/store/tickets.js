@@ -49,7 +49,7 @@ export function fetchTicketsOfSessionUser(user) {
 
 export function fetchTicketToAdd(eventId, userId) {
     return async function (dispatch) {
-        console.log('here here');
+        // console.log('here here');
         const res = await csrfFetch(`/api/users/${userId}/events/${eventId}/tickets`,
             {
                 method: 'POST',

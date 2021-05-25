@@ -79,7 +79,7 @@ router.post('/:userId/events/:eventId/tickets', asyncHandler( async (req, res) =
   console.log('existing ticket', checkForExistingTicket);
 
   if (!checkForExistingTicket) {
-    console.log('good, no existing ticket');
+    // console.log('good, no existing ticket');
     const userTicketToAdd = await UserTicket.create( { eventId, userId } );
     const ticketThatWasJustAdded = await UserTicket.findOne({
       where: { userId, eventId },
