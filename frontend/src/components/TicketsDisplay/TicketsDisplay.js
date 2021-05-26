@@ -11,7 +11,7 @@ export default function TicketsDisplay() {
     //hooks
     const dispatch = useDispatch();
     const sessionUser = useSelector( (state) => state.session.user );
-    const arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
+    let arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
 
     // console.log('>>>>>>', arrTicketsOfSessionUser);
 

@@ -106,6 +106,16 @@ router.delete('/:userId/events/:eventId/tickets', asyncHandler( async (req, res)
     return res.json(userTicketToDelete);
   }
 
+  if (!userTicketToDelete) {
+    const err = new Error('Login failed');
+    err.status = 401;
+    err.title = 'No event found';
+    err.errors = ['No event was found.'];
+    console.log('err', err);
+    return err;
+    // return next(err);
+  }
+
 
 
 }));

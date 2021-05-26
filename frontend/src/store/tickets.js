@@ -75,8 +75,10 @@ export function fetchTicketToRemove(eventId, ticketId, userId) {
             }
         );
         if (res.ok) {
-            const data = res.json();
-            // dispatch(removeTicket(data));
+
+            const data = await res.json();
+            // console.log('data in fetchTicketToRemove', data)
+            dispatch(removeTicket(data));
             return data;
         } else {
             throw res;
@@ -100,10 +102,10 @@ export function clearTicketsOnLogOut() {
     }
 }
 
-export function removeTicket(ticketId) {
+export function removeTicket(ticket) {
     return {
         type: REMOVE_TICKET,
-        payload: ticketId,
+        payload: ticket,
     }
 }
 
@@ -145,8 +147,8 @@ export default function ticketsReducer(state = initialState, action) {
 
       case REMOVE_TICKET:
         newState = {...state};
-        const idOfTicketToRemove = action.payload;
-        delete newState[idOfTicketToRemove];
+        const idOfTicketToRemove = action.payload.id;
+        delete newState[+idOfTicketToRemove];
         return newState;
       default:
         // If this reducer doesn't recognize the action type, or doesn't

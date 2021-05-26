@@ -18,18 +18,18 @@ export default function TicketButton({ eventId, ticketId, userId }) {
 
     //JavaScript
         //button text toggle
-    let buttonText;
+    // let buttonText;
 
-    if (ticketId) {
-        buttonText = 'Cancel Ticket';
-    }
-    else {
-        buttonText = 'Register for Event';
-    }
+    // if (ticketId) {
+    //     buttonText = 'Cancel Ticket';
+    // }
+    // else {
+    //     buttonText = 'Register for Event';
+    // }
         //button callback function toggle
     function clickTicketButton() {
         setHasTicket( (prevValue) => !prevValue );
-        if (ticketId) {return cancelTicket()}
+        if (hasTicket) {return cancelTicket()}
         else {return registerForEvent()}
     }
 
