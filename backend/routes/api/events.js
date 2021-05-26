@@ -6,7 +6,7 @@ const asyncHandler = require('express-async-handler');
 
 //internal imports
 
-const { Event, User } = require('../../db/models')
+const { Event, User, UserTicket } = require('../../db/models')
 const { requireAuth } = require('../../utils/auth');
 
 //helper functions
@@ -104,13 +104,13 @@ router.put('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
 
     const newData = req.body;
 
-    console.log('newData', newData);
+    // console.log('newData', newData);
 
-    console.log('eventId', newData.id);
+    // console.log('eventId', newData.id);
 
     const eventToUpdate = await Event.findByPk(newData.id, {});
 
-    console.log('eventToUpdate', JSON.stringify(eventToUpdate, null, 4));
+    // console.log('eventToUpdate', JSON.stringify(eventToUpdate, null, 4));
 
     if (!eventToUpdate) {
         const err = new Error('No event found');
@@ -124,6 +124,27 @@ router.put('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
         console.log('updatedEvent', JSON.stringify(updatedEvent, null, 4));
         return res.json(updatedEvent);
     }
+
+}));
+
+router.get('/:eventId(\\d+)/tickets', asyncHandler( async (req, res) => {
+
+    console.group('in route');
+    const { eventId } = req.params;
+
+    const TicketsOfEvent = await UserTicket.findAll({
+        where: { eventId: eventId },
+        attributes: { include: ['id'] },
+    });
+
+    console.log('in route', JSON.stringify(TicketsOfEvent, null, 4));
+
+    if (!Array.isArray(TicketsOfEvent)) {
+        let temp = [TicketsOfEvent]
+        TicketsOfEvent = temp;
+    }
+
+    return res.json(TicketsOfEvent);
 
 }));
 

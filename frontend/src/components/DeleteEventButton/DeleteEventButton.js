@@ -5,6 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 //internal imports
 import * as eventsActions from '../../store/events';
+import * as ticketsActions from '../../store/tickets';
 
 export default function DeleteEventButton() {
 
@@ -12,9 +13,13 @@ export default function DeleteEventButton() {
     const dispatch = useDispatch();
     const history = useHistory();
     const { eventId } = useParams();
+    // const sessionUser = useSelector( (state) => state.session.user );
     // const [isDeleted, setIsDeleted] = useState(false);
 
+
+
     function activateDeleteButton() {
+        dispatch(ticketsActions.fetchTicketsToDeleteFromStore(eventId));
         dispatch(eventsActions.fetchEventToDelete(eventId));
         history.push('/');
         // setIsDeleted(true);
