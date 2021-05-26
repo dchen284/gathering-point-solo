@@ -10,9 +10,6 @@ ul {
     list-style-type: none;
 }
 
+body {
 
-.eventCardDisplay {
-    display: flex;
-    background-color: pink;
-    flex-flow: row wrap;
 }

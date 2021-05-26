@@ -1,0 +1,5 @@
+.eventCardDisplay {
+    display: flex;
+    background-color: rgb(86, 11, 98);
+    flex-flow: row wrap;
+}

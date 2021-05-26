@@ -31,7 +31,7 @@ function LoginForm() {
   };
 
   return (
-    <>
+
       <div className="form-container">
         <form className="form-container__inputs" onSubmit={handleSubmit}>
           <ul>
@@ -63,12 +63,12 @@ function LoginForm() {
         </form>
         <div className='form-container__side-section'>
           <img className='form-container__side-image' alt="quill" src="/images/stx-82-poet-s-quill.jpeg" />
-          <div>Poet's Quill, illustrated by Anna Fehr</div>
-          <div>From Magic: the Gathering, by Wizards of the Coast</div>
+          <div className='form-container__side-image-caption'>Poet's Quill, illustrated by Anna Fehr</div>
+          <div className='form-container__side-image-caption'>From Magic: the Gathering, by Wizards of the Coast</div>
         </div>
       </div>
 
-    </>
+
   );
 }
 

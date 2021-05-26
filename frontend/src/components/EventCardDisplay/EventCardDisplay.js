@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 //internal imports
+import './EventCardDisplay.css';
 import EventCard from '../EventCard';
 import * as eventsActions from '../../store/events';
 

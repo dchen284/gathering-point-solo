@@ -1,4 +1,25 @@
-a {
-    font-weight: bolder;
+
+
+.nav {
+    background-color: rgb(86, 11, 98);
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
 }
 
+.nav__logo {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.nav__logo__text {
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    color: gold;
+    font-size: 18px;
+}

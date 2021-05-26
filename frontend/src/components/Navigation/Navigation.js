@@ -34,7 +34,12 @@ const sessionUser = useSelector(state => state.session.user);
   }
 
   return (
-    <ul>
+    <ul className='nav'>
+      <li className='nav__logo'>
+        <NavLink exact to="/">
+          <div className='nav__logo__text'>Gathering Point</div>
+        </NavLink>
+      </li>
       <li>
         <NavLink exact to="/">
           <button className="pure-button">Home</button>

@@ -1,6 +1,7 @@
 .eventCard {
     /* width: 50%; */
-    background-color: grey;
+    background-color: white;
+    border: black solid 2px;
     padding: 5px 10px;
     margin: 5px;
     overflow: hidden;
@@ -26,3 +27,4 @@ img {
     width: 220px;
     height: 100px;
 }
+

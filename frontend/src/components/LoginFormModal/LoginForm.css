@@ -24,6 +24,11 @@
     width: 100%;
 }
 
+.form-container__side-image-caption {
+    font-size: 12px;
+    margin: 0px;
+}
+
 form {
     display: block;
 }
@@ -31,4 +36,9 @@ form {
 .form-container__side-image {
     height: 95%;
     width: 95%;
+    margin: 0;
+}
+
+input {
+    width: 100%;
 }
