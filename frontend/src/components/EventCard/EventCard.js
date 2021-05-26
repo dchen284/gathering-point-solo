@@ -32,12 +32,14 @@ export default function EventCard({event}) {
         <Link key={event.id} to={`/events/${event.id}`}>
             <div className="event-card">
                 <div>
-                    <img className="event-card__image" alt="event" src={event.imgUrl} />
+                    <img className="event-card__image" alt="event" src={event.imgUrl ? event.imgUrl : "/images/thb-278-plains.jpeg"} />
                 </div>
-                <BookmarkButton className='bookmark-button' key={event.id}/>
-                <p className="event-card__title">{event.title}</p>
-                <p>Organizer: {event.organizerName}</p>
-                <p>Start Time: {strStartTime}</p>
+                <div className="event-card__data">
+                    <BookmarkButton className='bookmark-button' key={event.id}/>
+                    <p className="event-card__title">{event.title}</p>
+                    <p className="event-card__organizer">Organizer: {event.organizerName}</p>
+                    <p className="event-card__start-time">Start Time: {strStartTime}</p>
+                </div>
             </div>
         </Link>
 

@@ -1,5 +1,10 @@
-.eventCardDisplay {
+.display {
     display: flex;
     /* background-color: rgb(86, 11, 98); */
     flex-flow: row wrap;
+}
+
+.title {
+    margin: 20px;
+    text-decoration: underline;
 }

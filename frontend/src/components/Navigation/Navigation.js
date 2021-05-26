@@ -41,9 +41,9 @@ const sessionUser = useSelector(state => state.session.user);
         </NavLink>
       </li>
       <li>
-        <NavLink exact to="/">
+        {/* <NavLink exact to="/">
           <button className="pure-button">Home</button>
-        </NavLink>
+        </NavLink> */}
         {isLoaded && sessionLinks}
       </li>
     </ul>

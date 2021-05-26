@@ -29,8 +29,8 @@ export default function EventCardDisplay() {
 
     return (
         <>
-            <p>Tournaments</p>
-            <div className="eventCardDisplay">
+            <h2 className='title'>TOURNAMENTS</h2>
+            <div className="display">
                 {arrEventsToShow.map( (event) => {
                     return <EventCard key={`${event.id}`} event={event}/>
                 })}

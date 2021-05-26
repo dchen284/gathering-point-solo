@@ -1,5 +1,9 @@
+a {
+    text-decoration: none;
+}
+
 .event-card {
-    width: 250px;
+    width: 270px;
     background-color: white;
     border: black solid 2px;
     padding: 5px 10px;
@@ -8,25 +12,9 @@
     height: 300px;
 }
 
-a {
-    text-decoration: none;
-}
-
-.event-card .bookmark-button {
-    /* background-color: red;
-    color: white;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%; */
+.event-card__data {
     position: relative;
     bottom: 30px;
-}
-
-.event-card p {
-    text-decoration: none;
 }
 
 .event-card__image {
@@ -34,7 +22,11 @@ a {
     height: 100%;
 }
 
-.event-card .event-card__title {
+.event-card__start-time {
+    color: orange;
+}
+
+.event-card__title {
     font-weight: bold;
     text-decoration: underline;
 }

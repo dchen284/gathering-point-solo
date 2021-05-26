@@ -144,68 +144,72 @@ function EventForm({ formAction, setShowModal }) {
 
   return (
     <>
-      {formAction === 'Update' ?
-        <div>Update</div> :
-        <div>Create</div>}
-      <form onSubmit={cb}>
-        <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
-        <label>
-          Title
-          <input
-            type="text"
-            value={formTitle}
-            onChange={(e) => setFormTitle(e.target.value)}
-            required
-          />
-        </label>
-        <label className="green">
-          Event Description (optional)
-          <textarea
-            value={formEventBody}
-            onChange={(e) => setFormEventBody(e.target.value)}
-          />
-        </label>
-        <label>
-          Start Time:
-          <input
-            type="datetime-local"
-            value={formStartTime}
-            onChange={(e) => {
-              console.log('time change', e.target.value)
-              setFormStartTime(e.target.value)
-            }}
-            required
-          />
-        </label>
-        <label>
-          End Time:
-          <input
-            type="datetime-local"
-            value={formEndTime}
-            onChange={(e) => setFormEndTime(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Image URL (optional):
-          <input
-            type="url"
-            value={formImgUrl}
-            onChange={(e) => setFormImgUrl(e.target.value)}
-          />
-        </label>
-        <label>
-          Organizer Name:
-          <input
-            type="text"
-            value={formOrganizerName}
-            onChange={(e) => setFormOrganizerName(e.target.value)}
-          />
-        </label>
-        <button className="pure-button" type="submit">{`${formAction} Event`}</button>
-      </form>
+      <div className="form-container">
+
+        <form onSubmit={cb}>
+          {
+            formAction === 'Update' ? <div>Update Event</div> : <div>Create Event</div>
+          }
+          <ul>
+            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          </ul>
+          <label>
+            Title
+            <input
+              type="text"
+              value={formTitle}
+              onChange={(e) => setFormTitle(e.target.value)}
+              required
+            />
+          </label>
+          <label className="green">
+            Event Description (optional)
+            <textarea
+              value={formEventBody}
+              onChange={(e) => setFormEventBody(e.target.value)}
+            />
+          </label>
+          <label>
+            Start Time:
+            <input
+              type="datetime-local"
+              value={formStartTime}
+              onChange={(e) => {
+                console.log('time change', e.target.value)
+                setFormStartTime(e.target.value)
+              }}
+              required
+            />
+          </label>
+          <label>
+            End Time:
+            <input
+              type="datetime-local"
+              value={formEndTime}
+              onChange={(e) => setFormEndTime(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Image URL (optional):
+            <input
+              type="url"
+              value={formImgUrl}
+              onChange={(e) => setFormImgUrl(e.target.value)}
+            />
+          </label>
+          <label>
+            Organizer Name:
+            <input
+              type="text"
+              value={formOrganizerName}
+              onChange={(e) => setFormOrganizerName(e.target.value)}
+            />
+          </label>
+          <button className="pure-button" type="submit">{`${formAction} Event`}</button>
+        </form>
+      </div>
+
     </>
   );
 // const dispatch = useDispatch();
