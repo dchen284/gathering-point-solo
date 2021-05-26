@@ -7,17 +7,37 @@ import './EventCard.css';
 import BookmarkButton from "../BookmarkButton";
 
 export default function EventCard({event}) {
+
+    //template: 1998-05-24T23:22:37
+
+    const strDate = event.startTime.slice(0, 10);
+    const strHour = +event.startTime.slice(11, 13);
+    const strMinutes = event.startTime.slice(14, 16);
+
+    let strStartTime;
+
+    if (+strHour <= 12) {
+        strStartTime = `${strDate}, ${strHour}:${strMinutes} AM`;
+    }
+    else if (+strHour >= 13 && +strHour <= 21)
+    {
+        strStartTime = `${strDate}, 0${+strHour-12}:${strMinutes} PM`;
+    }
+    else {
+        strStartTime = `${strDate}, ${+strHour-12}:${strMinutes} PM`;
+    }
+
+
     return (
-        <Link key={event.id} to={`/events/${event.id}`} style={{ textDecoration: 'none' }}>
+        <Link key={event.id} to={`/events/${event.id}`}>
             <div className="event-card">
                 <div>
                     <img className="event-card__image" alt="event" src={event.imgUrl} />
                 </div>
                 <BookmarkButton className='bookmark-button' key={event.id}/>
-                <p>ID: {event.id}</p>
-                <p>Title: {event.title}</p>
+                <p className="event-card__title">{event.title}</p>
                 <p>Organizer: {event.organizerName}</p>
-                <p>Start Time: {event.startTime}</p>
+                <p>Start Time: {strStartTime}</p>
             </div>
         </Link>
 
