@@ -1,15 +1,25 @@
 //external imports
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //internal imports
 import * as ticketsActions from '../../store/tickets';
 
 export default function TicketButton({ eventId, ticketId, userId }) {
 
+    // console.log('gah', ticketId, !!ticketId);
+
     //hooks
     const dispatch = useDispatch();
-    const [hasTicket, setHasTicket] = useState(!!ticketId);
+    // const [hasTicket, setHasTicket] = useState(!!ticketId);
+    let hasTicket = false;
     const sessionUser = useSelector( (state) => state.session.user );
+    let arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
+
+    // console.log('array', arrTicketsOfSessionUser);
+
+    arrTicketsOfSessionUser.forEach( ticket => {
+        if (+ticket.id === +ticketId) {hasTicket = true}
+    });
 
     //useEffects
     useEffect( () => {
@@ -28,9 +38,14 @@ export default function TicketButton({ eventId, ticketId, userId }) {
     // }
         //button callback function toggle
     function clickTicketButton() {
-        setHasTicket( (prevValue) => !prevValue );
-        if (hasTicket) {return cancelTicket()}
-        else {return registerForEvent()}
+        if (hasTicket) {
+            hasTicket = !hasTicket;
+            return cancelTicket();
+        }
+        else {
+            hasTicket = !hasTicket;
+            return registerForEvent()
+        }
     }
 
         //button callback function options
