@@ -53,7 +53,7 @@ router.post(
 
 //user tickets routes
 
-router.get('/:userId/tickets', asyncHandler( async (req, res) => {
+router.get('/:userId/tickets', requireAuth, asyncHandler( async (req, res) => {
   const userId = req.params.userId;
 
   const userTicketsOfSessionUser = await UserTicket.findAll({
@@ -67,7 +67,7 @@ router.get('/:userId/tickets', asyncHandler( async (req, res) => {
 
 }));
 
-router.post('/:userId/events/:eventId/tickets', asyncHandler( async (req, res) => {
+router.post('/:userId/events/:eventId/tickets', requireAuth, asyncHandler( async (req, res) => {
 
   const { eventId, userId } = req.params;
   // console.log('eventId', eventId, 'userId', userId)
@@ -91,7 +91,7 @@ router.post('/:userId/events/:eventId/tickets', asyncHandler( async (req, res) =
 
 }));
 
-router.delete('/:userId/events/:eventId/tickets', asyncHandler( async (req, res) => {
+router.delete('/:userId/events/:eventId/tickets', requireAuth, asyncHandler( async (req, res) => {
   const { ticketId } = req.body;
 
   const userTicketToDelete = await UserTicket.findOne({

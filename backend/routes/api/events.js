@@ -7,6 +7,7 @@ const asyncHandler = require('express-async-handler');
 //internal imports
 
 const { Event, User } = require('../../db/models')
+const { requireAuth } = require('../../utils/auth');
 
 //helper functions
 
@@ -60,7 +61,7 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
 
 }));
 
-router.post('/', asyncHandler( async (req, res) => {
+router.post('/', requireAuth, asyncHandler( async (req, res) => {
 
     await Event.create(req.body);
 
@@ -76,7 +77,7 @@ router.post('/', asyncHandler( async (req, res) => {
     // might not need a return, either addOne action creator, or force a load action
 }));
 
-router.delete('/:eventId(\\d+)', asyncHandler( async (req, res) => {
+router.delete('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
 
     const eventId = req.params.eventId;
     // console.log('eventId>>>>', eventId);
@@ -99,7 +100,7 @@ router.delete('/:eventId(\\d+)', asyncHandler( async (req, res) => {
 
 }));
 
-router.put('/:eventId(\\d+)', asyncHandler( async (req, res) => {
+router.put('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
 
     const newData = req.body;
 
