@@ -69,7 +69,12 @@ module.exports = (sequelize, DataTypes) => {
       }
     );
 
-    User.hasMany( models.UserTicket, {foreignKey: 'userId'});
+    User.hasMany(
+      models.UserTicket,
+      {
+        foreignKey: 'userId',
+        onDelete: 'cascade', hooks: true,
+      });
 
   };
 
