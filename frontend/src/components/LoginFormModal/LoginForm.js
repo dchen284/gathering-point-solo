@@ -31,33 +31,44 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Username or Email
-        <input
-          type="text"
-          value={credential}
-          onChange={(e) => setCredential(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button className="pure-button" type="submit">Log In</button>
-      <DemoUserButton />
-    </form>
+    <>
+      <div className="form-container">
+        <form className="form-container__inputs" onSubmit={handleSubmit}>
+          <ul>
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+          <h2>Log In</h2>
+          <label>
+            Username or Email
+            <input
+              type="text"
+              value={credential}
+              onChange={(e) => setCredential(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+          <button className="pure-button" type="submit">Log In</button>
+          <DemoUserButton />
+        </form>
+        <div className='form-container__side-section'>
+          <img className='form-container__side-image' alt="quill" src="/images/stx-82-poet-s-quill.jpeg" />
+          <div>Poet's Quill, illustrated by Anna Fehr</div>
+          <div>From Magic: the Gathering, by Wizards of the Coast</div>
+        </div>
+      </div>
+
+    </>
   );
 }
 
