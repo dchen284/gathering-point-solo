@@ -60,6 +60,7 @@ export default function EventDisplay() {
         <>
             {isLoaded && (
                 <>
+                    <div>Event ID: {event.id}</div>
                     <div>Event Title: {event.title}</div>
                     <div>Organizer Name: {event.organizerName}</div>
                     <div>Event Description: {event.eventBody}</div>

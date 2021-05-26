@@ -1,6 +1,6 @@
 //external imports
 import React, { useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 //internal imports
 import TicketButton from '../TicketButton';
@@ -33,6 +33,7 @@ export default function TicketsDisplay() {
                     <thead>
                         <tr>
                             <th>Ticket ID#</th>
+                            <th>Event ID#</th>
                             <th>Event Title</th>
                             <th>Cancel Ticket</th>
                         </tr>
@@ -42,7 +43,12 @@ export default function TicketsDisplay() {
                         return (
                             <tr key={`${ticket.id}`}>
                                 <td>{ticket.id}</td>
-                                <td>{ticket.Event.title}</td>
+                                <td>{ticket.eventId}</td>
+                                <td>
+                                    <Link to={`/events/${ticket.eventId}`}>
+                                        {ticket.Event.title}
+                                    </Link>
+                                </td>
                                 <td>
                                     <TicketButton
                                         eventId={ticket.eventId}
