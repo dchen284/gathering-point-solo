@@ -8,10 +8,10 @@ import BookmarkButton from "../BookmarkButton";
 
 export default function EventCard({event}) {
     return (
-        <Link key={event.id} to={`/events/${event.id}`}>
-            <div className="eventCard">
+        <Link key={event.id} to={`/events/${event.id}`} style={{ textDecoration: 'none' }}>
+            <div className="event-card">
                 <div>
-                    <img alt="event" src={event.imgUrl} />
+                    <img className="event-card__image" alt="event" src={event.imgUrl} />
                 </div>
                 <BookmarkButton className='bookmark-button' key={event.id}/>
                 <p>ID: {event.id}</p>
