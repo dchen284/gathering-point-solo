@@ -1,6 +1,6 @@
 //external imports
-// import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 //internal imports
 import * as ticketsActions from '../../store/tickets';
 
@@ -8,7 +8,12 @@ export default function TicketButton({ eventId, ticketId, userId }) {
 
     //hooks
     const dispatch = useDispatch();
+    const sessionUser = useSelector( (state) => state.session.user );
 
+    //useEffects
+    useEffect( () => {
+        dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser));
+    }, [dispatch, sessionUser])
 
     //JavaScript
         //button text toggle
@@ -29,7 +34,7 @@ export default function TicketButton({ eventId, ticketId, userId }) {
         //button callback function options
     function cancelTicket() {
         console.log('Canceling the Ticket')
-        // dispatch(ticketsAction.fetchTicketToRemove(ticketId, userId));
+        dispatch(ticketsActions.fetchTicketToRemove(eventId, ticketId, userId));
 
     }
 

@@ -66,17 +66,17 @@ export function fetchTicketToAdd(eventId, userId) {
     }
 }
 
-export function fetchTicketToRemove(userId, eventId) {
+export function fetchTicketToRemove(eventId, ticketId, userId) {
     return async function (dispatch) {
-        const res = await csrfFetch(`/api/users/${userId}/tickets/${eventId}`,
+        const res = await csrfFetch(`/api/users/${userId}/events/${eventId}/tickets`,
             {
                 method: 'DELETE',
-                body: JSON.stringify({userId, eventId}),
+                body: JSON.stringify({ticketId}),
             }
         );
         if (res.ok) {
             const data = res.json();
-            dispatch(removeTicket(data));
+            // dispatch(removeTicket(data));
             return data;
         } else {
             throw res;
