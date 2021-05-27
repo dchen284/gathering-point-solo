@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 //internal imports
+import './EventDisplay.css';
 import * as eventsActions from '../../store/events';
 import * as ticketsActions from '../../store/tickets';
 import BookmarkButton from '../BookmarkButton';
@@ -56,16 +57,38 @@ export default function EventDisplay() {
             {boolOwnsEvent = true}
     }
 
+    function convertTime(strInputTime) {
+        const strDate = strInputTime.slice(0, 10);
+        const strHour = strInputTime.slice(11, 13);
+        const strMinutes = strInputTime.slice(14, 16);
+
+        let strConvertedTime;
+
+        if (+strHour <= 12) {
+            strConvertedTime = `${strDate}, ${strHour}:${strMinutes} AM`;
+        }
+        else if (+strHour >= 13 && +strHour <= 21)
+        {
+            strConvertedTime = `${strDate}, 0${+strHour-12}:${strMinutes} PM`;
+        }
+        else {
+            strConvertedTime = `${strDate}, ${+strHour-12}:${strMinutes} PM`;
+        }
+
+        return strConvertedTime;
+    }
+
     return (
         <>
             {isLoaded && (
-                <>
+                <div className="event-display-container">
+                    <img src={event.imgUrl ? event.imgUrl : 'images/thb-278-plains.jpeg'}/>
                     <div>Event ID: {event.id}</div>
                     <div>Event Title: {event.title}</div>
                     <div>Organizer Name: {event.organizerName}</div>
                     <div>Event Description: {event.eventBody}</div>
-                    <div>Event Start Time: {event.startTime}</div>
-                    <div>Event End Time: {event.endTime}</div>
+                    <div>Event Start Time: {convertTime(event.startTime)}</div>
+                    <div>Event End Time: {convertTime(event.endTime)}</div>
                     {sessionUser ?
                     <TicketButton
                         eventId={eventId}
@@ -88,7 +111,7 @@ export default function EventDisplay() {
                         : null
                     }
                     <BookmarkButton />
-                </>
+                </div>
             )}
         </>
     );

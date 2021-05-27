@@ -11,7 +11,7 @@ export default function EventCard({event}) {
     //template: 1998-05-24T23:22:37
 
     const strDate = event.startTime.slice(0, 10);
-    const strHour = +event.startTime.slice(11, 13);
+    const strHour = event.startTime.slice(11, 13);
     const strMinutes = event.startTime.slice(14, 16);
 
     let strStartTime;
