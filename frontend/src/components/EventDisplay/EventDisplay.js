@@ -82,35 +82,41 @@ export default function EventDisplay() {
         <>
             {isLoaded && (
                 <div className="event-display-container">
-                    <img src={event.imgUrl ? event.imgUrl : 'images/thb-278-plains.jpeg'}/>
-                    <div>Event ID: {event.id}</div>
-                    <div>Event Title: {event.title}</div>
-                    <div>Organizer Name: {event.organizerName}</div>
-                    <div>Event Description: {event.eventBody}</div>
-                    <div>Event Start Time: {convertTime(event.startTime)}</div>
-                    <div>Event End Time: {convertTime(event.endTime)}</div>
-                    {sessionUser ?
-                    <TicketButton
-                        eventId={eventId}
-                        ticketId={ticketId}
-                        userId={sessionUser.id}
-                    />
-                    :
-                    <>
-                        <div>Login to Register!</div>
-                        <LoginFormModal />
-                    </>
-                    }
+                    <div>
+                        <img src={event.imgUrl ? event.imgUrl : '/images/thb-278-plains.jpeg'} alt="Event Splash"/>
+                        <div>Event Description: {event.eventBody}</div>
 
-                    {
-                        boolOwnsEvent ?
+
+                    </div>
+                    <div>
+                        <div className="time-display">Event Start Time: {convertTime(event.startTime)}</div>
+                        <div className="time-display">Event End Time: {convertTime(event.endTime)}</div>
+                        <br />
+                        <div>{event.title}</div>
+                        <div>By: {event.organizerName}</div>
+                        <br />
+                        {sessionUser ?
+                        <TicketButton
+                            eventId={eventId}
+                            ticketId={ticketId}
+                            userId={sessionUser.id}
+                        />
+                        :
                         <>
-                            <EventFormModal formAction='Update'/>
-                            <DeleteEventButton />
+                            <div>Login to Register!</div>
+                            <LoginFormModal />
                         </>
-                        : null
-                    }
-                    <BookmarkButton />
+                        }
+                        {
+                            boolOwnsEvent ?
+                            <>
+                                <EventFormModal formAction='Update'/>
+                                <DeleteEventButton />
+                            </>
+                            : null
+                        }
+                        <BookmarkButton />
+                    </div>
                 </div>
             )}
         </>

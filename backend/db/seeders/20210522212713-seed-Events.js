@@ -30,7 +30,7 @@ module.exports = {
         eventBody: 'Bring your best Historic deck to qualify for the next PT!',
         startTime: timeTest,
         endTime: timeTest,
-        imgUrl: 'images/sta-33-tainted-pact.jpeg',
+        imgUrl: '/images/sta-33-tainted-pact.jpeg',
         organizerName: 'Tolaria West',
         ownerId: 5,
       },

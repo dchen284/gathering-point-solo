@@ -37,7 +37,7 @@ export default function EventCard({event}) {
                 <div className="event-card__data">
                     <BookmarkButton className='bookmark-button' key={event.id}/>
                     <p className="event-card__title">{event.title}</p>
-                    <p className="event-card__organizer">Organizer: {event.organizerName}</p>
+                    <p className="event-card__organizer">By: {event.organizerName}</p>
                     <p className="event-card__start-time">Start Time: {strStartTime}</p>
                 </div>
             </div>

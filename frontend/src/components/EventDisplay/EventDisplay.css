@@ -1,3 +1,8 @@
 .event-display-container {
     margin: 20px;
+    display: flex;
+}
+
+.time-display {
+    font-weight: bold;
 }

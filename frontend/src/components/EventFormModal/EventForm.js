@@ -108,6 +108,8 @@ function EventForm({ formAction, setShowModal }) {
         {errorsToPrint.push('Please provide a start time.')}
     if (!formEndTime)
         {errorsToPrint.push('Please provide an end time.')}
+    if (formStartTime > formEndTime)
+        {errorsToPrint.push('The event start time is after the event end time.')}
     if (!formOrganizerName)
         {errorsToPrint.push('Please provide an organizer name.')}
     if (formOrganizerName.length < 3 || formOrganizerName.length > 255)
@@ -126,7 +128,7 @@ function EventForm({ formAction, setShowModal }) {
       );
     }
 
-    return setErrors(['Temporary']);
+    return setErrors(errorsToPrint);
 
   };
 
@@ -138,11 +140,11 @@ function EventForm({ formAction, setShowModal }) {
     <>
       <div className="form-container">
         <form className="form-container__inputs" onSubmit={cb}>
-          {
+          {/* {
             formAction === 'Update' ? <div>Update Event</div> : <div>Create Event</div>
-          }
+          } */}
           <ul>
-            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            {errors.map((error, idx) => <li className="errors" key={idx}>{error}</li>)}
           </ul>
           <label>
             Title

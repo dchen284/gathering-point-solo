@@ -3,22 +3,35 @@
 const express = require('express');
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
+const { check } = require('express-validator');
 
 //internal imports
 
 const { Event, User, UserTicket } = require('../../db/models')
 const { requireAuth } = require('../../utils/auth');
+const { handleValidationErrors } = require('../../utils/validation');
 
-//helper functions
+//Validations
 
-// async function fetchEventsForEventCardDisplay() {
-//     const fetchedEvents = await Event.findAll({
-//         limit: 5,
-//         include: [ User ],
-//     });
-//     // const dataEvents = await fetchedEvents.json();
-//     return res.json(fetchedEvents);
-// }
+const validateEvent = [
+    check('title')
+        .exists({ checkFalsy: true })
+        .withMessage('Please enter a title.')
+        .isLength({ min: 3, max: 255 })
+        .withMessage('Title must be between 3 and 255 characters.'),
+    check('startTime')
+        .exists({ checkFalsy: true })
+        .withMessage('Please enter a start time.'),
+    check('endTime')
+        .exists({ checkFalsy: true })
+        .withMessage('Please enter a end time.'),
+    check('organizerName')
+        .exists({ checkFalsy: true })
+        .withMessage('Please enter a name for the organizer of the event.')
+        .isLength({ min: 3, max: 255 })
+        .withMessage('Organizer name must be between 3 and 255 characters.'),
+    handleValidationErrors,
+];
 
 //routes
 
@@ -61,7 +74,7 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
 
 }));
 
-router.post('/', requireAuth, asyncHandler( async (req, res) => {
+router.post('/', validateEvent, requireAuth, asyncHandler( async (req, res) => {
 
     await Event.create(req.body);
 
