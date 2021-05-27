@@ -107,6 +107,8 @@ export default function EventDisplay() {
                             <LoginFormModal />
                         </>
                         }
+                        <br/>
+                        <br/>
                         {
                             boolOwnsEvent ?
                             <>

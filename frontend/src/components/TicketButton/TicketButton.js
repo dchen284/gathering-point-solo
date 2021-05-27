@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //internal imports
+import './TicketButton.css';
 import * as ticketsActions from '../../store/tickets';
 
 export default function TicketButton({ eventId, ticketId, userId }) {
@@ -63,10 +64,10 @@ export default function TicketButton({ eventId, ticketId, userId }) {
     return (
         <button
             onClick={clickTicketButton}
-            className={`pure-button`}
+            className={ hasTicket ? `pure-button orange` : `pure-button`}
         >
             {/* {buttonText} */}
-            {hasTicket ? 'Cancel Ticket' : 'Register for Event'}
+            {hasTicket ? 'Registered! (Cancel Ticket)' : 'Register for Event'}
         </button>
     );
 }
