@@ -1,7 +1,44 @@
-.green {
-    color: green;
+* {
+    margin: 5px;
 }
 
 .errors {
     color: red;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+.form-container__inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-container__side-section {
+    height: 100%;
+    width: 100%;
+}
+
+.form-container__side-image-caption {
+    font-size: 12px;
+    margin: 0px;
+}
+
+/* form {
+    display: block;
+} */
+
+.form-container__side-image {
+    height: 95%;
+    width: 95%;
+    margin: 0;
+}
+
+input {
+    width: 100%;
 }

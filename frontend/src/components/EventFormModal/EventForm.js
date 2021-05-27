@@ -15,13 +15,14 @@ function EventForm({ formAction, setShowModal }) {
   const { eventId } = useParams();
   const eventOnDisplay = useSelector( (state) => state.events[eventId]);
 
-  console.log('eventOnDisplay', eventOnDisplay)
+  // console.log('eventOnDisplay', eventOnDisplay)
+  //2021-05-06T18:34
 
   let initialStateForForm = {
     title: '',
     eventBody: '',
-    startTime: '',
-    endTime: '',
+    startTime: '2021-05-06T13:00:000',
+    endTime: '2021-05-06T13:00:000',
     imgUrl: '',
     organizerName: '',
   };
@@ -31,15 +32,6 @@ function EventForm({ formAction, setShowModal }) {
   if (eventOnDisplay) {
     initialStateForForm = {...eventOnDisplay};
 
-    // let startTimeFromDb = eventOnDisplay.startTime;
-    // let startTimeWithoutZ = startTimeFromDb.slice(0, startTimeFromDb.length -1);
-    // console.log ('startTimeWithoutZ', startTimeWithoutZ);
-    // initialStateForForm.startTime = startTimeWithoutZ;
-
-    // let endTimeFromDb = eventOnDisplay.endTime;
-    // let endTimeWithoutZ = endTimeFromDb.slice(0, endTimeFromDb.length -1);
-    // console.log ('endTimeWithoutZ', endTimeWithoutZ);
-    // initialStateForForm.endTime = endTimeWithoutZ;
   }
 
   // console.log('>>> before submit', initialStateForForm);
@@ -145,7 +137,7 @@ function EventForm({ formAction, setShowModal }) {
   return (
     <>
       <div className="form-container">
-        <form onSubmit={cb}>
+        <form className="form-container__inputs" onSubmit={cb}>
           {
             formAction === 'Update' ? <div>Update Event</div> : <div>Create Event</div>
           }
@@ -207,11 +199,13 @@ function EventForm({ formAction, setShowModal }) {
           </label>
           <button className="pure-button" type="submit">{`${formAction} Event`}</button>
         </form>
-      </div>
-      <div className='form-container__side-section'>
-          <img className='form-container__side-image' alt="quill" src="/images/stx-198-lorehold-apprentice.jpeg" />
-          <div className='form-container__side-image-caption'>Lorehold Apprentice, illustrated by Manuel Castañón</div>
-          <div className='form-container__side-image-caption'>From Magic: the Gathering, by Wizards of the Coast</div>
+
+        <div className='form-container__side-section'>
+            <img className='form-container__side-image' alt="quill" src="/images/eld-248-tournament-grounds.jpeg" />
+            <div className='form-container__side-image-caption'>Tournament Grounds, illustrated by Cristi Balanescu</div>
+            <div className='form-container__side-image-caption'>From Magic: the Gathering, by Wizards of the Coast</div>
+        </div>
+
       </div>
     </>
   );
