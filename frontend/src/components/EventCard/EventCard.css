@@ -2,6 +2,10 @@ a {
     text-decoration: none;
 }
 
+/* a:visited {
+    color: green;
+} */
+
 .event-card {
     width: 270px;
     background-color: white;

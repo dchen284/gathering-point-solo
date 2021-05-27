@@ -61,7 +61,7 @@ function EventForm({ formAction, setShowModal }) {
       ownerId: sessionUser.id,
     };
 
-    console.log('updatedEventData', updatedEventData);
+    // console.log('updatedEventData', updatedEventData);
 
     let errorsToPrint = [];
 
@@ -168,7 +168,7 @@ function EventForm({ formAction, setShowModal }) {
               type="datetime-local"
               value={formStartTime}
               onChange={(e) => {
-                console.log('time change', e.target.value)
+                // console.log('time change', e.target.value)
                 setFormStartTime(e.target.value)
               }}
               required

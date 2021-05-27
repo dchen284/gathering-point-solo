@@ -134,7 +134,7 @@ router.put('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
     }
     else {
         const updatedEvent = await eventToUpdate.update(newData);
-        console.log('updatedEvent', JSON.stringify(updatedEvent, null, 4));
+        // console.log('updatedEvent', JSON.stringify(updatedEvent, null, 4));
         return res.json(updatedEvent);
     }
 
@@ -150,7 +150,7 @@ router.get('/:eventId(\\d+)/tickets', asyncHandler( async (req, res) => {
         attributes: { include: ['id'] },
     });
 
-    console.log('in route', JSON.stringify(TicketsOfEvent, null, 4));
+    // console.log('in route', JSON.stringify(TicketsOfEvent, null, 4));
 
     if (!Array.isArray(TicketsOfEvent)) {
         let temp = [TicketsOfEvent]

@@ -51,13 +51,13 @@ export default function TicketButton({ eventId, ticketId, userId }) {
 
         //button callback function options
     function cancelTicket() {
-        console.log('Canceling the Ticket')
+        // console.log('Canceling the Ticket')
         dispatch(ticketsActions.fetchTicketToRemove(eventId, ticketId, userId));
 
     }
 
     function registerForEvent() {
-        console.log('Registering for Event')
+        // console.log('Registering for Event')
         dispatch(ticketsActions.fetchTicketToAdd(eventId, userId))
     }
 

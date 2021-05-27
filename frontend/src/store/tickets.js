@@ -37,11 +37,11 @@ export function fetchTicketsOfSessionUser(user) {
 
 export function fetchTicketsToDeleteFromStore(eventId) {
     return async function (dispatch) {
-        console.log('got here>>>>>>>>>>>', eventId)
+        // console.log('got here>>>>>>>>>>>', eventId)
         const res = await csrfFetch(`/api/events/${eventId}/tickets/`);
         if (res.ok) {
             const data = await res.json();
-            console.log('data', data)
+            // console.log('data', data)
             dispatch(removeTickets(data));
             return data;
         } else {
@@ -165,11 +165,11 @@ export default function ticketsReducer(state = initialState, action) {
       case REMOVE_TICKETS:
             newState = {...state};
             const arrTickets = action.payload;
-            console.log('before delete state', newState);
+            // console.log('before delete state', newState);
             arrTickets.forEach( ticket => {
                 delete newState[+ticket.id];
             })
-            console.log('newest state', newState);
+            // console.log('newest state', newState);
             return newState;
 
       default:
