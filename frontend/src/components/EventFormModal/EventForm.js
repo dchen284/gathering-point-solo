@@ -145,7 +145,6 @@ function EventForm({ formAction, setShowModal }) {
   return (
     <>
       <div className="form-container">
-
         <form onSubmit={cb}>
           {
             formAction === 'Update' ? <div>Update Event</div> : <div>Create Event</div>
@@ -209,7 +208,11 @@ function EventForm({ formAction, setShowModal }) {
           <button className="pure-button" type="submit">{`${formAction} Event`}</button>
         </form>
       </div>
-
+      <div className='form-container__side-section'>
+          <img className='form-container__side-image' alt="quill" src="/images/stx-198-lorehold-apprentice.jpeg" />
+          <div className='form-container__side-image-caption'>Lorehold Apprentice, illustrated by Manuel Castañón</div>
+          <div className='form-container__side-image-caption'>From Magic: the Gathering, by Wizards of the Coast</div>
+      </div>
     </>
   );
 // const dispatch = useDispatch();

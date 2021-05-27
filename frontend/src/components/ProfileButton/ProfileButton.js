@@ -1,6 +1,10 @@
+//external imports
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+
+//internal imports
+import './ProfileButton.css';
 import * as sessionActions from '../../store/session';
 import * as ticketActions from '../../store/tickets';
 
@@ -33,27 +37,30 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button className="pure-button" onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <NavLink to={`/users/${user.id}/tickets`}>My Tickets</NavLink>
-          </li>
-          <li>
-            <NavLink to={`/events/2`}>My Bookmarks</NavLink>
-          </li>
-          <li>
-            <NavLink to={`/events/2`}>Events Created By Me</NavLink>
-          </li>
-          <li>
-            <button className="pure-button" onClick={logout}>Log Out</button>
-          </li>
-        </ul>
-      )}
+      <span className="profile-button">
+        <button className="pure-button" onClick={openMenu}>
+          <i className="fas fa-user-circle" />
+        </button>
+        {showMenu && (
+          <ul className="profile-dropdown">
+            <li>{user.username}</li>
+            <li>{user.email}</li>
+            <li>
+              <NavLink to={`/users/${user.id}/tickets`}>My Tickets</NavLink>
+            </li>
+            <li>
+              <NavLink to={`/events/2`}>My Bookmarks</NavLink>
+            </li>
+            <li>
+              <NavLink to={`/events/2`}>Events Created By Me</NavLink>
+            </li>
+            <li>
+              <button className="pure-button" onClick={logout}>Log Out</button>
+            </li>
+          </ul>
+        )}
+      </span>
+
     </>
   );
 }
