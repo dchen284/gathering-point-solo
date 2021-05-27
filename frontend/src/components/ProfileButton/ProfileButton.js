@@ -45,13 +45,13 @@ function ProfileButton({ user }) {
           <ul className="profile-dropdown">
             <li>{user.username}</li>
             <li>{user.email}</li>
-            <li>
+            <li className="profile-button__li-navlink">
               <NavLink to={`/users/${user.id}/tickets`}>My Tickets</NavLink>
             </li>
-            <li>
+            <li className="profile-button__li-navlink">
               <NavLink to={`/events/2`}>My Bookmarks</NavLink>
             </li>
-            <li>
+            <li className="profile-button__li-navlink">
               <NavLink to={`/events/2`}>Events Created By Me</NavLink>
             </li>
             <li>
