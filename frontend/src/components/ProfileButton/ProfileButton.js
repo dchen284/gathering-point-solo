@@ -45,18 +45,27 @@ function ProfileButton({ user }) {
           <ul className="profile-dropdown">
             <li>{user.username}</li>
             <li>{user.email}</li>
-            <li className="profile-button__li-navlink">
-              <NavLink to={`/users/${user.id}/tickets`}>My Tickets</NavLink>
-            </li>
-            <li className="profile-button__li-navlink">
-              <NavLink to={`/events/2`}>My Bookmarks</NavLink>
-            </li>
-            <li className="profile-button__li-navlink">
-              <NavLink to={`/events/2`}>Events Created By Me</NavLink>
-            </li>
-            <li>
+            {/* <li className="profile-button__li-navlink" > */}
+              <NavLink
+                to={`/users/${user.id}/tickets`}
+                className="pure-button"
+                >My Tickets</NavLink>
+            {/* </li> */}
+            {/* <li className="profile-button__li-navlink" > */}
+              <NavLink
+                to={`/users/${user.id}/tickets`}
+                className="pure-button"
+              >My Bookmarks</NavLink>
+            {/* </li> */}
+            {/* <li className="profile-button__li-navlink"> */}
+              <NavLink
+                to={`/users/${user.id}/tickets`}
+                className="pure-button"
+              >Events Created By Me</NavLink>
+            {/* </li> */}
+            {/* <li> */}
               <button className="pure-button" onClick={logout}>Log Out</button>
-            </li>
+            {/* </li> */}
           </ul>
         )}
       </span>

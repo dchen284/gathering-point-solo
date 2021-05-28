@@ -1,7 +1,11 @@
 .footer {
     display: inline-block;
+    background-color: rgb(86, 11, 98);
+    width: 100%;
+    color: gold;
 }
 
-a {
+.footer a {
+    color: gold;
     margin: 5px;
 }

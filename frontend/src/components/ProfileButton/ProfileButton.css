@@ -1,8 +1,14 @@
-.profile-dropdown, 
-.profile-dropdown li a {
+.profile-dropdown {
     color: gold;
+    display: flex;
+    flex-direction: column;
 }
 
-.profile-button__li-navlink {
+/* .profile-dropdown li a {
+    color: gold;
+} */
+
+/* .profile-button__li-navlink {
     background-color: rgb(199, 55, 199);
-}
+    border: 1px solid gold;
+} */

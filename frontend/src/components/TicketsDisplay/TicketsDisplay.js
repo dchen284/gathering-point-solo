@@ -29,6 +29,7 @@ export default function TicketsDisplay() {
     else {
         return (
             <>
+                <h2>My Tickets</h2>
                 <table className="pure-table pure-table-bordered">
                     <thead>
                         <tr>
