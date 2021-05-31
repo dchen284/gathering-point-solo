@@ -80,6 +80,7 @@ export default function EventDisplay() {
 
     return (
         <>
+            {!isLoaded && <h2>404: Event Not Found</h2>}
             {isLoaded && (
                 <div className="event-display-container">
                     <div>
