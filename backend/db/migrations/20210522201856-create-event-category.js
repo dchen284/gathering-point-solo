@@ -12,14 +12,20 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Events',
+          model: {
+            tableName: 'Events',
+          },
+          key: 'id',
         },
       },
       categoryId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Categories',
+          model: {
+            tableName: 'Categories',
+          },
+          key: 'id',
         }
       },
       createdAt: {
