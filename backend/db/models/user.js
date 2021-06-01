@@ -2,6 +2,8 @@
 const bcrypt = require('bcryptjs');
 const { Validator } = require("sequelize");
 
+// const { UserTicket } = require('../models');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: {
@@ -93,7 +95,7 @@ module.exports = (sequelize, DataTypes) => {
     return await User.scope('currentUser').findByPk(id);
   };
     //find user, check if passwords match, return use if passwords match
-  User.login = async function ({ credential, password }) {
+  User.login = async function ({ credential, password }, UserTicket) {
     const { Op } = require('sequelize');
     const user = await User.scope('loginUser').findOne({
       where: {
@@ -104,7 +106,10 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
     if (user && user.validatePassword(password)) {
-      return await User.scope('currentUser').findByPk(user.id);
+      console.log('>>>', UserTicket);
+      return await User.scope('currentUser').findByPk(user.id, {
+        include: [ UserTicket ],
+      });
     }
   };
     //create new user, return new user

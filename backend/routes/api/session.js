@@ -7,7 +7,7 @@ const { check } = require('express-validator');
 //internal require/imports
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, UserTicket } = require('../../db/models');
 const { demouser } = require('../../config');
 
 //Validations
@@ -55,7 +55,7 @@ router.post(
     asyncHandler(async (req, res, next) => {
       const { credential, password } = req.body;
 
-      const user = await User.login({ credential, password });
+      const user = await User.login({ credential, password }, UserTicket);
 
       if (!user) {
         const err = new Error('Login failed');
@@ -79,7 +79,7 @@ router.post(
   asyncHandler(async (req, res, next) => {
     // const { credential, password } = req.body;
 
-    const user = await User.login(demouser);
+    const user = await User.login(demouser, UserTicket);
 
     if (!user) {
       const err = new Error('Login failed');
