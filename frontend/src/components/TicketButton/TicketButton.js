@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //internal imports
 import './TicketButton.css';
+import * as sessionActions from '../../store/session';
 import * as ticketsActions from '../../store/tickets';
 
 export default function TicketButton({ eventId, ticketId, userId }) {
@@ -58,7 +59,9 @@ export default function TicketButton({ eventId, ticketId, userId }) {
 
     function registerForEvent() {
         // console.log('Registering for Event')
-        dispatch(ticketsActions.fetchTicketToAdd(eventId, userId))
+        dispatch(ticketsActions.fetchTicketToAdd(eventId, userId));
+        console.log('second dispatch');
+        dispatch(sessionActions.fetchAddTicketForUser({eventId, userId}));
     }
 
     return (

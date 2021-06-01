@@ -41,7 +41,7 @@ router.get('/', asyncHandler( async (req, res) => {
 
     const fetchedEvents = await Event.findAll({
         // limit: 6,
-        include: [ User ],
+        include: [ UserTicket ],
         order: [ ['id', 'DESC'] ],
     });
     // console.log('fetchedEvents', JSON.stringify(fetchedEvents, null, 4));
@@ -54,7 +54,7 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
     const eventId = req.params.eventId;
 
     const fetchedEvent = await Event.findByPk(eventId, {
-        include: [ User ],
+        include: [ UserTicket ],
     });
 
     // console.log('fetchedEvent', fetchedEvent);
@@ -80,7 +80,7 @@ router.post('/', validateEvent, requireAuth, asyncHandler( async (req, res) => {
 
     const fetchedNewestEvent = await Event.findOne({
         // limit: 6,
-        include: [ User ],
+        include: [ User, UserTicket ],
         order: [ ['id', 'DESC'] ],
     });
 
