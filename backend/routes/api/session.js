@@ -40,9 +40,11 @@ router.get(
     restoreUser,
     (req, res) => {
       const { user } = req;
+      console.log('in api route for restore session user', JSON.stringify(user, null, 4));
       if (user) {
         return res.json({
-          user: user.toSafeObject()
+          user: user.toSafeObject(),
+
         });
       } else return res.json({});
     }
