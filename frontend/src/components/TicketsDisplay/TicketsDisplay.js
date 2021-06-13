@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 //internal imports
 import TicketButton from '../TicketButton';
 import * as ticketsActions from '../../store/tickets';
+import formatTime from '../../utils/format-time'
 
 export default function TicketsDisplay() {
 
@@ -36,6 +37,7 @@ export default function TicketsDisplay() {
                             <th>Ticket ID#</th>
                             <th>Event ID#</th>
                             <th>Event Title</th>
+                            <th>Event Start Time</th>
                             <th>Cancel Ticket</th>
                         </tr>
                     </thead>
@@ -50,6 +52,7 @@ export default function TicketsDisplay() {
                                         {ticket.Event.title}
                                     </Link>
                                 </td>
+                                <td>{formatTime(ticket.Event.startTime)}</td>
                                 <td>
                                     <TicketButton
                                         eventId={ticket.eventId}
