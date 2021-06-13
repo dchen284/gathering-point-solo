@@ -2,6 +2,7 @@
 
 //internal imports
 import { csrfFetch } from './csrf';
+import * as ticketsActions from './tickets';
 
 //action type strings
 
@@ -10,7 +11,7 @@ const SET_SESSION_USER = 'session/SET_SESSION_USER';
 const REMOVE_SESSION_USER = 'session/REMOVE_SESSION_USER';
 
   //tickets
-const ADD_TICKET = 'session/ADD_TICKET';
+// const ADD_TICKET = 'session/ADD_TICKET';
 
 //thunk action creators
 
@@ -26,6 +27,8 @@ export const login = (userData) => async (dispatch) => {
     if (res.ok) {
         // console.log('returned data', data);
         dispatch(setSessionUser(data.user));
+        console.log('tickets?', data.user.UserTickets)
+        dispatch(ticketsActions.loadTickets(data.user.UserTickets));
         return data.user;
     }
     else {
@@ -44,6 +47,8 @@ export const loginDemoUser = () => async (dispatch) => {
   if (res.ok) {
       // console.log('returned data', data);
       dispatch(setSessionUser(data.user));
+      console.log('tickets?', data.user.UserTickets)
+      dispatch(ticketsActions.loadTickets(data.user.UserTickets));
       return data.user;
   }
   else {
@@ -58,7 +63,7 @@ export const restoreSessionUser = () => async (dispatch) => {
   return res;
 }
 
-//redo
+//from example
 export const signup = (user) => async (dispatch) => {
   const { username, email, password } = user;
   const response = await csrfFetch("/api/users", {
@@ -84,23 +89,23 @@ export const logout = () => async (dispatch) => {
 };
 
   //tickets
-export const fetchAddTicketForUser = (ticketData) => async (dispatch) => {
-  // const res = await csrfFetch(
-  //   `api/users/:${ticketData.userId}/events/${ticketData.eventId}/tickets`,
-  //   {
-  //     method: 'POST',
-  //     body: JSON.stringify(ticketData),
-  //   }
-  // )
-  // if (res.ok) {
-  //   const data = await res.json();
-    console.log('got here');
-    dispatch(addTicketForUser(ticketData));
-    console.log('did that?')
-    // dispatch(addTicketForEvent(data));
-    return ticketData;
-  // }
-}
+// export const fetchAddTicketForUser = (ticketData) => async (dispatch) => {
+//   // const res = await csrfFetch(
+//   //   `api/users/:${ticketData.userId}/events/${ticketData.eventId}/tickets`,
+//   //   {
+//   //     method: 'POST',
+//   //     body: JSON.stringify(ticketData),
+//   //   }
+//   // )
+//   // if (res.ok) {
+//   //   const data = await res.json();
+//     console.log('got here');
+//     dispatch(addTicketForUser(ticketData));
+//     console.log('did that?')
+//     // dispatch(addTicketForEvent(data));
+//     return ticketData;
+//   // }
+// }
 
 //action creators
 
@@ -117,12 +122,12 @@ export function removeSessionUser() {
     }
 }
 
-export function addTicketForUser(data) {
-  return {
-    type: ADD_TICKET,
-    payload: data,
-  }
-}
+// export function addTicketForUser(data) {
+//   return {
+//     type: ADD_TICKET,
+//     payload: data,
+//   }
+// }
 
 //reducer
 
@@ -133,12 +138,12 @@ export default function sessionReducer(state = initialState, action) {
     let newState;
     switch (action.type) {
       // Do something here based on the different types of actions
-      case ADD_TICKET:
-        newState = Object.assign({}, state);
-        const newTicket = action.payload;
-        newState.user.UserTickets['temp'] = newTicket;
-        console.log('updated state', newState);
-        return newState;
+      // case ADD_TICKET:
+      //   newState = Object.assign({}, state);
+      //   const newTicket = action.payload;
+      //   newState.user.UserTickets['temp'] = newTicket;
+      //   console.log('updated state', newState);
+      //   return newState;
       case SET_SESSION_USER:
         newState = Object.assign({}, state);
         newState.user = action.payload;

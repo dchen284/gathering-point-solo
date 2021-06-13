@@ -24,6 +24,7 @@ export function fetchTicketsOfSessionUser(user) {
                 const data = await res.json();
                 // console.log('data', data);
                 dispatch(loadTickets(data));
+                console.log('>>>data', data)
                 return data;
             } else {
                 throw res;
@@ -151,7 +152,9 @@ export default function ticketsReducer(state = initialState, action) {
       case LOAD_TICKETS:
         newState = {...state};
         const arrTicketsToLoad = action.payload;
+        console.log('>>>>>>>>arrTicketsToLoad', arrTicketsToLoad)
         arrTicketsToLoad.forEach( ticket => {
+            console.log('>>>>>>ticket', ticket)
             newState[ticket.id] = ticket;
         });
         return newState;

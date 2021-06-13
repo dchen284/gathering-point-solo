@@ -108,7 +108,11 @@ module.exports = (sequelize, DataTypes) => {
     if (user && user.validatePassword(password)) {
       console.log('>>>', UserTicket);
       return await User.scope('currentUser').findByPk(user.id, {
-        include: [ UserTicket ],
+        // include: [ UserTicket ],
+        include: {
+          model: UserTicket,
+          attributes: { include: ['id'] },
+        },
       });
     }
   };

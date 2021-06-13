@@ -1,9 +1,9 @@
 //external imports
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //internal imports
 import './TicketButton.css';
-import * as sessionActions from '../../store/session';
+// import * as sessionActions from '../../store/session';
 import * as ticketsActions from '../../store/tickets';
 
 export default function TicketButton({ eventId, ticketId, userId }) {
@@ -12,21 +12,28 @@ export default function TicketButton({ eventId, ticketId, userId }) {
 
     //hooks
     const dispatch = useDispatch();
-    // const [hasTicket, setHasTicket] = useState(!!ticketId);
-    let hasTicket = false;
+    const [hasTicket, setHasTicket] = useState(false);
+    // let hasTicket = false;
     const sessionUser = useSelector( (state) => state.session.user );
     let arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
 
     // console.log('array', arrTicketsOfSessionUser);
 
-    arrTicketsOfSessionUser.forEach( ticket => {
-        if (+ticket.id === +ticketId) {hasTicket = true}
-    });
+    // arrTicketsOfSessionUser.forEach( ticket => {
+    //     // if (+ticket.id === +ticketId) {hasTicket = true}
+    //     if (+ticket.id === +ticketId) {setHasTicket(true)}
+    // });
 
     //useEffects
     useEffect( () => {
         dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser));
-    }, [dispatch, sessionUser])
+
+        arrTicketsOfSessionUser.forEach( ticket => {
+            // if (+ticket.id === +ticketId) {hasTicket = true}
+            if (+ticket.id === +ticketId) {setHasTicket(true)}
+        });
+
+    }, [dispatch, sessionUser, ticketId])
 
     //JavaScript
         //button text toggle
@@ -40,12 +47,13 @@ export default function TicketButton({ eventId, ticketId, userId }) {
     // }
         //button callback function toggle
     function clickTicketButton() {
+        setHasTicket((prevHasTicket) => !prevHasTicket)
         if (hasTicket) {
-            hasTicket = !hasTicket;
+            // hasTicket = !hasTicket;
             return cancelTicket();
         }
         else {
-            hasTicket = !hasTicket;
+            // hasTicket = !hasTicket;
             return registerForEvent()
         }
     }
@@ -60,8 +68,8 @@ export default function TicketButton({ eventId, ticketId, userId }) {
     function registerForEvent() {
         // console.log('Registering for Event')
         dispatch(ticketsActions.fetchTicketToAdd(eventId, userId));
-        console.log('second dispatch');
-        dispatch(sessionActions.fetchAddTicketForUser({eventId, userId}));
+        // console.log('second dispatch');
+        // dispatch(sessionActions.fetchAddTicketForUser({eventId, userId}));
     }
 
     return (
