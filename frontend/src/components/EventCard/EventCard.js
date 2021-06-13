@@ -5,27 +5,28 @@ import { Link } from "react-router-dom";
 //interal imports
 import './EventCard.css';
 import BookmarkButton from "../BookmarkButton";
+import formatTime from '../../utils/format-time';
 
 export default function EventCard({event}) {
 
     //template: 1998-05-24T23:22:37
 
-    const strDate = event.startTime.slice(0, 10);
-    const strHour = event.startTime.slice(11, 13);
-    const strMinutes = event.startTime.slice(14, 16);
+    // const strDate = event.startTime.slice(0, 10);
+    // const strHour = event.startTime.slice(11, 13);
+    // const strMinutes = event.startTime.slice(14, 16);
 
-    let strStartTime;
+    // let strStartTime;
 
-    if (+strHour <= 12) {
-        strStartTime = `${strDate}, ${strHour}:${strMinutes} AM`;
-    }
-    else if (+strHour >= 13 && +strHour <= 21)
-    {
-        strStartTime = `${strDate}, 0${+strHour-12}:${strMinutes} PM`;
-    }
-    else {
-        strStartTime = `${strDate}, ${+strHour-12}:${strMinutes} PM`;
-    }
+    // if (+strHour <= 12) {
+    //     strStartTime = `${strDate}, ${strHour}:${strMinutes} AM`;
+    // }
+    // else if (+strHour >= 13 && +strHour <= 21)
+    // {
+    //     strStartTime = `${strDate}, 0${+strHour-12}:${strMinutes} PM`;
+    // }
+    // else {
+    //     strStartTime = `${strDate}, ${+strHour-12}:${strMinutes} PM`;
+    // }
 
 
     return (
@@ -38,7 +39,7 @@ export default function EventCard({event}) {
                     <BookmarkButton className='bookmark-button' key={event.id}/>
                     <p className="event-card__title">{event.title}</p>
                     <p className="event-card__organizer">By: {event.organizerName}</p>
-                    <p className="event-card__start-time">Start Time: {strStartTime}</p>
+                    <p className="event-card__start-time">Start Time: {formatTime(event.startTime)}</p>
                 </div>
             </div>
         </Link>

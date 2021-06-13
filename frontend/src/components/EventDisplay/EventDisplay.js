@@ -11,6 +11,7 @@ import * as ticketsActions from '../../store/tickets';
 import BookmarkButton from '../BookmarkButton';
 import DeleteEventButton from '../DeleteEventButton';
 import EventFormModal from '../EventFormModal';
+import formatTime from '../../utils/format-time'
 import LoginFormModal from '../LoginFormModal';
 import TicketButton from '../TicketButton';
 
@@ -57,26 +58,26 @@ export default function EventDisplay() {
             {boolOwnsEvent = true}
     }
 
-    function convertTime(strInputTime) {
-        const strDate = strInputTime.slice(0, 10);
-        const strHour = strInputTime.slice(11, 13);
-        const strMinutes = strInputTime.slice(14, 16);
+    // function convertTime(strInputTime) {
+    //     const strDate = strInputTime.slice(0, 10);
+    //     const strHour = strInputTime.slice(11, 13);
+    //     const strMinutes = strInputTime.slice(14, 16);
 
-        let strConvertedTime;
+    //     let strConvertedTime;
 
-        if (+strHour <= 12) {
-            strConvertedTime = `${strDate}, ${strHour}:${strMinutes} AM`;
-        }
-        else if (+strHour >= 13 && +strHour <= 21)
-        {
-            strConvertedTime = `${strDate}, 0${+strHour-12}:${strMinutes} PM`;
-        }
-        else {
-            strConvertedTime = `${strDate}, ${+strHour-12}:${strMinutes} PM`;
-        }
+    //     if (+strHour <= 12) {
+    //         strConvertedTime = `${strDate}, ${strHour}:${strMinutes} AM`;
+    //     }
+    //     else if (+strHour >= 13 && +strHour <= 21)
+    //     {
+    //         strConvertedTime = `${strDate}, 0${+strHour-12}:${strMinutes} PM`;
+    //     }
+    //     else {
+    //         strConvertedTime = `${strDate}, ${+strHour-12}:${strMinutes} PM`;
+    //     }
 
-        return strConvertedTime;
-    }
+    //     return strConvertedTime;
+    // }
 
     return (
         <>
@@ -90,8 +91,8 @@ export default function EventDisplay() {
 
                     </div>
                     <div>
-                        <div className="time-display">Event Start Time: {convertTime(event.startTime)}</div>
-                        <div className="time-display">Event End Time: {convertTime(event.endTime)}</div>
+                        <div className="time-display">Event Start Time: {formatTime(event.startTime)}</div>
+                        <div className="time-display">Event End Time: {formatTime(event.endTime)}</div>
                         <br />
                         <div>{event.title}</div>
                         <div>By: {event.organizerName}</div>
