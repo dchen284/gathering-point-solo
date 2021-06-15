@@ -11,8 +11,8 @@ export default function DemoUserButton() {
 
     function loginDemoUser(e) {
         e.preventDefault();
-        // return dispatch(sessionActions.login({ credential: 'Demo-lition' , password: 'password' })).catch(
-        return dispatch(sessionActions.loginDemoUser()).catch(
+        return dispatch(sessionActions.login({ credential: 'Demo-lition' , password: 'password' })).catch(
+        // return dispatch(sessionActions.loginDemoUser()).catch(
             async (res) => {
               // const data = await res.json();
               // if (data && data.errors) setErrors(data.errors);

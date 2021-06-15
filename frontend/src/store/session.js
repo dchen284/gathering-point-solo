@@ -40,29 +40,29 @@ export const login = (userData) => async (dispatch) => {
     }
 }
 
-export const loginDemoUser = () => async (dispatch) => {
-  // const { credential, password } = userData;
-  // console.log('userData', userData);
-  const res = await csrfFetch('/api/session/demo-user', {
-      method: 'POST',
-      body: JSON.stringify({}),
-  });
-  const data = await res.json();
-  if (res.ok) {
-      console.log('returned data', data);
-      dispatch(setSessionUser(data.user));
-      // console.log('tickets?', data.user.UserTickets)
+// export const loginDemoUser = () => async (dispatch) => {
+//   // const { credential, password } = userData;
+//   // console.log('userData', userData);
+//   const res = await csrfFetch('/api/session/demo-user', {
+//       method: 'POST',
+//       body: JSON.stringify({}),
+//   });
+//   const data = await res.json();
+//   if (res.ok) {
+//       console.log('returned data', data);
+//       dispatch(setSessionUser(data.user));
+//       // console.log('tickets?', data.user.UserTickets)
 
-      // dispatch(ticketsActions.loadTickets(data.user.UserTickets));
-      // const copyOfTickets = JSON.parse(JSON.stringify(data.user.UserTickets));
-      // console.log('copyOfTickets', copyOfTickets);
-      // dispatch(ticketsActions.loadTickets(copyOfTickets));
-      return data.user;
-  }
-  else {
-      throw res;
-  }
-}
+//       // dispatch(ticketsActions.loadTickets(data.user.UserTickets));
+//       // const copyOfTickets = JSON.parse(JSON.stringify(data.user.UserTickets));
+//       // console.log('copyOfTickets', copyOfTickets);
+//       // dispatch(ticketsActions.loadTickets(copyOfTickets));
+//       return data.user;
+//   }
+//   else {
+//       throw res;
+//   }
+// }
 
 export const restoreSessionUser = () => async (dispatch) => {
   const res = await csrfFetch('/api/session');

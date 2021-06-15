@@ -8,7 +8,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User, UserTicket } = require('../../db/models');
-const { demouser } = require('../../config');
+// const { demouser } = require('../../config');
 
 //Validations
 const validateLogin = [
@@ -76,28 +76,28 @@ router.post(
   );
 
 // Log in demo user
-router.post(
-  '/demo-user',
-  asyncHandler(async (req, res, next) => {
-    // const { credential, password } = req.body;
+// router.post(
+//   '/demo-user',
+//   asyncHandler(async (req, res, next) => {
+//     // const { credential, password } = req.body;
 
-    const user = await User.login(demouser);
+//     const user = await User.login(demouser);
 
-    if (!user) {
-      const err = new Error('Login failed');
-      err.status = 401;
-      err.title = 'Login failed';
-      err.errors = ['The provided credentials were invalid.'];
-      return next(err);
-    }
+//     if (!user) {
+//       const err = new Error('Login failed');
+//       err.status = 401;
+//       err.title = 'Login failed';
+//       err.errors = ['The provided credentials were invalid.'];
+//       return next(err);
+//     }
 
-    await setTokenCookie(res, user);
+//     await setTokenCookie(res, user);
 
-    return res.json({
-      user,
-    });
-  }),
-);
+//     return res.json({
+//       user,
+//     });
+//   }),
+// );
 
 
 module.exports = router;
