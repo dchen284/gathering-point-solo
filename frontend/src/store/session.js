@@ -25,10 +25,14 @@ export const login = (userData) => async (dispatch) => {
     });
     const data = await res.json();
     if (res.ok) {
-        // console.log('returned data', data);
+        console.log('returned data', data);
         dispatch(setSessionUser(data.user));
-        console.log('tickets?', data.user.UserTickets)
-        dispatch(ticketsActions.loadTickets(data.user.UserTickets));
+        // console.log('tickets?', data.user.UserTickets)
+
+        // dispatch(ticketsActions.loadTickets(data.user.UserTickets));
+        // const copyOfTickets = JSON.parse(JSON.stringify(data.user.UserTickets));
+        // console.log('copyOfTickets', copyOfTickets);
+        // dispatch(ticketsActions.loadTickets(copyOfTickets));
         return data.user;
     }
     else {
@@ -45,10 +49,14 @@ export const loginDemoUser = () => async (dispatch) => {
   });
   const data = await res.json();
   if (res.ok) {
-      // console.log('returned data', data);
+      console.log('returned data', data);
       dispatch(setSessionUser(data.user));
-      console.log('tickets?', data.user.UserTickets)
-      dispatch(ticketsActions.loadTickets(data.user.UserTickets));
+      // console.log('tickets?', data.user.UserTickets)
+
+      // dispatch(ticketsActions.loadTickets(data.user.UserTickets));
+      // const copyOfTickets = JSON.parse(JSON.stringify(data.user.UserTickets));
+      // console.log('copyOfTickets', copyOfTickets);
+      // dispatch(ticketsActions.loadTickets(copyOfTickets));
       return data.user;
   }
   else {
@@ -147,6 +155,7 @@ export default function sessionReducer(state = initialState, action) {
       case SET_SESSION_USER:
         newState = Object.assign({}, state);
         newState.user = action.payload;
+        // if (newState.user) {delete newState.user.UserTickets};
         return newState;
         // return { user: action.payload };
       case REMOVE_SESSION_USER:

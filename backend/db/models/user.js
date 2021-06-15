@@ -83,8 +83,8 @@ module.exports = (sequelize, DataTypes) => {
   //User Model Methods
     //returns a safe object for JWT
   User.prototype.toSafeObject = function() { // remember, this cannot be an arrow function
-    const { id, username, email, UserTickets } = this; // context will be the User instance
-    return { id, username, email, UserTickets };
+    const { id, username, email } = this; // context will be the User instance
+    return { id, username, email };
   };
     //returns true/false for if password and hashedPassword line up
   User.prototype.validatePassword = function (password) {
@@ -95,7 +95,7 @@ module.exports = (sequelize, DataTypes) => {
     return await User.scope('currentUser').findByPk(id);
   };
     //find user, check if passwords match, return use if passwords match
-  User.login = async function ({ credential, password }, UserTicket) {
+  User.login = async function ({ credential, password }) {
     const { Op } = require('sequelize');
     const user = await User.scope('loginUser').findOne({
       where: {
@@ -106,13 +106,12 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
     if (user && user.validatePassword(password)) {
-      console.log('>>>', UserTicket);
       return await User.scope('currentUser').findByPk(user.id, {
         // include: [ UserTicket ],
-        include: {
-          model: UserTicket,
-          attributes: { include: ['id'] },
-        },
+        // include: {
+        //   model: UserTicket,
+        //   attributes: { include: ['id'] },
+        // },
       });
     }
   };

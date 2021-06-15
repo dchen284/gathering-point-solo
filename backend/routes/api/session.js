@@ -57,7 +57,7 @@ router.post(
     asyncHandler(async (req, res, next) => {
       const { credential, password } = req.body;
 
-      const user = await User.login({ credential, password }, UserTicket);
+      const user = await User.login({ credential, password } );
 
       if (!user) {
         const err = new Error('Login failed');
@@ -81,7 +81,7 @@ router.post(
   asyncHandler(async (req, res, next) => {
     // const { credential, password } = req.body;
 
-    const user = await User.login(demouser, UserTicket);
+    const user = await User.login(demouser);
 
     if (!user) {
       const err = new Error('Login failed');

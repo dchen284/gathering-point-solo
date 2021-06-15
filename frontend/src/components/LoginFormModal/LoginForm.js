@@ -24,6 +24,7 @@ function LoginForm() {
     // );
     dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
+        // console.log('eeba', res);
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       }
