@@ -115,6 +115,35 @@ export const logout = () => async (dispatch) => {
 //   // }
 // }
 
+export const createUser = (user) => async (dispatch) => {
+  const { images, image, username, email, password } = user;
+  const formData = new FormData();
+  formData.append("username", username);
+  formData.append("email", email);
+  formData.append("password", password);
+
+  // for multiple files
+  if (images && images.length !== 0) {
+    for (var i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
+  }
+
+  // for single file
+  if (image) formData.append("image", image);
+
+  const res = await csrfFetch(`/api/users/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    body: formData,
+  });
+
+  const data = await res.json();
+  dispatch(setSessionUser(data.user));
+};
+
 //action creators
 
 export function setSessionUser(user) {
@@ -152,12 +181,15 @@ export default function sessionReducer(state = initialState, action) {
       //   newState.user.UserTickets['temp'] = newTicket;
       //   console.log('updated state', newState);
       //   return newState;
+      // case SET_SESSION_USER:
+      //   newState = Object.assign({}, state);
+      //   newState.user = action.payload;
+      //   // if (newState.user) {delete newState.user.UserTickets};
+      //   return newState;
+      //   // return { user: action.payload };
+      //set user with suggested syntax
       case SET_SESSION_USER:
-        newState = Object.assign({}, state);
-        newState.user = action.payload;
-        // if (newState.user) {delete newState.user.UserTickets};
-        return newState;
-        // return { user: action.payload };
+        return { ...state, user: action.payload };
       case REMOVE_SESSION_USER:
         // newState = Object.assign({}, state);
         // newState.user = null;

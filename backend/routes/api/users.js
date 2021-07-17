@@ -8,6 +8,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth, setTokenCookie } = require('../../utils/auth');
 const { Event, User, UserTicket } = require('../../db/models');
+const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
 
 //Validations
 
@@ -36,20 +37,44 @@ const validateSignup = [
 
 
 // Sign up
+// router.post(
+//     '/',
+//     validateSignup,
+//     asyncHandler(async (req, res) => {
+//       const { email, password, username } = req.body;
+//       const user = await User.signup({ email, username, password });
+
+//       await setTokenCookie(res, user);
+
+//       return res.json({
+//         user,
+//       });
+//     }),
+//   );
+
+// Sign up with AWS
 router.post(
-    '/',
-    validateSignup,
-    asyncHandler(async (req, res) => {
-      const { email, password, username } = req.body;
-      const user = await User.signup({ email, username, password });
+  "/",
+  singleMulterUpload("image"),
+  validateSignup,
+  asyncHandler(async (req, res) => {
+    const { email, password, username } = req.body;
+    const profileImageUrl = await singlePublicFileUpload(req.file);
+    const user = await User.signup({
+      username,
+      email,
+      password,
+      profileImageUrl,
+    });
 
-      await setTokenCookie(res, user);
+    setTokenCookie(res, user);
 
-      return res.json({
-        user,
-      });
-    }),
-  );
+    return res.json({
+      user,
+    });
+  })
+);
+
 
 //user tickets routes
 

@@ -11,6 +11,7 @@ import Navigation from "./components/Navigation";
 import TicketsDisplay from "./components/TicketsDisplay";
 // import SignupFormPage from './components/SignupFormPage';
 import * as sessionActions from './store/session';
+import CreateUser from './components/CreateUser';
 
 function App() {
 
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route path={`/users/:userId(\\d+)/tickets`}>
             <TicketsDisplay />
+          </Route>
+          <Route exact path={`/test`}>
+            <CreateUser />
           </Route>
           <Route>
             <div>404: Not Found</div>

@@ -6,6 +6,7 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { ValidationError } = require('sequelize');
+const bodyParser = require('body-parser');
 
 //Internal require/import
 const { environment } = require('./config');
@@ -20,7 +21,10 @@ const app = express();
 //Middleware
 app.use(morgan('dev')); //Console log info on req & res; dev is format type for console log
 app.use(cookieParser()); //parse cookies
-app.use(express.json()); //parse JSON bodies of requests; put on req.body
+app.use(bodyParser.urlencoded({ extended: false })); //used for AWS
+app.use(bodyParser.json()); //used for AWS
+
+// app.use(express.json()); //parse JSON bodies of requests; put on req.body
     // Security Middleware
 if (!isProduction) {
     // enable cors only in development
