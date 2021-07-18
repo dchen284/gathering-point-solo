@@ -19,6 +19,11 @@ const sessionUser = useSelector(state => state.session.user);
   if (sessionUser) {
     sessionLinks = (
       <>
+        {
+          sessionUser.profileImageUrl ?
+          <img src={sessionUser.profileImageUrl} /> :
+          null
+        }
         <EventFormModal formAction='Create' />
         <ProfileButton user={sessionUser} />
       </>

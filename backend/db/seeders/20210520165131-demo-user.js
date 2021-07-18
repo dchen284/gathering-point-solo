@@ -19,6 +19,7 @@ module.exports = {
           email: 'demo@user.io',
           username: 'Demo-lition',
           hashedPassword: bcrypt.hashSync('password'),
+          profileImageUrl: 'https://i.imgur.com/JLSW7vn.png',
         },
         {
           email: faker.internet.email(),

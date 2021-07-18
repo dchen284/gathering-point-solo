@@ -32,6 +32,9 @@ module.exports = (sequelize, DataTypes) => {
         len: [60, 60]
       },
     },
+    profileImageUrl: {
+      type: DataTypes.STRING,
+    },
 
   },
   { //scope controls what is included and excluded from queries
@@ -83,8 +86,8 @@ module.exports = (sequelize, DataTypes) => {
   //User Model Methods
     //returns a safe object for JWT
   User.prototype.toSafeObject = function() { // remember, this cannot be an arrow function
-    const { id, username, email } = this; // context will be the User instance
-    return { id, username, email };
+    const { id, username, email, profileImageUrl } = this; // context will be the User instance
+    return { id, username, email, profileImageUrl };
   };
     //returns true/false for if password and hashedPassword line up
   User.prototype.validatePassword = function (password) {
@@ -116,12 +119,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
     //create new user, return new user
-  User.signup = async function ({ username, email, password }) {
+  User.signup = async function ({ username, email, password, profileImageUrl }) {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
       username,
       email,
       hashedPassword,
+      profileImageUrl,
     });
     return await User.scope('currentUser').findByPk(user.id);
   };
