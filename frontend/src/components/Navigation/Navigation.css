@@ -24,6 +24,27 @@
     font-size: 30px;
     font-family: "SF New Republic Bold", sans-serif;
 }
+
+.nav__search {
+    background-color: #F6F5F8;
+    color: #D4D3DA;
+    display: flex;
+    padding: 10px;
+}
+
+.nav__search--border_on_focus {
+    border: 2px blue solid;
+}
+
+.nav__search--box {
+    border: none;
+    background-color: #F6F5F8;
+    color: #D4D3DA;
+    font-size: 16px;
+    outline: none;
+}
+
+
 /*
 @font-face {
     font-family: "Mayeka Demi Bold";
