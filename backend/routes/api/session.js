@@ -7,7 +7,7 @@ const { check } = require('express-validator');
 //internal require/imports
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User, UserTicket } = require('../../db/models');
+const { User, Event, UserTicket } = require('../../db/models');
 // const { demouser } = require('../../config');
 
 //Validations

@@ -2,7 +2,8 @@
 const bcrypt = require('bcryptjs');
 const { Validator } = require("sequelize");
 
-// const { UserTicket } = require('../models');
+// const { Event, UserTicket } = require('../../db/models');
+// const { Event } = require('./event');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -65,14 +66,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     );
 
-    User.belongsToMany(
-      models.Event,
-      {
-        through: 'UserTicket',
-        foreignKey: 'userId',
-        otherKey: 'eventId',
-      }
-    );
+    // User.belongsToMany(
+    //   models.Event,
+    //   {
+    //     through: 'UserTicket',
+    //     foreignKey: 'userId',
+    //     otherKey: 'eventId',
+    //   }
+    // );
 
     User.hasMany(
       models.UserTicket,
@@ -100,6 +101,9 @@ module.exports = (sequelize, DataTypes) => {
     //find user, check if passwords match, return use if passwords match
   User.login = async function ({ credential, password }) {
     const { Op } = require('sequelize');
+
+    const { Event, UserTicket } = require('../models');
+
     const user = await User.scope('loginUser').findOne({
       where: {
         [Op.or]: {
@@ -109,13 +113,20 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
     if (user && user.validatePassword(password)) {
-      return await User.scope('currentUser').findByPk(user.id, {
-        // include: [ UserTicket ],
-        // include: {
-        //   model: UserTicket,
-        //   attributes: { include: ['id'] },
-        // },
+      // console.log('++++++++++++');
+      // console.log('User', User);
+      // console.log('Event', Event);
+      // const test = await Event.findAll();
+
+      const result = await User.scope('currentUser').findByPk(user.id, {
+        // include: UserTicket,
+        include: {
+          model: UserTicket,
+          attributes: { include: ['id'] },
+        },
       });
+      // console.log('test', JSON.stringify(test, null, 4));
+      return result;
     }
   };
     //create new user, return new user

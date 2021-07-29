@@ -35,6 +35,7 @@ export default function EventCardDisplay() {
                     return <EventCard key={`${event.id}`} event={event}/>
                 })}
             </div>
+            
         </>
     );
 }
