@@ -3,8 +3,9 @@
 .nav {
     background-color: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-content: center;
+    padding: 0px;
 }
 
 
@@ -26,7 +27,7 @@
 
 .nav__logo {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-content: center;
 
 }
@@ -34,7 +35,7 @@
 .nav__logo__text {
 
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-content: center;
 
     color: #d1410c;
