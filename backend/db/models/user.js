@@ -66,14 +66,21 @@ module.exports = (sequelize, DataTypes) => {
       }
     );
 
-    // User.belongsToMany(
-    //   models.Event,
-    //   {
-    //     through: 'UserTicket',
-    //     foreignKey: 'userId',
-    //     otherKey: 'eventId',
-    //   }
-    // );
+    User.belongsToMany(
+      models.Event,
+      {
+        through: 'UserBookmark',
+        foreignKey: 'userId',
+        otherKey: 'eventId',
+      }
+    );
+
+    User.hasMany(
+      models.UserBookmark,
+      {
+        foreignKey: 'userId',
+        onDelete: 'cascade', hooks: true,
+      });
 
     User.hasMany(
       models.UserTicket,
@@ -102,7 +109,7 @@ module.exports = (sequelize, DataTypes) => {
   User.login = async function ({ credential, password }) {
     const { Op } = require('sequelize');
 
-    const { Event, UserTicket } = require('../models');
+    const { Event, UserBookmark, UserTicket } = require('../models');
 
     const user = await User.scope('loginUser').findOne({
       where: {
@@ -113,17 +120,21 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
     if (user && user.validatePassword(password)) {
-      // console.log('++++++++++++');
+      console.log('++++++++++++');
       // console.log('User', User);
-      // console.log('Event', Event);
+      console.log('UserBookmark', UserBookmark);
       // const test = await Event.findAll();
 
       const result = await User.scope('currentUser').findByPk(user.id, {
-        // include: UserTicket,
-        include: {
-          model: UserTicket,
-          attributes: { include: ['id'] },
-        },
+        include: [Event, UserBookmark, UserTicket],
+      //   include: {
+      //     model: Event,
+      //     attributes: { include: ['id'] },
+      //   },
+      //   include: {
+      //     model: UserTicket,
+      //     attributes: { include: ['id'] },
+      //   },
       });
       // console.log('test', JSON.stringify(test, null, 4));
       return result;

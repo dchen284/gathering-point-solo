@@ -14,10 +14,8 @@ module.exports = {
     */
       return queryInterface.bulkInsert('UserBookmarks',
       [
-        {userId: 1, eventId: 1},
+        {userId: 1, eventId: 2},
         {userId: 1, eventId: 3},
-        {userId: 2, eventId: 2},
-        {userId: 2, eventId: 3},
       ], {});
   },
 
