@@ -39,7 +39,6 @@ function Navigation({ isLoaded }){
     );
   }
 
-  console.log('+++++++', focusOnSearch);
   return (
     <ul className='nav'>
       <li className='nav__logo'>
@@ -60,10 +59,25 @@ function Navigation({ isLoaded }){
         </div>
       </li>
       <li>
-        {/* <i className="fas fa-plus"></i>
-        <i className="fas fa-heart"></i>
-        <i className="far fa-heart"></i>
-        <i className="fas fa-ticket-alt"></i> */}
+        <div className="nav__button_container">
+          <div className="nav__button">
+            <i className="fas fa-plus"></i>
+            <div>Create an event</div>
+          </div>
+          <div className="nav__button">
+            <i className="far fa-heart"></i>
+            <div>Likes</div>
+          </div>
+          <div className="nav__button">
+            <i className="fas fa-ticket-alt"></i>
+            <div>Tickets</div>
+          </div>
+        </div>
+
+
+        {/* <i className="fas fa-heart"></i> */}
+        {/* <i className="far fa-heart"></i> */}
+        {/* <i className="fas fa-ticket-alt"></i> */}
       </li>
       <li>
         {/* <NavLink exact to="/">

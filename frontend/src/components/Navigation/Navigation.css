@@ -7,6 +7,23 @@
     align-content: center;
 }
 
+
+.nav__button_container {
+    display: flex;
+}
+
+.nav__button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+}
+
+.nav__button:hover {
+    background-color: #F6F5F8;
+}
+
 .nav__logo {
     display: flex;
     justify-content: center;
@@ -39,11 +56,10 @@
 .nav__search--box {
     border: none;
     background-color: #F6F5F8;
-    color: #D4D3DA;
+    color: black;
     font-size: 16px;
     outline: none;
 }
-
 
 /*
 @font-face {
