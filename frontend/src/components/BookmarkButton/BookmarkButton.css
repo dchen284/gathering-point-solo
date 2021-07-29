@@ -1,4 +1,17 @@
 .bookmark-button {
+    /* background-color: white;
+    border: 1px solid grey;
+    color: black;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; */
+    /* position: static; */
+    /* bottom: 20px; */
+    /* color: #d1410c; */
+
     background-color: white;
     border: 1px solid grey;
     color: black;
@@ -8,7 +21,8 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    /* position: static; */
-    /* bottom: 20px; */
-    /* color: #d1410c; */
+}
+
+.fas {
+    color: #d1410c;
 }
