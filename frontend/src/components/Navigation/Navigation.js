@@ -19,11 +19,11 @@ const sessionUser = useSelector(state => state.session.user);
   if (sessionUser) {
     sessionLinks = (
       <>
-        {
+        {/* {
           sessionUser.profileImageUrl ?
           <img src={sessionUser.profileImageUrl} /> :
           null
-        }
+        } */}
         <EventFormModal formAction='Create' />
         <ProfileButton user={sessionUser} />
       </>
@@ -42,7 +42,7 @@ const sessionUser = useSelector(state => state.session.user);
     <ul className='nav'>
       <li className='nav__logo'>
         <NavLink exact to="/">
-          <div className='nav__logo__text'>Gathering Point</div>
+          <div className='nav__logo__text'>eventmagic</div>
         </NavLink>
       </li>
       <li>

@@ -1,7 +1,7 @@
-
+@import '../../fonts/font-stylesheet.css';
 
 .nav {
-    background-color: rgb(86, 11, 98);
+    background-color: white;
     display: flex;
     justify-content: space-between;
     align-content: center;
@@ -20,7 +20,12 @@
     justify-content: center;
     align-content: center;
 
-    color: gold;
-    font-size: 18px;
+    color: #d1410c;
+    font-size: 30px;
+    font-family: "SF New Republic Bold", sans-serif;
 }
-
+/*
+@font-face {
+    font-family: "Mayeka Demi Bold";
+    src: url("../../fonts/mayeka/Mayeka\ Demi\ Bold\ Demo.otf") format("opentype"),
+  } */

@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "Mayeka Demi Bold";
+    src: url("../fonts/mayeka/Mayeka_Demi_Bold_Demo.otf") format("svg"),
+  }
+
+@font-face {
+    font-family: "Gondola SD";
+    src: url("../fonts/Gondola-SD/Gondola_SD.ttf") format("truetype");
+    }
+
+@font-face {
+    font-family: "SF New Republic Bold";
+    src: url("../fonts/sf-new-republic/SF\ New\ Republic\ Bold.ttf") format("truetype");
+    }
