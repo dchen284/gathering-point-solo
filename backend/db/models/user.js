@@ -120,13 +120,13 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
     if (user && user.validatePassword(password)) {
-      console.log('++++++++++++');
+      // console.log('++++++++++++');
       // console.log('User', User);
-      console.log('UserBookmark', UserBookmark);
+      // console.log('UserBookmark', UserBookmark);
       // const test = await Event.findAll();
 
       const result = await User.scope('currentUser').findByPk(user.id, {
-        include: [Event, UserBookmark, UserTicket],
+        include: [UserBookmark, UserTicket],
       //   include: {
       //     model: Event,
       //     attributes: { include: ['id'] },

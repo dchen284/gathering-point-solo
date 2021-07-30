@@ -11,8 +11,8 @@ const SET_SESSION_USER = 'session/SET_SESSION_USER';
 const REMOVE_SESSION_USER = 'session/REMOVE_SESSION_USER';
 
   //tickets
-const ADD_TICKET = 'session/ADD_TICKET';
-const REMOVE_TICKET = 'session/REMOVE_TICKET';
+// const ADD_TICKET = 'session/ADD_TICKET';
+// const REMOVE_TICKET = 'session/REMOVE_TICKET';
 
 //thunk action creators
 
@@ -41,33 +41,10 @@ export const login = (userData) => async (dispatch) => {
     }
 }
 
-// export const loginDemoUser = () => async (dispatch) => {
-//   // const { credential, password } = userData;
-//   // console.log('userData', userData);
-//   const res = await csrfFetch('/api/session/demo-user', {
-//       method: 'POST',
-//       body: JSON.stringify({}),
-//   });
-//   const data = await res.json();
-//   if (res.ok) {
-//       console.log('returned data', data);
-//       dispatch(setSessionUser(data.user));
-//       // console.log('tickets?', data.user.UserTickets)
-
-//       // dispatch(ticketsActions.loadTickets(data.user.UserTickets));
-//       // const copyOfTickets = JSON.parse(JSON.stringify(data.user.UserTickets));
-//       // console.log('copyOfTickets', copyOfTickets);
-//       // dispatch(ticketsActions.loadTickets(copyOfTickets));
-//       return data.user;
-//   }
-//   else {
-//       throw res;
-//   }
-// }
-
 export const restoreSessionUser = () => async (dispatch) => {
   const res = await csrfFetch('/api/session');
   const data = await res.json();
+  console.log('data in thunk', data);
   dispatch(setSessionUser(data.user));
   return res;
 }
@@ -98,23 +75,26 @@ export const logout = () => async (dispatch) => {
 };
 
   //tickets
-// export const fetchAddTicketForUser = (ticketData) => async (dispatch) => {
-//   // const res = await csrfFetch(
-//   //   `api/users/:${ticketData.userId}/events/${ticketData.eventId}/tickets`,
-//   //   {
-//   //     method: 'POST',
-//   //     body: JSON.stringify(ticketData),
-//   //   }
-//   // )
-//   // if (res.ok) {
-//   //   const data = await res.json();
-//     console.log('got here');
-//     dispatch(addTicketForUser(ticketData));
-//     console.log('did that?')
-//     // dispatch(addTicketForEvent(data));
-//     return ticketData;
-//   // }
+
+
+// export const fetchAddTicket = (eventId, userId) => async (dispatch) => {
+
+//   const res = await csrfFetch(`/api/users/${userId}/events/${eventId}/tickets`,
+//     {
+//         method: 'POST',
+//         body: JSON.stringify({userId, eventId}),
+//     }
+//   );
+//   if (res.ok) {
+//     const data = await res.json();
+//     console.log(data);
+//     // dispatch(addTicket(data));
+//     return;
+//   } else {
+//     return res;
+//   }
 // }
+
 
 
 
@@ -146,7 +126,7 @@ const initialState = { user: null };
 
 export default function sessionReducer(state = initialState, action) {
     // The reducer normally looks at the action type field to decide what happens
-    // let newState;
+    let newState;
     switch (action.type) {
       // Do something here based on the different types of actions
       // case ADD_TICKET:
@@ -163,7 +143,32 @@ export default function sessionReducer(state = initialState, action) {
       //   // return { user: action.payload };
       //set user with suggested syntax
       case SET_SESSION_USER:
-        return { ...state, user: action.payload };
+
+        newState = { user: action.payload };
+        // console.log('+++++++', action.payload);
+        // reshape UserTickets to object, with eventId as key
+
+        if (action.payload && action.payload.UserTickets) {
+          let objUserTickets = {};
+          action.payload.UserTickets.forEach(ticket => {
+            objUserTickets[ticket.eventId] = ticket;
+          })
+          newState.user.UserTickets = objUserTickets;
+        }
+
+        // reshape UserBookmarks to object, with eventId as key
+
+        if (action.payload && action.payload.UserBookmarks) {
+          let objUserBookmarks = {};
+          action.payload.UserBookmarks.forEach(bookmark => {
+            objUserBookmarks[bookmark.eventId] = bookmark;
+          })
+          newState.user.UserBookmarks = objUserBookmarks;
+        }
+
+        return newState;
+
+        // return { ...state, user: action.payload };
       case REMOVE_SESSION_USER:
         // newState = Object.assign({}, state);
         // newState.user = null;

@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 //internal imports
 // import TicketButton from '../TicketButton';
+// import * as sessionActions from '../../store/session';
+// import { useEffect } from 'react';
 // import * as ticketsActions from '../../store/tickets';
 // import formatTime from '../../utils/format-time'
 
@@ -16,10 +18,13 @@ export default function TicketsDisplay() {
 
     // console.log('>>>>>>', arrTicketsOfSessionUser);
 
-    // useEffects
+    //useEffects
     // useEffect( () => {
-    //     dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser));
+        // dispatch(sessionActions.fetchGetTickets(sessionUser));
+        // dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser));
     // }, [dispatch, sessionUser])
+
+
 
     //HTML
     if (!sessionUser) {

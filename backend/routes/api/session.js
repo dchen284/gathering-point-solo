@@ -7,7 +7,7 @@ const { check } = require('express-validator');
 //internal require/imports
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User, Event, UserTicket } = require('../../db/models');
+const { User, Event, UserBookmark, UserTicket } = require('../../db/models');
 // const { demouser } = require('../../config');
 
 //Validations
@@ -38,15 +38,20 @@ router.delete(
 router.get(
     '/',
     restoreUser,
-    (req, res) => {
+    async (req, res) => {
       const { user } = req;
       console.log('in api route for restore session user', JSON.stringify(user, null, 4));
       if (user) {
-        return res.json({
-          user: user.toSafeObject(),
-
+        const result = await User.scope('currentUser').findByPk(user.id, {
+          include: [UserBookmark, UserTicket],
         });
-      } else return res.json({});
+        return res.json({user: result});
+      //   return res.json({
+      //     user: user.toSafeObject(),
+      //   });
+      // } else return res.json({});
+
+      } else return res.json({user: null});
     }
 );
 
