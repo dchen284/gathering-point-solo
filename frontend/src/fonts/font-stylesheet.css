@@ -1,12 +1,19 @@
 @font-face {
+  font-family: "Gondola SD";
+  src: url("../fonts/Gondola-SD/Gondola_SD.ttf") format("truetype");
+  }
+
+@font-face {
+  font-family: "League Spartan Bold";
+  src: url("../fonts/league-spartan/LeagueSpartan-Bold.otf") format("opentype"),
+}
+
+@font-face {
     font-family: "Mayeka Demi Bold";
     src: url("../fonts/mayeka/Mayeka_Demi_Bold_Demo.otf") format("svg"),
   }
 
-@font-face {
-    font-family: "Gondola SD";
-    src: url("../fonts/Gondola-SD/Gondola_SD.ttf") format("truetype");
-    }
+
 
 @font-face {
     font-family: "SF New Republic Bold";

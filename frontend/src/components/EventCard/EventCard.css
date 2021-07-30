@@ -9,16 +9,23 @@ a {
 .event-card {
     width: 270px;
     background-color: white;
-    border: black solid 2px;
+    /* border: black solid 2px; */
     padding: 5px 10px;
     margin: 5px;
     overflow: hidden;
     height: 300px;
 }
 
-.event-card__data {
+.event-card__bookmark-button-container {
+    display: flex;
+    justify-content: flex-end;
     position: relative;
     bottom: 30px;
+}
+
+.event-card__data {
+    position: relative;
+    bottom: 45px;
 }
 
 .event-card__image {
@@ -28,9 +35,11 @@ a {
 
 .event-card__start-time {
     color: #d1410c;
+
 }
 
 .event-card__title {
     font-weight: bold;
-    text-decoration: underline;
+    padding-top: 8px;
+    padding-bottom: 4px;
 }

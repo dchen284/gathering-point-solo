@@ -35,11 +35,13 @@ export default function EventCard({event}) {
                 <div>
                     <img className="event-card__image" alt="event" src={event.imgUrl ? event.imgUrl : "/images/thb-278-plains.jpeg"} />
                 </div>
-                <div className="event-card__data">
+                <div className='event-card__bookmark-button-container'>
                     <BookmarkButton className='bookmark-button' key={event.id}/>
-                    <p className="event-card__title">{event.title}</p>
+                </div>
+                <div className="event-card__data">
+                    <p className="event-card__title">{event.title.toUpperCase()}</p>
+                    <p className="event-card__start-time">{formatTime(event.startTime)}</p>
                     <p className="event-card__organizer">By: {event.organizerName}</p>
-                    <p className="event-card__start-time">Start Time: {formatTime(event.startTime)}</p>
                 </div>
             </div>
         </Link>

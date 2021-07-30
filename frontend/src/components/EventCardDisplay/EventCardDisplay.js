@@ -28,14 +28,18 @@ export default function EventCardDisplay() {
 
 
     return (
-        <>
-            <h2 className='title'>TOURNAMENTS</h2>
-            <div className="display">
+        <div className='event-card-display'>
+            <h2 className='event-card-display--title'>Tournaments in Houston</h2>
+            <ul className='event-card-display--tabs-container'>
+                <li className='event-card-display--tab'>Standard</li>
+                <li className='event-card-display--tab'>Draft</li>
+            </ul>
+            <div className="event-card-display--grid">
                 {arrEventsToShow.map( (event) => {
                     return <EventCard key={`${event.id}`} event={event}/>
                 })}
             </div>
-            
-        </>
+
+        </div>
     );
 }
