@@ -37,43 +37,22 @@ const validateSignup = [
 
 
 // Sign up
-// router.post(
-//     '/',
-//     validateSignup,
-//     asyncHandler(async (req, res) => {
-//       const { email, password, username } = req.body;
-//       const user = await User.signup({ email, username, password });
-
-//       await setTokenCookie(res, user);
-
-//       return res.json({
-//         user,
-//       });
-//     }),
-//   );
-
-// Sign up with AWS
 router.post(
-  "/",
-  singleMulterUpload("image"),
-  validateSignup,
-  asyncHandler(async (req, res) => {
-    const { email, password, username } = req.body;
-    const profileImageUrl = await singlePublicFileUpload(req.file);
-    const user = await User.signup({
-      username,
-      email,
-      password,
-      profileImageUrl,
-    });
+    '/',
+    validateSignup,
+    asyncHandler(async (req, res) => {
+      const { email, password, username } = req.body;
+      const user = await User.signup({ email, username, password });
 
-    setTokenCookie(res, user);
+      await setTokenCookie(res, user);
 
-    return res.json({
-      user,
-    });
-  })
-);
+      return res.json({
+        user,
+      });
+    }),
+  );
+
+
 
 
 //user tickets routes
@@ -146,3 +125,28 @@ router.delete('/:userId/events/:eventId/tickets', requireAuth, asyncHandler( asy
 }));
 
 module.exports = router;
+
+
+
+// Unused code: Sign up with AWS
+// router.post(
+//   "/",
+//   singleMulterUpload("image"),
+//   validateSignup,
+//   asyncHandler(async (req, res) => {
+//     const { email, password, username } = req.body;
+//     const profileImageUrl = await singlePublicFileUpload(req.file);
+//     const user = await User.signup({
+//       username,
+//       email,
+//       password,
+//       profileImageUrl,
+//     });
+
+//     setTokenCookie(res, user);
+
+//     return res.json({
+//       user,
+//     });
+//   })
+// );

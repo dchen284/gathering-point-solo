@@ -7,13 +7,13 @@ import { useParams } from 'react-router-dom';
 //internal imports
 import './EventDisplay.css';
 import * as eventsActions from '../../store/events';
-import * as ticketsActions from '../../store/tickets';
+// import * as ticketsActions from '../../store/tickets';
 import BookmarkButton from '../BookmarkButton';
 import DeleteEventButton from '../DeleteEventButton';
 import EventFormModal from '../EventFormModal';
 import formatTime from '../../utils/format-time'
-import LoginFormModal from '../LoginFormModal';
-import TicketButton from '../TicketButton';
+// import LoginFormModal from '../LoginFormModal';
+// import TicketButton from '../TicketButton';
 
 export default function EventDisplay() {
 
@@ -25,7 +25,7 @@ export default function EventDisplay() {
     //state
     const sessionUser = useSelector(state => state.session.user);
     const event = useSelector( state => state.events[eventId] );
-    const arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
+    // const arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
 
     // console.log('aaaaaaaa', sessionUser, arrTicketsOfSessionUser);
 
@@ -34,21 +34,21 @@ export default function EventDisplay() {
         dispatch(eventsActions.fetchEventById(eventId)).then(() => setIsLoaded(true));
     }, [dispatch, eventId]);
 
-    useEffect( () => {
-        dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser));
-    }, [dispatch, sessionUser])
+    // useEffect( () => {
+    //     dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser));
+    // }, [dispatch, sessionUser])
 
     //JavaScript
 
 
     // let boolSessionUserHasTicket = false;
-    let ticketId = null;
+    // let ticketId = null;
 
-    if (sessionUser && arrTicketsOfSessionUser) {
-        arrTicketsOfSessionUser.forEach( ticket => {
-            if (+ticket.eventId === +eventId) {ticketId = ticket.id}
-        });
-    }
+    // if (sessionUser && arrTicketsOfSessionUser) {
+    //     arrTicketsOfSessionUser.forEach( ticket => {
+    //         if (+ticket.eventId === +eventId) {ticketId = ticket.id}
+    //     });
+    // }
 
     // console.log('ticketId', ticketId);
 
@@ -97,7 +97,7 @@ export default function EventDisplay() {
                         <div>{event.title}</div>
                         <div>By: {event.organizerName}</div>
                         <br />
-                        {sessionUser ?
+                        {/* {sessionUser ?
                         <TicketButton
                             eventId={eventId}
                             ticketId={ticketId}
@@ -108,7 +108,7 @@ export default function EventDisplay() {
                             <div>Login to Register!</div>
                             <LoginFormModal />
                         </>
-                        }
+                        } */}
                         <br/>
                         <br/>
                         {

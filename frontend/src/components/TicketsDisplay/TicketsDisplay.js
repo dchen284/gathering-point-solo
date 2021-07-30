@@ -1,25 +1,25 @@
 //external imports
-import React, { useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+// import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 //internal imports
-import TicketButton from '../TicketButton';
-import * as ticketsActions from '../../store/tickets';
-import formatTime from '../../utils/format-time'
+// import TicketButton from '../TicketButton';
+// import * as ticketsActions from '../../store/tickets';
+// import formatTime from '../../utils/format-time'
 
 export default function TicketsDisplay() {
 
     //hooks
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const sessionUser = useSelector( (state) => state.session.user );
-    let arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
+    // let arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
 
     // console.log('>>>>>>', arrTicketsOfSessionUser);
 
     // useEffects
-    useEffect( () => {
-        dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser));
-    }, [dispatch, sessionUser])
+    // useEffect( () => {
+    //     dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser));
+    // }, [dispatch, sessionUser])
 
     //HTML
     if (!sessionUser) {
@@ -34,7 +34,7 @@ export default function TicketsDisplay() {
                 <table className="pure-table pure-table-bordered">
                     <thead>
                         <tr>
-                            <th>Ticket ID#</th>
+                            {/* <th>Ticket ID#</th> */}
                             <th>Event ID#</th>
                             <th>Event Title</th>
                             <th>Event Start Time</th>
@@ -42,27 +42,29 @@ export default function TicketsDisplay() {
                         </tr>
                     </thead>
                     <tbody>
-                    {arrTicketsOfSessionUser.map( (ticket) => {
-                        return (
-                            <tr key={`${ticket.id}`}>
-                                <td>{ticket.id}</td>
-                                <td>{ticket.eventId}</td>
-                                <td>
-                                    <Link to={`/events/${ticket.eventId}`}>
-                                        {ticket.Event.title}
-                                    </Link>
-                                </td>
-                                <td>{formatTime(ticket.Event.startTime)}</td>
-                                <td>
-                                    <TicketButton
-                                        eventId={ticket.eventId}
-                                        ticketId={ticket.id}
-                                        userId={sessionUser.id}
-                                    />
-                                </td>
-                            </tr>
-                        )
-                    })}
+                    {
+                        // arrTicketsOfSessionUser.map( (ticket) => {
+                        //     return (
+                        //         <tr key={`${ticket.id}`}>
+                        //             {/* <td>{ticket.id}</td> */}
+                        //             <td>{ticket.eventId}</td>
+                        //             <td>
+                        //                 <Link to={`/events/${ticket.eventId}`}>
+                        //                     {ticket.Event.title}
+                        //                 </Link>
+                        //             </td>
+                        //             <td>{formatTime(ticket.Event.startTime)}</td>
+                        //             <td>
+                        //                 <TicketButton
+                        //                     eventId={ticket.eventId}
+                        //                     ticketId={ticket.id}
+                        //                     userId={sessionUser.id}
+                        //                 />
+                        //             </td>
+                        //         </tr>
+                        //     )
+                        // })
+                    }
                     </tbody>
                 </table>
 

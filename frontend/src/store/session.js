@@ -2,7 +2,7 @@
 
 //internal imports
 import { csrfFetch } from './csrf';
-import * as ticketsActions from './tickets';
+// import * as ticketsActions from './tickets';
 
 //action type strings
 
@@ -11,7 +11,8 @@ const SET_SESSION_USER = 'session/SET_SESSION_USER';
 const REMOVE_SESSION_USER = 'session/REMOVE_SESSION_USER';
 
   //tickets
-// const ADD_TICKET = 'session/ADD_TICKET';
+const ADD_TICKET = 'session/ADD_TICKET';
+const REMOVE_TICKET = 'session/REMOVE_TICKET';
 
 //thunk action creators
 
@@ -115,34 +116,7 @@ export const logout = () => async (dispatch) => {
 //   // }
 // }
 
-export const createUser = (user) => async (dispatch) => {
-  const { images, image, username, email, password } = user;
-  const formData = new FormData();
-  formData.append("username", username);
-  formData.append("email", email);
-  formData.append("password", password);
 
-  // for multiple files
-  if (images && images.length !== 0) {
-    for (var i = 0; i < images.length; i++) {
-      formData.append("images", images[i]);
-    }
-  }
-
-  // for single file
-  if (image) formData.append("image", image);
-
-  const res = await csrfFetch(`/api/users/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-    body: formData,
-  });
-
-  const data = await res.json();
-  dispatch(setSessionUser(data.user));
-};
 
 //action creators
 
@@ -172,7 +146,7 @@ const initialState = { user: null };
 
 export default function sessionReducer(state = initialState, action) {
     // The reducer normally looks at the action type field to decide what happens
-    let newState;
+    // let newState;
     switch (action.type) {
       // Do something here based on the different types of actions
       // case ADD_TICKET:
@@ -201,3 +175,35 @@ export default function sessionReducer(state = initialState, action) {
         return state;
     }
   }
+
+
+// unused AWS code
+
+// export const createUser = (user) => async (dispatch) => {
+//   const { images, image, username, email, password } = user;
+//   const formData = new FormData();
+//   formData.append("username", username);
+//   formData.append("email", email);
+//   formData.append("password", password);
+
+//   // for multiple files
+//   if (images && images.length !== 0) {
+//     for (var i = 0; i < images.length; i++) {
+//       formData.append("images", images[i]);
+//     }
+//   }
+
+//   // for single file
+//   if (image) formData.append("image", image);
+
+//   const res = await csrfFetch(`/api/users/`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "multipart/form-data",
+//     },
+//     body: formData,
+//   });
+
+//   const data = await res.json();
+//   dispatch(setSessionUser(data.user));
+// };

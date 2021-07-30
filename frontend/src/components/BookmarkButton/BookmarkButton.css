@@ -23,6 +23,6 @@
     border-radius: 50%;
 }
 
-.fas {
+.bookmark-button > .fas {
     color: #d1410c;
 }
