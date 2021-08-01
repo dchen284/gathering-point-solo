@@ -1,7 +1,7 @@
 //external imports
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 //internal imports
 import './EventForm.css';
@@ -11,6 +11,7 @@ import * as eventsActions from "../../store/events";
 
 function EventForm({ formAction, setShowModal }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const { eventId } = useParams();
   const eventOnDisplay = useSelector( (state) => state.events[eventId]);
@@ -68,6 +69,21 @@ function EventForm({ formAction, setShowModal }) {
 
     let errorsToPrint = [];
 
+    if (!formTitle)
+        {errorsToPrint.push('Please provide a title.')}
+    if (formTitle.length < 3 || formTitle.length > 255)
+        {errorsToPrint.push('Please provide a title that is between 3 and 255 letters long.')}
+    if (!formStartTime)
+        {errorsToPrint.push('Please provide a start time.')}
+    if (!formEndTime)
+        {errorsToPrint.push('Please provide an end time.')}
+    if (formStartTime > formEndTime)
+        {errorsToPrint.push('The event start time is after the event end time.')}
+    if (!formOrganizerName)
+        {errorsToPrint.push('Please provide an organizer name.')}
+    if (formOrganizerName.length < 3 || formOrganizerName.length > 255)
+        {errorsToPrint.push('Please provide an organizer name that is between 3 and 255 letters long.')}
+
     if (errorsToPrint.length === 0) {
       // console.log(newEventData);
 
@@ -79,6 +95,7 @@ function EventForm({ formAction, setShowModal }) {
           if (data && data.errors) setErrors(data.errors);
         }
       );
+
     }
   }
 
@@ -122,14 +139,16 @@ function EventForm({ formAction, setShowModal }) {
     if (errorsToPrint.length === 0) {
       // console.log(newEventData);
 
-      setShowModal(false);
+      // setShowModal(false);
 
-      return dispatch(eventsActions.fetchEventToAdd(newEventData)).catch(
+      const postedEvent = await dispatch(eventsActions.fetchEventToAdd(newEventData)).catch(
         async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         }
       );
+      history.push(`/events/${postedEvent.id}`);
+      setShowModal(false);
     }
 
     return setErrors(errorsToPrint);

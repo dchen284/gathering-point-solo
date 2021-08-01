@@ -26,6 +26,7 @@ a {
 .event-card__data {
     position: relative;
     bottom: 80px;
+    /* z-index: -1; */
 }
 
 .event-card__image {

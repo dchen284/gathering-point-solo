@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 //internal imports
 import * as eventsActions from '../../store/events';
-import * as ticketsActions from '../../store/tickets';
+// import * as ticketsActions from '../../store/tickets';
 
 export default function DeleteEventButton() {
 
@@ -19,7 +19,7 @@ export default function DeleteEventButton() {
 
 
     function activateDeleteButton() {
-        dispatch(ticketsActions.fetchTicketsToDeleteFromStore(eventId));
+        // dispatch(ticketsActions.fetchTicketsToDeleteFromStore(eventId));
         dispatch(eventsActions.fetchEventToDelete(eventId));
         history.push('/');
         // setIsDeleted(true);
