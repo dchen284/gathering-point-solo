@@ -44,7 +44,7 @@ router.get('/', asyncHandler( async (req, res) => {
 
     const fetchedEvents = await Event.findAll({
         // limit: 6,
-        include: [ UserTicket ],
+        // include: [ UserTicket ],
         order: [ ['id', 'DESC'] ],
     });
     // console.log('fetchedEvents', JSON.stringify(fetchedEvents, null, 4));
@@ -57,7 +57,7 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
     const eventId = req.params.eventId;
 
     const fetchedEvent = await Event.findByPk(eventId, {
-        include: [ UserTicket ],
+        // include: [ UserTicket ],
     });
 
     // console.log('fetchedEvent', fetchedEvent);
@@ -82,7 +82,7 @@ router.post('/', validateEvent, requireAuth, asyncHandler( async (req, res) => {
     const newestEvent = await Event.create(req.body);
 
     const fetchedNewestEvent = await Event.findByPk(newestEvent.id, {
-        include: [ User, UserTicket ],
+        // include: [ User, UserTicket ],
     });
 
     // const fetchedNewestEvent = await Event.findOne({
@@ -146,25 +146,25 @@ router.put('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
 
 }));
 
-router.get('/:eventId(\\d+)/tickets', asyncHandler( async (req, res) => {
+// router.get('/:eventId(\\d+)/tickets', asyncHandler( async (req, res) => {
 
-    console.group('in route');
-    const { eventId } = req.params;
+//     console.group('in route');
+//     const { eventId } = req.params;
 
-    const TicketsOfEvent = await UserTicket.findAll({
-        where: { eventId: eventId },
-        attributes: { include: ['id'] },
-    });
+//     const TicketsOfEvent = await UserTicket.findAll({
+//         where: { eventId: eventId },
+//         attributes: { include: ['id'] },
+//     });
 
-    // console.log('in route', JSON.stringify(TicketsOfEvent, null, 4));
+//     // console.log('in route', JSON.stringify(TicketsOfEvent, null, 4));
 
-    if (!Array.isArray(TicketsOfEvent)) {
-        let temp = [TicketsOfEvent]
-        TicketsOfEvent = temp;
-    }
+//     if (!Array.isArray(TicketsOfEvent)) {
+//         let temp = [TicketsOfEvent]
+//         TicketsOfEvent = temp;
+//     }
 
-    return res.json(TicketsOfEvent);
+//     return res.json(TicketsOfEvent);
 
-}));
+// }));
 
 module.exports = router;

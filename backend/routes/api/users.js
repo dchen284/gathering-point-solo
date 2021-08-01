@@ -85,29 +85,28 @@ router.post('/:userId/events/:eventId/tickets', requireAuth, asyncHandler( async
   if (!checkForExistingTicket) {
     // console.log('good, no existing ticket');
     const userTicketToAdd = await UserTicket.create( { eventId, userId } );
-    const ticketThatWasJustAdded = await UserTicket.findOne({
-      where: { userId, eventId },
-      attributes: { include: ['id'] },
-      include: [ Event ],
-    })
-    return res.json(ticketThatWasJustAdded);
+    // const ticketThatWasJustAdded = await UserTicket.findOne({
+    //   where: { userId, eventId },
+    //   attributes: { include: ['id'] },
+    //   include: [ Event ],
+    // })
+    return res.json(userTicketToAdd);
   }
 
 }));
 
 router.delete('/:userId/events/:eventId/tickets', requireAuth, asyncHandler( async (req, res) => {
-  const { ticketId } = req.body;
+  const { eventId, userId } = req.body;
 
   const userTicketToDelete = await UserTicket.findOne({
-    attributes: { include: ['id'] },
-    where: { id: +ticketId },
+    where: { userId, eventId }
   });
 
   // console.log('gibo', JSON.stringify(userTicketToDelete, null, 4);
 
   if (userTicketToDelete) {
     await userTicketToDelete.destroy();
-    return res.json(userTicketToDelete);
+    return res.json({success: 'success'});
   }
 
   if (!userTicketToDelete) {
