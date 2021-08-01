@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     imgUrl: {
       type: DataTypes.STRING,
     },
+    location: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    },
     organizerName: {
       type: DataTypes.STRING,
       allowNull: false,

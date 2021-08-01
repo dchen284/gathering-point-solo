@@ -127,14 +127,19 @@ module.exports = (sequelize, DataTypes) => {
 
       const result = await User.scope('currentUser').findByPk(user.id, {
         include: [UserBookmark, UserTicket],
-      //   include: {
-      //     model: Event,
-      //     attributes: { include: ['id'] },
-      //   },
-      //   include: {
-      //     model: UserTicket,
-      //     attributes: { include: ['id'] },
-      //   },
+        // include: [
+        //   {
+        //     model: UserBookmark,
+        //     nested: true,
+        //     // attributes: { include: ['id'] },
+        //   },
+        //   {
+        //     model: UserTicket,
+        //     nested: true,
+        //     // attributes: { include: ['id'] },
+        //   },
+        // ],
+        // include: { all: true, nested: true }
       });
       // console.log('test', JSON.stringify(test, null, 4));
       return result;

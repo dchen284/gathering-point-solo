@@ -26,6 +26,10 @@ module.exports = {
       imgUrl: {
         type: Sequelize.STRING
       },
+      location: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       organizerName: {
         allowNull: false,
         type: Sequelize.STRING

@@ -25,6 +25,9 @@ const validateEvent = [
     check('endTime')
         .exists({ checkFalsy: true })
         .withMessage('Please enter a end time.'),
+    check('endTime')
+        .exists({ checkFalsy: true })
+        .withMessage('Please enter a location.'),
     check('organizerName')
         .exists({ checkFalsy: true })
         .withMessage('Please enter a name for the organizer of the event.')
@@ -76,13 +79,16 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
 
 router.post('/', validateEvent, requireAuth, asyncHandler( async (req, res) => {
 
-    await Event.create(req.body);
+    const newestEvent = await Event.create(req.body);
 
-    const fetchedNewestEvent = await Event.findOne({
-        // limit: 6,
+    const fetchedNewestEvent = await Event.findByPk(newestEvent.id, {
         include: [ User, UserTicket ],
-        order: [ ['id', 'DESC'] ],
     });
+
+    // const fetchedNewestEvent = await Event.findOne({
+    //     include: [ User, UserTicket ],
+    //     order: [ ['id', 'DESC'] ],
+    // });
 
     return res.json(fetchedNewestEvent);
 

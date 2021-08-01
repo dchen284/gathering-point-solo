@@ -44,6 +44,19 @@ router.get(
       if (user) {
         const result = await User.scope('currentUser').findByPk(user.id, {
           include: [UserBookmark, UserTicket],
+          // include: [
+          //   {
+          //     model: UserBookmark,
+          //     nested: true,
+          //     // attributes: { include: ['id'] },
+          //   },
+          //   {
+          //     model: UserTicket,
+          //     nested: true,
+          //     // attributes: { include: ['id'] },
+          //   },
+          // ],
+          // include: { all: true, nested: true }
         });
         return res.json({user: result});
       //   return res.json({
