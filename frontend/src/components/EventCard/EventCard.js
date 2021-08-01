@@ -30,21 +30,32 @@ export default function EventCard({event}) {
 
 
     return (
-        <Link key={event.id} to={`/events/${event.id}`}>
+        // <Link key={event.id} to={`/events/${event.id}`}>
+        <div key={event.id}>
             <div className="event-card">
+
                 <div>
-                    <img className="event-card__image" alt="event" src={event.imgUrl ? event.imgUrl : "/images/thb-278-plains.jpeg"} />
+                    <Link to={`/events/${event.id}`}>
+                        <img className="event-card__image" alt="event" src={event.imgUrl ? event.imgUrl : "/images/thb-278-plains.jpeg"} />
+                    </Link>
                 </div>
+
+
                 <div className='event-card__bookmark-button-container'>
-                    <BookmarkButton className='bookmark-button' key={event.id}/>
+                    <BookmarkButton className='bookmark-button' eventId={event.id}/>
                 </div>
+
                 <div className="event-card__data">
-                    <p className="event-card__title">{event.title.toUpperCase()}</p>
-                    <p className="event-card__start-time">{formatTime(event.startTime)}</p>
-                    <p className="event-card__organizer">{event.organizerName} • {event.location}</p>
+                    <Link to={`/events/${event.id}`}>
+                        <p className="event-card__title">{event.title.toUpperCase()}</p>
+                        <p className="event-card__start-time">{formatTime(event.startTime)}</p>
+                        <p className="event-card__organizer">{event.organizerName} • {event.location}</p>
+                    </Link>
                 </div>
+
             </div>
-        </Link>
+        </div>
+        // </Link>
 
     )
 }

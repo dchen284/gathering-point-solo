@@ -21,6 +21,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+    z-index: 2;
     /* font-size: 14px; */
 }
 

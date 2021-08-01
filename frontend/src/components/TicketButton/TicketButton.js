@@ -42,7 +42,7 @@ export default function TicketButton({ eventId }) {
 
         if (!hasTicket) {dispatch(sessionActions.fetchAddTicket(eventId, sessionUser.id))}
         else {dispatch(sessionActions.fetchRemoveTicket(eventId, sessionUser.id))}
-        setHasTicket((prevHasTicket) => !prevHasTicket)
+        setHasTicket((prevHasTicket) => !prevHasTicket);
     }
 
     //     //button callback function options

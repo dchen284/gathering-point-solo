@@ -20,12 +20,12 @@ a {
     display: flex;
     justify-content: flex-end;
     position: relative;
-    bottom: 30px;
+    bottom: 40px;
 }
 
 .event-card__data {
     position: relative;
-    bottom: 45px;
+    bottom: 80px;
 }
 
 .event-card__image {

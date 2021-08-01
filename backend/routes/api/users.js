@@ -7,8 +7,8 @@ const { check } = require('express-validator');
 //internal require/imports
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth, setTokenCookie } = require('../../utils/auth');
-const { Event, User, UserTicket } = require('../../db/models');
-const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
+const { Event, User, UserBookmark, UserTicket } = require('../../db/models');
+// const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
 
 //Validations
 
@@ -57,19 +57,19 @@ router.post(
 
 //user tickets routes
 
-router.get('/:userId/tickets', requireAuth, asyncHandler( async (req, res) => {
-  const userId = req.params.userId;
+// router.get('/:userId/tickets', requireAuth, asyncHandler( async (req, res) => {
+//   const userId = req.params.userId;
 
-  const userTicketsOfSessionUser = await UserTicket.findAll({
-    // attributes: ['id', 'userId', 'eventId'],
-    attributes: { include: ['id'] },
-    where: { userId: userId },
-    include: [ Event ],
-  })
-  // console.log('userTicketsOfSession', JSON.stringify(userTicketsOfSession, null, 4));
-  return res.json(userTicketsOfSessionUser);
+//   const userTicketsOfSessionUser = await UserTicket.findAll({
+//     // attributes: ['id', 'userId', 'eventId'],
+//     attributes: { include: ['id'] },
+//     where: { userId: userId },
+//     include: [ Event ],
+//   })
+//   // console.log('userTicketsOfSession', JSON.stringify(userTicketsOfSession, null, 4));
+//   return res.json(userTicketsOfSessionUser);
 
-}));
+// }));
 
 router.post('/:userId/events/:eventId/tickets', requireAuth, asyncHandler( async (req, res) => {
 
@@ -110,6 +110,59 @@ router.delete('/:userId/events/:eventId/tickets', requireAuth, asyncHandler( asy
   }
 
   if (!userTicketToDelete) {
+    const err = new Error('Login failed');
+    err.status = 401;
+    err.title = 'No event found';
+    err.errors = ['No event was found.'];
+    console.log('err', err);
+    return err;
+    // return next(err);
+  }
+
+
+
+}));
+
+// user bookmark routes
+router.post('/:userId/events/:eventId/bookmarks', requireAuth, asyncHandler( async (req, res) => {
+
+  const { eventId, userId } = req.params;
+  // console.log('eventId', eventId, 'userId', userId)
+
+  const checkForExistingBookmark = await UserBookmark.findOne({
+    where: { userId, eventId }
+  })
+
+  // console.log('existing ticket', checkForExistingTicket);
+
+  if (!checkForExistingBookmark) {
+    // console.log('good, no existing ticket');
+    const userBookmarkToAdd = await UserBookmark.create( { eventId, userId } );
+    // const ticketThatWasJustAdded = await UserTicket.findOne({
+    //   where: { userId, eventId },
+    //   attributes: { include: ['id'] },
+    //   include: [ Event ],
+    // })
+    return res.json(userBookmarkToAdd);
+  }
+
+}));
+
+router.delete('/:userId/events/:eventId/bookmarks', requireAuth, asyncHandler( async (req, res) => {
+  const { eventId, userId } = req.body;
+
+  const userBookmarkToDelete = await UserBookmark.findOne({
+    where: { userId, eventId }
+  });
+
+  // console.log('gibo', JSON.stringify(userBookmarkToDelete, null, 4);
+
+  if (userBookmarkToDelete) {
+    await userBookmarkToDelete.destroy();
+    return res.json({success: 'success'});
+  }
+
+  if (!userBookmarkToDelete) {
     const err = new Error('Login failed');
     err.status = 401;
     err.title = 'No event found';

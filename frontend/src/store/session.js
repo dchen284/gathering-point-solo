@@ -14,6 +14,10 @@ const REMOVE_SESSION_USER = 'session/REMOVE_SESSION_USER';
 const ADD_TICKET = 'session/ADD_TICKET';
 const REMOVE_TICKET = 'session/REMOVE_TICKET';
 
+  //bookmarks
+const ADD_BOOKMARK = 'session/ADD_BOOKMARK';
+const REMOVE_BOOKMARK = 'session/REMOVE_BOOKMARK';
+
 //thunk action creators
 
   //login and signup
@@ -75,8 +79,6 @@ export const logout = () => async (dispatch) => {
 };
 
   //tickets
-
-
 export const fetchAddTicket = (eventId, userId) => async (dispatch) => {
 
   // console.log('eventId', eventId, 'userId', userId);
@@ -115,6 +117,44 @@ export const fetchRemoveTicket = (eventId, userId) => async (dispatch) => {
   }
 }
 
+  //bookmarks
+  export const fetchAddBookmark = (eventId, userId) => async (dispatch) => {
+
+    // console.log('eventId', eventId, 'userId', userId);
+
+    const res = await csrfFetch(`/api/users/${userId}/events/${eventId}/bookmarks`,
+      {
+          method: 'POST',
+          body: JSON.stringify({userId, eventId}),
+      }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      // console.log(data);
+      dispatch(addBookmark(data));
+      return;
+    } else {
+      return res;
+    }
+  }
+
+  export const fetchRemoveBookmark = (eventId, userId) => async (dispatch) => {
+
+    // console.log('eventId', eventId, 'userId', userId);
+
+    const res = await csrfFetch(`/api/users/${userId}/events/${eventId}/bookmarks`,
+      {
+          method: 'DELETE',
+          body: JSON.stringify({userId, eventId}),
+      }
+    );
+    if (res.ok) {
+      dispatch(removeBookmark(eventId));
+      return;
+    } else {
+      return res;
+    }
+  }
 
 
 //action creators
@@ -139,10 +179,24 @@ export function addTicket(ticket) {
   }
 }
 
-export function removeTicket(ticketId) {
+export function removeTicket(eventId) {
   return {
     type: REMOVE_TICKET,
-    payload: ticketId,
+    payload: eventId,
+  }
+}
+
+export function addBookmark(bookmark) {
+  return {
+    type: ADD_BOOKMARK,
+    payload: bookmark,
+  }
+}
+
+export function removeBookmark(eventId) {
+  return {
+    type: REMOVE_BOOKMARK,
+    payload: eventId,
   }
 }
 
@@ -176,12 +230,23 @@ export default function sessionReducer(state = initialState, action) {
 
       case REMOVE_TICKET:
         newState = makeCopyOfState();
-        const deletedTicketId = action.payload;
-        delete newState.user.UserTickets[deletedTicketId];
+        const eventIdOfDeletedTicket = action.payload;
+        delete newState.user.UserTickets[eventIdOfDeletedTicket];
+        return newState;
+
+      case ADD_BOOKMARK:
+        newState = makeCopyOfState();
+        const newBookmark = action.payload;
+        newState.user.UserTickets[newBookmark.eventId] = newBookmark;
+        return newState;
+
+      case REMOVE_BOOKMARK:
+        newState = makeCopyOfState();
+        const eventIdOfDeletedBookmark = action.payload;
+        delete newState.user.UserTickets[eventIdOfDeletedBookmark];
         return newState;
 
       case SET_SESSION_USER:
-
         newState = { user: action.payload };
         // console.log('+++++++', action.payload);
         // reshape UserTickets to object, with eventId as key
