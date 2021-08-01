@@ -21,9 +21,10 @@ function EventForm({ formAction, setShowModal }) {
   let initialStateForForm = {
     title: '',
     eventBody: '',
-    startTime: '2021-05-06T13:00:000',
-    endTime: '2021-05-06T13:00:000',
+    startTime: '',
+    endTime: '',
     imgUrl: '',
+    location: '',
     organizerName: '',
   };
 
@@ -41,6 +42,7 @@ function EventForm({ formAction, setShowModal }) {
   const [formStartTime, setFormStartTime] = useState(initialStateForForm.startTime);
   const [formEndTime, setFormEndTime] = useState(initialStateForForm.endTime);
   const [formImgUrl, setFormImgUrl] = useState(initialStateForForm.imgUrl);
+  const [formLocation, setFormLocation] = useState(initialStateForForm.location);
   const [formOrganizerName, setFormOrganizerName] = useState(initialStateForForm.organizerName);
   const [errors, setErrors] = useState([]);
 
@@ -57,6 +59,7 @@ function EventForm({ formAction, setShowModal }) {
       startTime: formStartTime,
       endTime: formEndTime,
       imgUrl: formImgUrl,
+      location: formLocation,
       organizerName: formOrganizerName,
       ownerId: sessionUser.id,
     };
@@ -89,6 +92,7 @@ function EventForm({ formAction, setShowModal }) {
         startTime: formStartTime,
         endTime: formEndTime,
         imgUrl: formImgUrl,
+        location: formLocation,
         organizerName: formOrganizerName,
         ownerId: sessionUser.id,
     }
@@ -167,10 +171,7 @@ function EventForm({ formAction, setShowModal }) {
             <input
               type="datetime-local"
               value={formStartTime}
-              onChange={(e) => {
-                // console.log('time change', e.target.value)
-                setFormStartTime(e.target.value)
-              }}
+              onChange={(e) => setFormStartTime(e.target.value)}
               required
             />
           </label>
@@ -189,6 +190,14 @@ function EventForm({ formAction, setShowModal }) {
               type="url"
               value={formImgUrl}
               onChange={(e) => setFormImgUrl(e.target.value)}
+            />
+          </label>
+          <label>
+            Location:
+            <input
+              type="text"
+              value={formLocation}
+              onChange={(e) => setFormLocation(e.target.value)}
             />
           </label>
           <label>

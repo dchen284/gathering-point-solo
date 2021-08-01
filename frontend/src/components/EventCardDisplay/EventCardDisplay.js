@@ -13,14 +13,14 @@ export default function EventCardDisplay() {
     const dispatch = useDispatch();
     const arrEvents = useSelector((state) => Object.values(state.events) )
     const reversed = arrEvents.reverse();
-    const numEventsToShow = 8;
-    let arrEventsToShow;
-    if (reversed.length < numEventsToShow) {
-        arrEventsToShow = reversed;
-    } else {
-        arrEventsToShow = reversed.slice(0, numEventsToShow);
-    }
-
+    // const numEventsToShow = 8;
+    // let arrEventsToShow;
+    // if (reversed.length < numEventsToShow) {
+    //     arrEventsToShow = reversed;
+    // } else {
+    //     arrEventsToShow = reversed.slice(0, numEventsToShow);
+    // }
+    let arrEventsToShow = reversed;
 
     useEffect( () => {
         dispatch(eventsActions.fetchEvents());

@@ -1,6 +1,6 @@
 //external imports
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 
@@ -64,10 +64,13 @@ function Navigation({ isLoaded }){
             <i className="fas fa-plus"></i>
             <div>Create an event</div>
           </div>
-          <div className="nav__button">
-            <i className="far fa-heart"></i>
-            <div>Likes</div>
-          </div>
+          <Link to={`/users/${sessionUser?.id}/likes`}>
+            <div className="nav__button">
+              <i className="far fa-heart"></i>
+              <div>Likes</div>
+            </div>
+          </Link>
+
           <div className="nav__button">
             <i className="fas fa-ticket-alt"></i>
             <div>Tickets</div>

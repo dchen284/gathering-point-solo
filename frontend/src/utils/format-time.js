@@ -2,6 +2,8 @@
 export default function formatTime(strTime) {
     //template: 1998-05-24T23:22:37
 
+    if (!strTime) {return null}
+
     const date = new Date(strTime);
 
     const objDays = {

@@ -11,8 +11,8 @@ const SET_SESSION_USER = 'session/SET_SESSION_USER';
 const REMOVE_SESSION_USER = 'session/REMOVE_SESSION_USER';
 
   //tickets
-// const ADD_TICKET = 'session/ADD_TICKET';
-// const REMOVE_TICKET = 'session/REMOVE_TICKET';
+const ADD_TICKET = 'session/ADD_TICKET';
+const REMOVE_TICKET = 'session/REMOVE_TICKET';
 
 //thunk action creators
 
@@ -44,7 +44,7 @@ export const login = (userData) => async (dispatch) => {
 export const restoreSessionUser = () => async (dispatch) => {
   const res = await csrfFetch('/api/session');
   const data = await res.json();
-  console.log('data in thunk', data);
+  // console.log('data in thunk', data);
   dispatch(setSessionUser(data.user));
   return res;
 }
@@ -77,24 +77,43 @@ export const logout = () => async (dispatch) => {
   //tickets
 
 
-// export const fetchAddTicket = (eventId, userId) => async (dispatch) => {
+export const fetchAddTicket = (eventId, userId) => async (dispatch) => {
 
-//   const res = await csrfFetch(`/api/users/${userId}/events/${eventId}/tickets`,
-//     {
-//         method: 'POST',
-//         body: JSON.stringify({userId, eventId}),
-//     }
-//   );
-//   if (res.ok) {
-//     const data = await res.json();
-//     console.log(data);
-//     // dispatch(addTicket(data));
-//     return;
-//   } else {
-//     return res;
-//   }
-// }
+  // console.log('eventId', eventId, 'userId', userId);
 
+  const res = await csrfFetch(`/api/users/${userId}/events/${eventId}/tickets`,
+    {
+        method: 'POST',
+        body: JSON.stringify({userId, eventId}),
+    }
+  );
+  if (res.ok) {
+    const data = await res.json();
+    // console.log(data);
+    dispatch(addTicket(data));
+    return;
+  } else {
+    return res;
+  }
+}
+
+export const fetchRemoveTicket = (eventId, userId) => async (dispatch) => {
+
+  // console.log('eventId', eventId, 'userId', userId);
+
+  const res = await csrfFetch(`/api/users/${userId}/events/${eventId}/tickets`,
+    {
+        method: 'DELETE',
+        body: JSON.stringify({userId, eventId}),
+    }
+  );
+  if (res.ok) {
+    dispatch(removeTicket(eventId));
+    return;
+  } else {
+    return res;
+  }
+}
 
 
 
@@ -113,35 +132,54 @@ export function removeSessionUser() {
     }
 }
 
-// export function addTicketForUser(data) {
-//   return {
-//     type: ADD_TICKET,
-//     payload: data,
-//   }
-// }
+export function addTicket(ticket) {
+  return {
+    type: ADD_TICKET,
+    payload: ticket,
+  }
+}
+
+export function removeTicket(ticketId) {
+  return {
+    type: REMOVE_TICKET,
+    payload: ticketId,
+  }
+}
 
 //reducer
 
 const initialState = { user: null };
 
+
 export default function sessionReducer(state = initialState, action) {
     // The reducer normally looks at the action type field to decide what happens
     let newState;
+
+    // Helper function to generate copy of state
+    const makeCopyOfState = () => {
+      let copyOfState = { ...state };
+      copyOfState.user = { ...state.user };
+      copyOfState.user.UserBookmarks = { ...state.user.UserBookmarks };
+      copyOfState.user.UserTickets = { ...state.user.UserTickets };
+      return copyOfState;
+    }
+
+    // switch block
+
     switch (action.type) {
-      // Do something here based on the different types of actions
-      // case ADD_TICKET:
-      //   newState = Object.assign({}, state);
-      //   const newTicket = action.payload;
-      //   newState.user.UserTickets['temp'] = newTicket;
-      //   console.log('updated state', newState);
-      //   return newState;
-      // case SET_SESSION_USER:
-      //   newState = Object.assign({}, state);
-      //   newState.user = action.payload;
-      //   // if (newState.user) {delete newState.user.UserTickets};
-      //   return newState;
-      //   // return { user: action.payload };
-      //set user with suggested syntax
+
+      case ADD_TICKET:
+        newState = makeCopyOfState();
+        const newTicket = action.payload;
+        newState.user.UserTickets[newTicket.eventId] = newTicket;
+        return newState;
+
+      case REMOVE_TICKET:
+        newState = makeCopyOfState();
+        const deletedTicketId = action.payload;
+        delete newState.user.UserTickets[deletedTicketId];
+        return newState;
+
       case SET_SESSION_USER:
 
         newState = { user: action.payload };

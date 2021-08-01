@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 // import LoginFormPage from './components/LoginFormPage';
 import Navigation from "./components/Navigation";
 import TicketsDisplay from "./components/TicketsDisplay";
+import BookmarksDisplay from "./components/BookmarksDisplay";
 // import SignupFormPage from './components/SignupFormPage';
 import * as sessionActions from './store/session';
 // import CreateUser from './components/CreateUser';
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route path={`/users/:userId(\\d+)/tickets`}>
             <TicketsDisplay />
+          </Route>
+          <Route path={`/users/:userId(\\d+)/likes`}>
+            <BookmarksDisplay />
           </Route>
           {/* <Route exact path={`/test`}>
             <CreateUser />

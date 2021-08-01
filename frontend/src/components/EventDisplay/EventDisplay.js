@@ -12,8 +12,8 @@ import BookmarkButton from '../BookmarkButton';
 import DeleteEventButton from '../DeleteEventButton';
 import EventFormModal from '../EventFormModal';
 import formatTime from '../../utils/format-time'
-// import LoginFormModal from '../LoginFormModal';
-// import TicketButton from '../TicketButton';
+import LoginFormModal from '../LoginFormModal';
+import TicketButton from '../TicketButton';
 
 export default function EventDisplay() {
 
@@ -97,18 +97,16 @@ export default function EventDisplay() {
                         <div>{event.title}</div>
                         <div>By: {event.organizerName}</div>
                         <br />
-                        {/* {sessionUser ?
+                        {sessionUser ?
                         <TicketButton
                             eventId={eventId}
-                            ticketId={ticketId}
-                            userId={sessionUser.id}
                         />
                         :
                         <>
                             <div>Login to Register!</div>
                             <LoginFormModal />
                         </>
-                        } */}
+                        }
                         <br/>
                         <br/>
                         {

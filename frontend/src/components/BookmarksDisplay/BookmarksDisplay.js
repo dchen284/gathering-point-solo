@@ -3,42 +3,30 @@ import React, { useEffect } from 'react';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 //internal imports
-import TicketButton from '../TicketButton';
-// import * as sessionActions from '../../store/session';
-// import { useEffect } from 'react';
-// import * as ticketsActions from '../../store/tickets';
 import * as eventsActions from '../../store/events';
 import formatTime from '../../utils/format-time';
 
-export default function TicketsDisplay() {
+export default function BookmarksDisplay() {
 
-    //hooks
     const dispatch = useDispatch();
     const sessionUser = useSelector( (state) => state.session.user );
-    const arrTickets = useSelector( (state) => Object.values(state.session.user.UserTickets) );
+    const arrBookmarks = useSelector( (state) => Object.values(state.session.user.UserBookmarks) );
     const objEvents = useSelector((state) => state.events );
     const { userId } = useParams();
-    // const [isLoaded, setIsLoaded] = useState(false);
-
-    // console.log('>>>>>>arrTickets', arrTickets);
-    // console.log('+++++++objEvents', objEvents);
-    // console.log('@@@@@', isLoaded);
 
     //useEffects
-    //For each ticket, if that ticket's event is not in the store, fetch that event
     useEffect( () => {
-        arrTickets.forEach(ticket => {
-            if(!objEvents[ticket.eventId]) {
-                dispatch(eventsActions.fetchEventById(ticket.eventId));
+        arrBookmarks.forEach(bookmark => {
+            if(!objEvents[bookmark.eventId]) {
+                dispatch(eventsActions.fetchEventById(bookmark.eventId));
             }
         });
 
-    }, [dispatch, arrTickets, objEvents])
-
+    }, [dispatch, arrBookmarks, objEvents])
 
 
     //JSX
-    //if the user is not logged in, or the user is attempting to access another user's page
+
     //if the user is not logged in, redirect to home page
     if (!sessionUser) {
         return (
@@ -54,7 +42,7 @@ export default function TicketsDisplay() {
     else {
         return (
             <>
-                <h2>My Tickets</h2>
+                <h2>My Bookmarks</h2>
                 <table className="pure-table pure-table-bordered">
                     <thead>
                         <tr>
@@ -62,27 +50,27 @@ export default function TicketsDisplay() {
                             <th>Event ID#</th>
                             <th>Event Title</th>
                             <th>Event Start Time</th>
-                            <th>Cancel Ticket</th>
+                            <th>Cancel Bookmark</th>
                         </tr>
                     </thead>
                     <tbody>
                     {
-                        arrTickets.map( (ticket) => {
-                            if (objEvents[ticket.eventId]) {
+                        arrBookmarks.map( (bookmark) => {
+                            if (objEvents[bookmark.eventId]) {
                                 return (
-                                    <tr key={`${objEvents[ticket.eventId].id}`}>
-                                        <td>{objEvents[ticket.eventId].id}</td>
+                                    <tr key={`${objEvents[bookmark.eventId].id}`}>
+                                        <td>{objEvents[bookmark.eventId].id}</td>
                                         <td>
-                                            <Link to={`/events/${objEvents[ticket.eventId].id}`}>
-                                                {objEvents[ticket.eventId].title}
+                                            <Link to={`/events/${objEvents[bookmark.eventId].id}`}>
+                                                {objEvents[bookmark.eventId].title}
                                             </Link>
                                         </td>
-                                        <td>{formatTime(objEvents[ticket.eventId].startTime)}</td>
-                                        <td>
-                                            <TicketButton
-                                                eventId={ticket.eventId}
+                                        <td>{formatTime(objEvents[bookmark.eventId].startTime)}</td>
+                                        {/* <td>
+                                            <bookmarkButton
+                                                eventId={bookmark.eventId}
                                             />
-                                        </td>
+                                        </td> */}
                                     </tr>
                                 )
                             }
