@@ -12,7 +12,9 @@ export default function TicketButton({ eventId }) {
     const dispatch = useDispatch();
 
     const sessionUser = useSelector( (state) => state.session.user );
-    const ticket = useSelector( (state) => state.session.user.UserTickets[eventId] );
+    // const ticket = useSelector( (state) => state.session.user.UserTickets[eventId] );
+    let ticket = null;
+    if (sessionUser && sessionUser.UserTickets) {ticket = sessionUser.UserTickets[eventId]}
     const [hasTicket, setHasTicket] = useState(!!ticket);
     // let arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
 

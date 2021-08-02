@@ -237,13 +237,13 @@ export default function sessionReducer(state = initialState, action) {
       case ADD_BOOKMARK:
         newState = makeCopyOfState();
         const newBookmark = action.payload;
-        newState.user.UserTickets[newBookmark.eventId] = newBookmark;
+        newState.user.UserBookmarks[newBookmark.eventId] = newBookmark;
         return newState;
 
       case REMOVE_BOOKMARK:
         newState = makeCopyOfState();
         const eventIdOfDeletedBookmark = action.payload;
-        delete newState.user.UserTickets[eventIdOfDeletedBookmark];
+        delete newState.user.UserBookmarks[eventIdOfDeletedBookmark];
         return newState;
 
       case SET_SESSION_USER:

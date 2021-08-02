@@ -10,7 +10,9 @@ export default function BookmarksDisplay() {
 
     const dispatch = useDispatch();
     const sessionUser = useSelector( (state) => state.session.user );
-    const arrBookmarks = useSelector( (state) => Object.values(state.session.user.UserBookmarks) );
+    let arrBookmarks;
+    if (sessionUser) {arrBookmarks = Object.values(sessionUser.UserBookmarks)}
+    // const arrBookmarks = useSelector( (state) => Object.values(state.session.user.UserBookmarks) );
     const objEvents = useSelector((state) => state.events );
     const { userId } = useParams();
 

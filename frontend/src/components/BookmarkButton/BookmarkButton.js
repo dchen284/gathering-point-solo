@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //internal imports
+// import LoginFormModal from '../LoginFormModal';
 import * as sessionActions from '../../store/session';
 // import * as ticketsActions from '../../store/tickets';
 import './BookmarkButton.css'
@@ -12,14 +13,22 @@ export default function BookmarkButton({ eventId }) {
     const dispatch = useDispatch();
 
     const sessionUser = useSelector( (state) => state.session.user );
-    const bookmark = useSelector( (state) => state.session.user.UserBookmarks[eventId] );
+
+    let bookmark = null;
+    if (sessionUser && sessionUser.UserBookmarks) {bookmark = sessionUser.UserBookmarks[eventId]}
+
+    // const bookmark = useSelector( (state) => state.session.user.UserBookmarks[eventId] );
     const [hasBookmark, setHasBookmark] = useState(!!bookmark);
 
     function clickBookmarkButton() {
-
-        if (!hasBookmark) {dispatch(sessionActions.fetchAddBookmark(eventId, sessionUser.id))}
-        else {dispatch(sessionActions.fetchRemoveBookmark(eventId, sessionUser.id))}
-        setHasBookmark((prevHasBookmark) => !prevHasBookmark);
+        if (sessionUser) {
+            if (!hasBookmark) {dispatch(sessionActions.fetchAddBookmark(eventId, sessionUser.id))}
+            else {dispatch(sessionActions.fetchRemoveBookmark(eventId, sessionUser.id))}
+            setHasBookmark((prevHasBookmark) => !prevHasBookmark);
+        }
+        else {
+            //show modal
+        }
     }
 
     return (

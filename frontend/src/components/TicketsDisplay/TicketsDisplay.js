@@ -15,7 +15,9 @@ export default function TicketsDisplay() {
     //hooks
     const dispatch = useDispatch();
     const sessionUser = useSelector( (state) => state.session.user );
-    const arrTickets = useSelector( (state) => Object.values(state.session.user.UserTickets) );
+    let arrTickets;
+    if (sessionUser) {arrTickets = Object.values(sessionUser.UserTickets)}
+    // const arrTickets = useSelector( (state) => Object.values(state.session.user.UserTickets) );
     const objEvents = useSelector((state) => state.events );
     const { userId } = useParams();
     // const [isLoaded, setIsLoaded] = useState(false);
