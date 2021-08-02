@@ -1,5 +1,5 @@
 //external imports
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -11,10 +11,11 @@ import DemoUserButton from '../DemoUserButton';
 import LoginFormModal from '../LoginFormModal';
 import ProfileButton from '../ProfileButton';
 import SignupFormModal from '../SignupFormModal';
+import SearchBar from '../SearchBar';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
-  const [focusOnSearch, setFocusOnSearch] = useState(false);
+
 
   let sessionLinks;
   if (sessionUser) {
@@ -47,7 +48,8 @@ function Navigation({ isLoaded }){
         </NavLink>
       </li>
       <li>
-        <div className={focusOnSearch ? 'nav__search nav__search--border_on_focus' : 'nav__search'}>
+        <SearchBar />
+        {/* <div className={focusOnSearch ? 'nav__search nav__search--border_on_focus' : 'nav__search'}>
           <i className="fas fa-search"></i>
           <input
           className='nav__search--box'
@@ -56,7 +58,7 @@ function Navigation({ isLoaded }){
           onFocus={()=>setFocusOnSearch(true)}
           type="search">
           </input>
-        </div>
+        </div> */}
       </li>
       <li>
         <div className="nav__button_container">

@@ -5,7 +5,9 @@ const asyncHandler = require('express-async-handler');
 const { restoreUser } = require('../../utils/auth.js');
 const { requireAuth } = require('../../utils/auth.js');
 const { setTokenCookie } = require('../../utils/auth.js');
-const { User } = require('../../db/models');
+const { Event, User } = require('../../db/models');
+const { Sequelize } = require('sequelize');
+const Op = Sequelize.Op;
     //routers
 
 const eventsRouter = require('./events.js');
@@ -16,6 +18,24 @@ const usersRouter = require('./users.js');
 router.use('/events', eventsRouter);
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
+
+router.get('/search/:searchTerm', asyncHandler( async (req, res) => {
+    const { searchTerm } = req.params;
+
+    const Op = Sequelize.Op
+
+    const searchedEvents = await Event.findAll({
+        where: {
+            [Op.or]: [
+                {title: {[Op.iLike]: `%${searchTerm}%`}},
+                {eventBody: {[Op.iLike]: `%${searchTerm}%`}},
+            ]
+        }
+    });
+
+    return res.json(searchedEvents);
+}));
+
 
 //code for testing user auth middleware routes
     // router.get(

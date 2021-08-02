@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Navigation from "./components/Navigation";
 import TicketsDisplay from "./components/TicketsDisplay";
 import BookmarksDisplay from "./components/BookmarksDisplay";
+import SearchResults from "./components/SearchResults";
 // import SignupFormPage from './components/SignupFormPage';
 import * as sessionActions from './store/session';
 // import CreateUser from './components/CreateUser';
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path={`/users/:userId(\\d+)/likes`}>
             <BookmarksDisplay />
+          </Route>
+          <Route path={`/search/:searchTerm`}>
+            <SearchResults />
           </Route>
           {/* <Route exact path={`/test`}>
             <CreateUser />
