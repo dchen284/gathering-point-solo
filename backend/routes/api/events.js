@@ -79,11 +79,9 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
 
 router.post('/', validateEvent, requireAuth, asyncHandler( async (req, res) => {
 
-    const objEvent = req.body.event;
-    // const categoryId = req.body.categoryId;
+    const objEvent = req.body;
 
     const newestEvent = await Event.create(objEvent);
-    // await EventCategory.create({eventId: objEvent.id, categoryId});
 
     // const fetchedNewestEvent = await Event.findByPk(newestEvent.id, {
     //     include: [ User, UserTicket ],
@@ -125,8 +123,7 @@ router.delete('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => 
 
 router.put('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
 
-    const objEvent = req.body.event;
-    // const categoryId = req.body.categoryId;
+    const objEvent = req.body;
 
     // console.log('newData', newData);
 
