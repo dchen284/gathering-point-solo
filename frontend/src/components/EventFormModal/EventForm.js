@@ -1,10 +1,11 @@
 //external imports
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
 //internal imports
 import './EventForm.css';
+import * as categoriesActions from "../../store/category";
 import * as eventsActions from "../../store/events";
 // import * as sessionActions from "../../store/session";
 // import DemoUserButton from "../DemoUserButton";
@@ -13,8 +14,13 @@ function EventForm({ formAction, setShowModal }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
+  const arrCategories = useSelector((state) => Object.values(state.categories));
   const { eventId } = useParams();
   const eventOnDisplay = useSelector( (state) => state.events[eventId]);
+
+  useEffect( () => {
+    if (!arrCategories.length) {dispatch(categoriesActions.fetchGetCategories())}
+  }, [dispatch, arrCategories]);
 
   // console.log('eventOnDisplay', eventOnDisplay)
   //2021-05-06T18:34
@@ -27,6 +33,7 @@ function EventForm({ formAction, setShowModal }) {
     imgUrl: '',
     location: '',
     organizerName: '',
+    categoryId: 1,
   };
 
 
@@ -45,6 +52,7 @@ function EventForm({ formAction, setShowModal }) {
   const [formImgUrl, setFormImgUrl] = useState(initialStateForForm.imgUrl);
   const [formLocation, setFormLocation] = useState(initialStateForForm.location);
   const [formOrganizerName, setFormOrganizerName] = useState(initialStateForForm.organizerName);
+  const [formCategoryId, setFormCategoryId] = useState(initialStateForForm.categoryId);
   const [errors, setErrors] = useState([]);
 
 //   if (sessionUser) return <Redirect to="/" />;
@@ -63,6 +71,7 @@ function EventForm({ formAction, setShowModal }) {
       location: formLocation,
       organizerName: formOrganizerName,
       ownerId: sessionUser.id,
+      categoryId: formCategoryId,
     };
 
     // console.log('updatedEventData', updatedEventData);
@@ -89,12 +98,14 @@ function EventForm({ formAction, setShowModal }) {
 
       setShowModal(false);
 
-      return dispatch(eventsActions.fetchEventToUpdate(updatedEventData)).catch(
-        async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        }
-      );
+      dispatch(eventsActions.fetchEventToUpdate(updatedEventData));
+
+      // return dispatch(eventsActions.fetchEventToUpdate(updatedEventData)).catch(
+      //   async (res) => {
+      //     const data = await res.json();
+      //     if (data && data.errors) setErrors(data.errors);
+      //   }
+      // );
 
     }
   }
@@ -112,6 +123,7 @@ function EventForm({ formAction, setShowModal }) {
         location: formLocation,
         organizerName: formOrganizerName,
         ownerId: sessionUser.id,
+        categoryId: formCategoryId,
     }
 
 
@@ -135,6 +147,8 @@ function EventForm({ formAction, setShowModal }) {
         {errorsToPrint.push('Please provide an organizer name.')}
     if (formOrganizerName.length < 3 || formOrganizerName.length > 255)
         {errorsToPrint.push('Please provide an organizer name that is between 3 and 255 letters long.')}
+    if (!formLocation)
+        {errorsToPrint.push('Please provide a location.')}
 
     if (errorsToPrint.length === 0) {
       // console.log(newEventData);
@@ -147,6 +161,7 @@ function EventForm({ formAction, setShowModal }) {
           if (data && data.errors) setErrors(data.errors);
         }
       );
+      
       history.push(`/events/${postedEvent.id}`);
       // console.log('test for heroku');
       setShowModal(false);
@@ -178,6 +193,21 @@ function EventForm({ formAction, setShowModal }) {
               onChange={(e) => setFormTitle(e.target.value)}
               required
             />
+          </label>
+          <label>
+            Category:
+            <select
+              value={formCategoryId}
+              onChange={(e) => setFormCategoryId(e.target.value)}
+            >
+              {arrCategories.map(category => {
+                return (
+                  <option key={category.id} value={category.id}>
+                    {category.categoryName}
+                  </option>
+                )
+              })}
+            </select>
           </label>
           <label className="green">
             Event Description (optional)
@@ -218,6 +248,7 @@ function EventForm({ formAction, setShowModal }) {
               type="text"
               value={formLocation}
               onChange={(e) => setFormLocation(e.target.value)}
+              required
             />
           </label>
           <label>
@@ -226,6 +257,7 @@ function EventForm({ formAction, setShowModal }) {
               type="text"
               value={formOrganizerName}
               onChange={(e) => setFormOrganizerName(e.target.value)}
+              required
             />
           </label>
           <button className="pure-button" type="submit">{`${formAction} Event`}</button>

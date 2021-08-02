@@ -9,7 +9,7 @@ const LOAD_EVENTS = 'event/LOAD_EVENTS';
 
 //thunk action creators
 
-export const fetchEventToAdd = (objNewEvent) => async (dispatch) => {
+export const fetchEventToAdd = (objNewEvent, categoryId) => async (dispatch) => {
   const res = await csrfFetch('/api/events/', {
     method: 'POST',
     // headers: {
@@ -20,7 +20,8 @@ export const fetchEventToAdd = (objNewEvent) => async (dispatch) => {
   const data = await res.json();
   if (res.ok) {
     dispatch(addEvent(data));
-    return data;
+    // return data;
+    return;
   }
 }
 
@@ -32,7 +33,8 @@ export const fetchEventToDelete = (eventId) => async (dispatch) => {
   const data = await res.json();
   if (res.ok) {
     dispatch(deleteEvent(data));
-    return data;
+    // return data;
+    return;
   }
 }
 
@@ -41,10 +43,11 @@ export const fetchEventToUpdate = (updatedEventData) => async (dispatch) => {
     method: 'PUT',
     body: JSON.stringify(updatedEventData),
   });
-  const data = await res.json();
   if (res.ok) {
+    const data = await res.json();
     dispatch(addEvent(data));
-    return data;
+    // return data;
+    return;
   }
 }
 
@@ -107,7 +110,9 @@ const initialState = {}
       case ADD_EVENT:
         newState = {...state};
         const eventToAdd = action.payload;
+        console.log('in reducer', eventToAdd);
         newState[eventToAdd.id] = eventToAdd;
+        newState[eventToAdd.id].Category = eventToAdd.Category;
         return newState;
       case DELETE_EVENT:
         newState = {...state};
@@ -115,7 +120,7 @@ const initialState = {}
         delete newState[eventToDelete.id];
         return newState;
       case LOAD_EVENTS:
-        newState = {...state};
+        newState = {};
         (action.payload).forEach( event => {
             newState[event.id] = event;
         });
