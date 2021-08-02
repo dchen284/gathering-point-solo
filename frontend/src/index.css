@@ -1,6 +1,32 @@
 /* TODO Add site wide styles */
 
+* {
+    font-family: 'Helvetica', sans-serif;
+}
 
+button {
+    font-family: 'Helvetica', sans-serif;
+    height: 44px;
+    padding: 0 30px;
+    box-sizing: border-box;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0px 3px;
+}
+
+.btn-primary {
+    background-color: #D1410C;
+    color: white;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: black;
+    border: 2px solid grey;
+}
 
 .pure-button {
     margin: 2px;

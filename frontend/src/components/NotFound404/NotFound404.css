@@ -26,3 +26,8 @@
     display: flex;
     justify-content: center;
 }
+
+.not-found--buttons {
+    display: flex;
+    justify-content: center;
+}
