@@ -1,0 +1,28 @@
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #F6F5F8;
+}
+
+.not-found--icon {
+    font-size: 70px;
+    color: #faea11;
+    display: flex;
+    justify-content: center;
+}
+
+.not-found--whoops {
+    font-size: 3.5rem;
+    line-height: 4rem;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.not-found--directions {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    display: flex;
+    justify-content: center;
+}

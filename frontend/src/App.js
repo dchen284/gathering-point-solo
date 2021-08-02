@@ -11,6 +11,7 @@ import Navigation from "./components/Navigation";
 import TicketsDisplay from "./components/TicketsDisplay";
 import BookmarksDisplay from "./components/BookmarksDisplay";
 import SearchResults from "./components/SearchResults";
+import NotFound404 from './components/NotFound404';
 // import SignupFormPage from './components/SignupFormPage';
 import * as sessionActions from './store/session';
 // import CreateUser from './components/CreateUser';
@@ -50,7 +51,7 @@ function App() {
             <CreateUser />
           </Route> */}
           <Route>
-            <div>404: Not Found</div>
+            <NotFound404 />
           </Route>
         </Switch>
       )}

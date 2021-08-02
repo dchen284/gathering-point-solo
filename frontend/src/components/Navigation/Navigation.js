@@ -44,7 +44,7 @@ function Navigation({ isLoaded }){
     <ul className='nav'>
       <li className='nav__logo'>
         <NavLink exact to="/">
-          <div className='nav__logo__text'>eventmagic</div>
+          <div className='nav__logo__text'>gathering-point</div>
         </NavLink>
       </li>
       <li>
