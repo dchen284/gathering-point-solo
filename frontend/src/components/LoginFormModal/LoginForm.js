@@ -6,7 +6,7 @@ import './LoginForm.css';
 import * as sessionActions from "../../store/session";
 import DemoUserButton from "../DemoUserButton";
 
-function LoginForm() {
+function LoginForm({setShowModal}) {
   const dispatch = useDispatch();
     // const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
@@ -22,6 +22,7 @@ function LoginForm() {
     //     if (data && data.errors) setErrors(data.errors);
     //   }
     // );
+    setShowModal(false);
     dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
         // console.log('eeba', res);
@@ -29,6 +30,7 @@ function LoginForm() {
         if (data && data.errors) setErrors(data.errors);
       }
     );
+
   };
 
   return (
@@ -60,7 +62,7 @@ function LoginForm() {
             />
           </label>
           <button className="pure-button" type="submit">Log In</button>
-          <DemoUserButton />
+          <DemoUserButton setShowModal={setShowModal}/>
         </form>
         <div className='form-container__side-section'>
           <img className='form-container__side-image' alt="quill" src="/images/stx-82-poet-s-quill.jpeg" />

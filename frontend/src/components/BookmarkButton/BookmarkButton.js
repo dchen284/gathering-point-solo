@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //internal imports
-// import LoginFormModal from '../LoginFormModal';
+import { Modal } from '../../context/Modal';
+import LoginForm from '../LoginFormModal/LoginForm';
 import * as sessionActions from '../../store/session';
 // import * as ticketsActions from '../../store/tickets';
 import './BookmarkButton.css'
@@ -11,7 +12,7 @@ export default function BookmarkButton({ eventId }) {
 
     //hooks
     const dispatch = useDispatch();
-
+    const [showModal, setShowModal] = useState(false);
     const sessionUser = useSelector( (state) => state.session.user );
 
     let bookmark = null;
@@ -27,16 +28,23 @@ export default function BookmarkButton({ eventId }) {
             setHasBookmark((prevHasBookmark) => !prevHasBookmark);
         }
         else {
-            //show modal
+            setShowModal(true);
         }
     }
 
     return (
-        <div
-        className="bookmark-button"
-        onClick={clickBookmarkButton}
-        >
-            <i className={hasBookmark ? "fas fa-heart" : "far fa-heart"}></i>
-        </div>
+        <>
+            <div
+            className="bookmark-button"
+            onClick={clickBookmarkButton}
+            >
+                <i className={hasBookmark ? "fas fa-heart" : "far fa-heart"}></i>
+            </div>
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <LoginForm setShowModal={setShowModal}/>
+                </Modal>
+            )}
+        </>
     );
 }

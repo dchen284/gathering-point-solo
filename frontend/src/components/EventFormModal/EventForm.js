@@ -150,21 +150,24 @@ function EventForm({ formAction, setShowModal }) {
     if (!formLocation)
         {errorsToPrint.push('Please provide a location.')}
 
-    if (errorsToPrint.length === 0) {
+    if (!errorsToPrint.length) {
       // console.log(newEventData);
 
       // setShowModal(false);
 
+      // const postedEvent = await dispatch(eventsActions.fetchEventToAdd(newEventData));
       const postedEvent = await dispatch(eventsActions.fetchEventToAdd(newEventData)).catch(
         async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         }
       );
-      
+
+      // console.log('postedEvent', postedEvent);
+
       history.push(`/events/${postedEvent.id}`);
-      // console.log('test for heroku');
       setShowModal(false);
+      return;
     }
 
     return setErrors(errorsToPrint);
