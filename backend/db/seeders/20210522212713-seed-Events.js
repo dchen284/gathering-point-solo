@@ -25,6 +25,7 @@ module.exports = {
         location: 'Houston',
         organizerName: 'Card Corner',
         ownerId: 4,
+        categoryId: 1,
       },
       {
         title: 'PT Qualifier (Historic)',
@@ -35,6 +36,7 @@ module.exports = {
         location: 'Houston',
         organizerName: 'Tolaria West',
         ownerId: 5,
+        categoryId: 2,
       },
       {
         title: 'FNM at Game Place (Draft)',
@@ -45,6 +47,7 @@ module.exports = {
         location: 'Houston',
         organizerName: 'Game Place',
         ownerId: 2,
+        categoryId: 4,
       },
       {
         title: 'FNM at Game Place  (Standard)',
@@ -55,6 +58,7 @@ module.exports = {
         location: 'Houston',
         organizerName: 'Game Place',
         ownerId: 2,
+        categoryId: 5,
       },
       {
         title: 'Commander - Casual',
@@ -65,6 +69,7 @@ module.exports = {
         location: 'Houston',
         organizerName: 'Kard Kiosk',
         ownerId: 3,
+        categoryId: 3,
       },
       {
         title: 'Commander - Competitive',
@@ -75,6 +80,7 @@ module.exports = {
         location: 'Dallas',
         organizerName: 'Kard Kiosk',
         ownerId: 3,
+        categoryId: 8,
       },
       {
         title: 'Commander!',
@@ -85,6 +91,7 @@ module.exports = {
         location: 'Dallas',
         organizerName: 'Kard Kiosk',
         ownerId: 5,
+        categoryId: 3,
       },
     ], {});
   },

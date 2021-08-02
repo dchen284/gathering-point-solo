@@ -7,7 +7,7 @@ const { check } = require('express-validator');
 
 //internal imports
 
-const { Category, Event } = require('../../db/models')
+const { Category, Event, EventCategory } = require('../../db/models')
 const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -79,18 +79,22 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
 
 router.post('/', validateEvent, requireAuth, asyncHandler( async (req, res) => {
 
-    const newestEvent = await Event.create(req.body);
+    const objEvent = req.body.event;
+    // const categoryId = req.body.categoryId;
 
-    const fetchedNewestEvent = await Event.findByPk(newestEvent.id, {
-        // include: [ User, UserTicket ],
-    });
+    const newestEvent = await Event.create(objEvent);
+    // await EventCategory.create({eventId: objEvent.id, categoryId});
+
+    // const fetchedNewestEvent = await Event.findByPk(newestEvent.id, {
+    //     include: [ User, UserTicket ],
+    // });
 
     // const fetchedNewestEvent = await Event.findOne({
     //     include: [ User, UserTicket ],
     //     order: [ ['id', 'DESC'] ],
     // });
 
-    return res.json(fetchedNewestEvent);
+    return res.json(newestEvent);
 
     // return fetchEventsForEventCardDisplay();
     // might not need a return, either addOne action creator, or force a load action
@@ -121,13 +125,14 @@ router.delete('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => 
 
 router.put('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
 
-    const newData = req.body;
+    const objEvent = req.body.event;
+    // const categoryId = req.body.categoryId;
 
     // console.log('newData', newData);
 
     // console.log('eventId', newData.id);
 
-    const eventToUpdate = await Event.findByPk(newData.id, {});
+    const eventToUpdate = await Event.findByPk(objEvent.id, {});
 
     // console.log('eventToUpdate', JSON.stringify(eventToUpdate, null, 4));
 
@@ -139,7 +144,10 @@ router.put('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
         return next(err);
     }
     else {
-        const updatedEvent = await eventToUpdate.update(newData);
+        const updatedEvent = await eventToUpdate.update(objEvent);
+
+
+        // await EventCategory.update({eventId: objEvent.id, categoryId});
         // console.log('updatedEvent', JSON.stringify(updatedEvent, null, 4));
         return res.json(updatedEvent);
     }

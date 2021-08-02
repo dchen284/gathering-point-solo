@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   }, {});
   Event.associate = function(models) {
     // associations can be defined here
@@ -60,14 +64,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     );
 
-    Event.belongsToMany(
-      models.Category,
-      {
-        through: 'EventCategory',
-        foreignKey: 'eventId',
-        otherKey: 'categoryId',
-      }
-    );
+    // Event.belongsToMany(
+    //   models.Category,
+    //   {
+    //     through: 'EventCategory',
+    //     foreignKey: 'eventId',
+    //     otherKey: 'categoryId',
+    //   }
+    // );
 
     Event.hasMany(
       models.UserBookmark,
@@ -84,12 +88,18 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'cascade', hooks: true,
       });
 
-    Event.hasMany(
-      models.EventCategory,
-      {
-        foreignKey: 'eventId',
-        onDelete: 'cascade', hooks: true,
-      });
+    // Event.hasMany(
+    //   models.EventCategory,
+    //   {
+    //     foreignKey: 'eventId',
+    //     onDelete: 'cascade', hooks: true,
+    //   });
+
+    Event.belongsTo(
+      models.Category,
+      {foreignKey: 'categoryId'}
+    );
+
   };
   return Event;
 };
