@@ -22,8 +22,6 @@ export default function NotFound404() {
         setShowModal(true);
     }
 
-    console.log('++++++++++++', modalType)
-
     //JSX
     return (
         <div className='not-found-container'>

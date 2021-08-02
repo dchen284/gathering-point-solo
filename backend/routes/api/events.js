@@ -68,7 +68,7 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
         err.title = 'No event found';
         err.errors = ['No event was found.'];
         console.log('err', err);
-        return err;
+        throw err;
         // return next(err);
       }
 

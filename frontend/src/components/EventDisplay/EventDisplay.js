@@ -14,6 +14,7 @@ import EventFormModal from '../EventFormModal';
 import formatTime from '../../utils/format-time'
 import LoginFormModal from '../LoginFormModal';
 import TicketButton from '../TicketButton';
+import NotFound404 from '../NotFound404/NotFound404';
 
 export default function EventDisplay() {
 
@@ -24,33 +25,24 @@ export default function EventDisplay() {
 
     //state
     const sessionUser = useSelector(state => state.session.user);
-    const event = useSelector( state => state.events[eventId] );
-    // const arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
-
-    // console.log('aaaaaaaa', sessionUser, arrTicketsOfSessionUser);
+    const events = useSelector( state => state.events );
+    const event = events[eventId];
 
     //useEffects
     useEffect( () => {
-        dispatch(eventsActions.fetchEventById(eventId)).then(() => setIsLoaded(true));
+        dispatch(eventsActions.fetchEventById(eventId))
+            .then(() => {
+                setIsLoaded(true);
+            })
+            .catch((e)=>{
+                setIsLoaded(true);
+            })
     }, [dispatch, eventId]);
 
-    // useEffect( () => {
-    //     dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser));
-    // }, [dispatch, sessionUser])
+    // console.log('++++++++isLoaded', isLoaded);
+    // console.log('++++++++event', event);
 
     //JavaScript
-
-
-    // let boolSessionUserHasTicket = false;
-    // let ticketId = null;
-
-    // if (sessionUser && arrTicketsOfSessionUser) {
-    //     arrTicketsOfSessionUser.forEach( ticket => {
-    //         if (+ticket.eventId === +eventId) {ticketId = ticket.id}
-    //     });
-    // }
-
-    // console.log('ticketId', ticketId);
 
     let boolOwnsEvent = false;
     if (sessionUser && event) {
@@ -58,31 +50,11 @@ export default function EventDisplay() {
             {boolOwnsEvent = true}
     }
 
-    // function convertTime(strInputTime) {
-    //     const strDate = strInputTime.slice(0, 10);
-    //     const strHour = strInputTime.slice(11, 13);
-    //     const strMinutes = strInputTime.slice(14, 16);
-
-    //     let strConvertedTime;
-
-    //     if (+strHour <= 12) {
-    //         strConvertedTime = `${strDate}, ${strHour}:${strMinutes} AM`;
-    //     }
-    //     else if (+strHour >= 13 && +strHour <= 21)
-    //     {
-    //         strConvertedTime = `${strDate}, 0${+strHour-12}:${strMinutes} PM`;
-    //     }
-    //     else {
-    //         strConvertedTime = `${strDate}, ${+strHour-12}:${strMinutes} PM`;
-    //     }
-
-    //     return strConvertedTime;
-    // }
-
     return (
         <>
-            {!isLoaded && <h2>404: Event Not Found</h2>}
-            {isLoaded && (
+            {!isLoaded && null}
+            {isLoaded && !event && <NotFound404 />}
+            {isLoaded && event && (
                 <div className="event-display-container">
                     <div>
                         <img src={event.imgUrl ? event.imgUrl : '/images/thb-278-plains.jpeg'} alt="Event Splash"/>

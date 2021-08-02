@@ -59,18 +59,17 @@ export const fetchEvents = () => async (dispatch) => {
 }
 
 export const fetchEventById = (eventId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/events/${eventId}`);
-  // console.log('before data');
 
-  // console.log('after data');
+  const res = await csrfFetch(`/api/events/${eventId}`);
+
   if (res.ok) {
+
     const data = await res.json();
     dispatch(addEvent(data));
+    return;
   }
   else {
-    // console.log('got here');
-    throw res;
-    //how to display this error on the page?
+    return;
   }
 }
 
