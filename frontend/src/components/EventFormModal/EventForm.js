@@ -148,7 +148,7 @@ function EventForm({ formAction, setShowModal }) {
         }
       );
       history.push(`/events/${postedEvent.id}`);
-      console.log('test for heroku');
+      // console.log('test for heroku');
       setShowModal(false);
     }
 
