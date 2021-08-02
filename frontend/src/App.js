@@ -29,33 +29,41 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route exact path={`/`}>
-            <EventCardDisplay />
-          </Route>
-          <Route path={`/events/:eventId(\\d+)`}>
-            <EventDisplay />
-          </Route>
-          <Route path={`/users/:userId(\\d+)/tickets`}>
-            <TicketsDisplay />
-          </Route>
-          <Route path={`/users/:userId(\\d+)/likes`}>
-            <BookmarksDisplay />
-          </Route>
-          <Route path={`/search/:searchTerm`}>
-            <SearchResults />
-          </Route>
-          {/* <Route exact path={`/test`}>
-            <CreateUser />
-          </Route> */}
-          <Route>
-            <NotFound404 />
-          </Route>
-        </Switch>
-      )}
-      <Footer />
+      <div className='page-wrapper'>
+        <div className='page-wrapper--nav'>
+          <Navigation isLoaded={isLoaded} />
+        </div>
+        {isLoaded && (
+          <div className='page-wrapper--content'>
+            <Switch>
+              <Route exact path={`/`}>
+                <EventCardDisplay />
+              </Route>
+              <Route path={`/events/:eventId(\\d+)`}>
+                <EventDisplay />
+              </Route>
+              <Route path={`/users/:userId(\\d+)/tickets`}>
+                <TicketsDisplay />
+              </Route>
+              <Route path={`/users/:userId(\\d+)/likes`}>
+                <BookmarksDisplay />
+              </Route>
+              <Route path={`/search/:searchTerm`}>
+                <SearchResults />
+              </Route>
+              {/* <Route exact path={`/test`}>
+                <CreateUser />
+              </Route> */}
+              <Route>
+                <NotFound404 />
+              </Route>
+            </Switch>
+          </div>
+        )}
+        <div className='page-wrapper--footer'>
+          <Footer />
+        </div>
+      </div>
     </>
   );
 }

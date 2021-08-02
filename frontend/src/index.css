@@ -2,6 +2,7 @@
 
 * {
     font-family: 'Helvetica', sans-serif;
+    margin: 0;
 }
 
 button {
@@ -28,14 +29,12 @@ button {
     border: 2px solid grey;
 }
 
-.pure-button {
-    margin: 2px;
+.page-wrapper {
+    display: grid;
+    grid-template-rows: 80px 1fr 200px;
+
 }
 
 ul {
     list-style-type: none;
-}
-
-body {
-
 }
