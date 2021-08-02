@@ -16,6 +16,11 @@ module.exports = {
       [
         {eventId: 1, categoryId: 1},
         {eventId: 2, categoryId: 2},
+        {eventId: 3, categoryId: 4},
+        {eventId: 4, categoryId: 2},
+        {eventId: 5, categoryId: 3},
+        {eventId: 6, categoryId: 8},
+        {eventId: 7, categoryId: 3},
       ], {});
   },
 

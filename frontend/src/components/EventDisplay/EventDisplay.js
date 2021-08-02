@@ -87,7 +87,7 @@ export default function EventDisplay() {
                     <div>
                         <img src={event.imgUrl ? event.imgUrl : '/images/thb-278-plains.jpeg'} alt="Event Splash"/>
                         <div>Event Description: {event.eventBody}</div>
-
+                        <div>Event Category: {event.Categories[0].categoryName}</div>
 
                     </div>
                     <div>

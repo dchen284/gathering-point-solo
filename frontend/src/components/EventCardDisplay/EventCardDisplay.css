@@ -1,5 +1,9 @@
 @import '../../fonts/font-stylesheet.css';
 
+.category-bar {
+    display: flex;
+}
+
 .event-card-display {
     background-color: rgb(245, 245, 245);
 }

@@ -5,7 +5,7 @@ const asyncHandler = require('express-async-handler');
 const { restoreUser } = require('../../utils/auth.js');
 const { requireAuth } = require('../../utils/auth.js');
 const { setTokenCookie } = require('../../utils/auth.js');
-const { Event, User } = require('../../db/models');
+const { Category, Event } = require('../../db/models');
 const { Sequelize } = require('sequelize');
 const Op = Sequelize.Op;
     //routers
@@ -36,6 +36,12 @@ router.get('/search/:searchTerm', asyncHandler( async (req, res) => {
     return res.json(searchedEvents);
 }));
 
+router.get('/categories', asyncHandler( async (req, res) => {
+
+    const categories = await Category.findAll({});
+
+    return res.json(categories);
+}));
 
 //code for testing user auth middleware routes
     // router.get(

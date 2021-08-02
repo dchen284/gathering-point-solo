@@ -7,7 +7,7 @@ const { check } = require('express-validator');
 
 //internal imports
 
-const { Event, User, UserTicket } = require('../../db/models')
+const { Category, Event } = require('../../db/models')
 const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -44,7 +44,7 @@ router.get('/', asyncHandler( async (req, res) => {
 
     const fetchedEvents = await Event.findAll({
         // limit: 6,
-        // include: [ UserTicket ],
+        include: [ Category ],
         order: [ ['id', 'DESC'] ],
     });
     // console.log('fetchedEvents', JSON.stringify(fetchedEvents, null, 4));
@@ -57,7 +57,7 @@ router.get('/:eventId(\\d+)', asyncHandler( async (req, res) => {
     const eventId = req.params.eventId;
 
     const fetchedEvent = await Event.findByPk(eventId, {
-        // include: [ UserTicket ],
+        include: [ Category ],
     });
 
     // console.log('fetchedEvent', fetchedEvent);

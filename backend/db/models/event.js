@@ -83,6 +83,13 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'eventId',
         onDelete: 'cascade', hooks: true,
       });
+
+    Event.hasMany(
+      models.EventCategory,
+      {
+        foreignKey: 'eventId',
+        onDelete: 'cascade', hooks: true,
+      });
   };
   return Event;
 };
