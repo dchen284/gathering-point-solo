@@ -19,16 +19,28 @@ router.use('/events', eventsRouter);
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 
+router.get('/categories', asyncHandler( async (req, res) => {
+
+    const categories = await Category.findAll({});
+
+    return res.json(categories);
+}));
+
 router.get('/search/:searchTerm', asyncHandler( async (req, res) => {
     const { searchTerm } = req.params;
 
-    const Op = Sequelize.Op
+    const Op = Sequelize.Op;
+
+    // const categories = await Category.findAll({});
+
 
     const searchedEvents = await Event.findAll({
+        include: [Category],
         where: {
             [Op.or]: [
                 {title: {[Op.iLike]: `%${searchTerm}%`}},
                 {eventBody: {[Op.iLike]: `%${searchTerm}%`}},
+                // {Category.categoryName: {[Op.iLike]: `%${searchTerm}%`}},
             ]
         }
     });
@@ -36,12 +48,7 @@ router.get('/search/:searchTerm', asyncHandler( async (req, res) => {
     return res.json(searchedEvents);
 }));
 
-router.get('/categories', asyncHandler( async (req, res) => {
 
-    const categories = await Category.findAll({});
-
-    return res.json(categories);
-}));
 
 //code for testing user auth middleware routes
     // router.get(

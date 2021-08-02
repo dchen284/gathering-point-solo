@@ -129,7 +129,9 @@ router.put('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
 
     // console.log('eventId', newData.id);
 
-    const eventToUpdate = await Event.findByPk(objEvent.id, {});
+    const eventToUpdate = await Event.findByPk(objEvent.id, {
+        include: [Category]
+    });
 
     // console.log('eventToUpdate', JSON.stringify(eventToUpdate, null, 4));
 
@@ -141,8 +143,10 @@ router.put('/:eventId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
         return next(err);
     }
     else {
-        const updatedEvent = await eventToUpdate.update(objEvent);
-
+        await eventToUpdate.update(objEvent);
+        const updatedEvent = await Event.findByPk(objEvent.id, {
+            include: [Category]
+        });
 
         // await EventCategory.update({eventId: objEvent.id, categoryId});
         // console.log('updatedEvent', JSON.stringify(updatedEvent, null, 4));
