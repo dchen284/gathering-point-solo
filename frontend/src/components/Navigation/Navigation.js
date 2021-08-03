@@ -26,7 +26,7 @@ function Navigation({ isLoaded }){
           <img src={sessionUser.profileImageUrl} /> :
           null
         } */}
-        <EventFormModal formAction='Create' />
+        {/* <EventFormModal formAction='Create' /> */}
         <ProfileButton user={sessionUser} />
       </>
     );
@@ -60,29 +60,19 @@ function Navigation({ isLoaded }){
           </input>
         </div> */}
       </li>
-      <li>
-        <div className="nav__button_container">
+      <li className="nav__button_container">
+          <EventFormModal formAction='Create' />
+        <Link to={`/users/${sessionUser?.id}/likes`}>
           <div className="nav__button">
-            <i className="fas fa-plus"></i>
-            <div>Create an event</div>
+            <i className="far fa-heart"></i>
+            <div>Likes</div>
           </div>
-          <Link to={`/users/${sessionUser?.id}/likes`}>
-            <div className="nav__button">
-              <i className="far fa-heart"></i>
-              <div>Likes</div>
-            </div>
-          </Link>
+        </Link>
 
-          <div className="nav__button">
-            <i className="fas fa-ticket-alt"></i>
-            <div>Tickets</div>
-          </div>
+        <div className="nav__button">
+          <i className="fas fa-ticket-alt"></i>
+          <div>Tickets</div>
         </div>
-
-
-        {/* <i className="fas fa-heart"></i> */}
-        {/* <i className="far fa-heart"></i> */}
-        {/* <i className="fas fa-ticket-alt"></i> */}
       </li>
       <li>
         {/* <NavLink exact to="/">

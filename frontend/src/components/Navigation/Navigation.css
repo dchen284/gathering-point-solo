@@ -6,8 +6,7 @@
     justify-content: space-between;
     align-content: center;
     box-sizing: border-box;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    height: 60px;
     padding-inline-start: 0px;
 }
 
@@ -22,10 +21,25 @@
     justify-content: center;
     align-items: center;
     font-size: 13px;
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
 }
 
 .nav__button:hover {
     background-color: #F6F5F8;
+}
+
+.nav__button--create_event {
+    color: #3D64FF;
+}
+
+.nav__button i {
+    font-size: 20px;
+    margin: 5px;
 }
 
 .nav__logo {
@@ -33,6 +47,8 @@
     justify-content: flex-start;
     align-self: center;
     margin-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .nav__logo__text {
@@ -41,7 +57,7 @@
     align-content: center;
 
     color: #d1410c;
-    font-size: 30px;
+    font-size: 24px;
     font-family: "SF New Republic Bold", sans-serif;
 }
 
