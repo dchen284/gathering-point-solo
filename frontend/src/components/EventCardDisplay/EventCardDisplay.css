@@ -4,6 +4,28 @@
     display: flex;
 }
 
+.event-card-display--category {
+    /* border: 1px solid black; */
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 12px;
+    padding-bottom: 8px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #6f7287;
+}
+
+.event-card-display--category:hover {
+    border-bottom: 1px solid black;
+    color: #39364f;
+}
+
+.event-card-display--category.selected {
+    font-weight: bold;
+    color: #3D64FF;
+    border-bottom: 2px solid #3D64FF;
+}
+
 .event-card-display {
     background-color: rgb(245, 245, 245);
 }
@@ -14,10 +36,6 @@
     flex-flow: row wrap;
 }
 
-.event-card-display--tabs-container {
-    display: flex;
-    padding-left: 0px;
-}
 
 .event-card-display--tab {
     font-size: 16px;

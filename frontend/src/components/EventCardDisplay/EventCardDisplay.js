@@ -35,8 +35,20 @@ export default function EventCardDisplay() {
             <div className='event-card-display'>
                 <h2 className='event-card-display--title'>Tournaments in Houston</h2>
                 <div className='event-card-display--category-bar'>
+                    <div
+                    className='event-card-display--category selected'
+                    >
+                        All
+                    </div>
                     {arrCategories.map( (category) => {
-                            return <div key={category.id}>{category.categoryName}</div>
+                            return (
+                                <div
+                                key={category.id}
+                                className='event-card-display--category'
+                                >
+                                    {category.categoryName}
+                                </div>
+                                )
                     })}
                 </div>
                 <div className="event-card-display--grid">
