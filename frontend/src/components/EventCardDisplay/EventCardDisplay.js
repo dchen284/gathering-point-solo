@@ -45,16 +45,25 @@ export default function EventCardDisplay() {
     return (
         <>
             <div className='event-card-splash-image'>
-                <button onClick={()=>window.location.replace('/#tournaments')}>
-                    test
-                </button>
+                <div>
+                    <p>
+                        Welcome to Gathering Point, a place where users can Create, get Tickets, and Like tournaments for the game Magic: the Gathering.
+                    </p>
+                    <button
+                    className='btn-primary'
+                    onClick={()=>window.location.replace('/#tournaments')}
+                    >
+                        Find your next event
+                    </button>
+                </div>
+
             </div>
             <div className='event-card-display'>
                 <h2
                 id="tournaments"
                 className='event-card-display--title'
                 >
-                    Tournaments in Houston
+                    Tournaments Formats
                 </h2>
                 <div className='event-card-display--category-bar'>
                     <div
