@@ -31,7 +31,7 @@ export default function EventCard({event}) {
 
     return (
         // <Link key={event.id} to={`/events/${event.id}`}>
-        <div key={event.id}>
+        <div key={event.id} className="event-card-container">
             <div className="event-card">
 
                 <div>

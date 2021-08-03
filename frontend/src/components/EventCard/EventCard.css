@@ -6,15 +6,16 @@ a {
     color: green;
 } */
 
+.event-card-container {
+    margin: 10px;
+}
+
 .event-card {
-    /* width: 270px; */
-    width: 90%;
+    width: 330px;
+    /* width: 100%; */
     background-color: white;
-    /* border: black solid 2px; */
-    padding: 5px 10px;
-    margin: 5px;
     overflow: hidden;
-    height: 300px;
+    height: 330px;
 }
 
 .event-card:hover {
@@ -32,13 +33,14 @@ a {
 
 .event-card__data {
     position: relative;
-    bottom: 40px;
+    bottom: 25px;
     width: 225px;
+    margin-left: 15px;
     /* z-index: -1; */
 }
 
 .event-card__image {
-    width: 260px;
+    width: 100%;
     height: 190px;
 }
 
