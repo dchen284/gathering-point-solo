@@ -49,30 +49,21 @@ function Navigation({ isLoaded }){
       </li>
       <li className='nav__search-container'>
         <SearchBar />
-        {/* <div className={focusOnSearch ? 'nav__search nav__search--border_on_focus' : 'nav__search'}>
-          <i className="fas fa-search"></i>
-          <input
-          className='nav__search--box'
-          placeholder="Search events"
-          onBlur={()=>setFocusOnSearch(false)}
-          onFocus={()=>setFocusOnSearch(true)}
-          type="search">
-          </input>
-        </div> */}
       </li>
       <li className="nav__button_container">
           <EventFormModal formAction='Create' />
-        <Link to={`/users/${sessionUser?.id}/likes`}>
-          <div className="nav__button">
-            <i className="far fa-heart"></i>
-            <div>Likes</div>
-          </div>
-        </Link>
-
-        <div className="nav__button">
-          <i className="fas fa-ticket-alt"></i>
-          <div>Tickets</div>
-        </div>
+          <Link to={`/users/${sessionUser?.id}/likes`}>
+            <div className="nav__button nav__button--likes">
+              <i className="far fa-heart"></i>
+              <div>Likes</div>
+            </div>
+          </Link>
+          <Link to={`/users/${sessionUser?.id}/tickets`}>
+            <div className="nav__button nav__button--tickets">
+              <i className="fas fa-ticket-alt"></i>
+              <div>Tickets</div>
+            </div>
+          </Link>
       </li>
       <li>
         {/* <NavLink exact to="/">

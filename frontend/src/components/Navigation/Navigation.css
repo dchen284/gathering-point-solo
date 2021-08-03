@@ -37,6 +37,10 @@
     color: #3D64FF;
 }
 
+.nav__button--likes, .nav__button--tickets {
+    color: black;
+}
+
 .nav__button i {
     font-size: 20px;
     margin: 5px;
