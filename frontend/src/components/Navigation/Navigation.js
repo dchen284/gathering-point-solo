@@ -47,7 +47,7 @@ function Navigation({ isLoaded }){
           <div className='nav__logo__text'>gathering-point</div>
         </NavLink>
       </li>
-      <li>
+      <li className='nav__search-container'>
         <SearchBar />
         {/* <div className={focusOnSearch ? 'nav__search nav__search--border_on_focus' : 'nav__search'}>
           <i className="fas fa-search"></i>

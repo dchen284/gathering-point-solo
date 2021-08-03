@@ -7,18 +7,24 @@
     height: 100%;
 }
 
-.footer--container {
-    display: flex;
-    flex-direction: column;
-}
 
 .footer a {
+    display: flex;
     color: #a19fb0;
     font-size: 14px;
     margin-left: 60px;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 80px;
+    width: min-content;
+}
+
+.footer i {
+    font-size: 20px;
+}
+
+.footer text {
+    margin-left: 5px;
+    margin-top: 2px;
 }
 
 .footer--title {

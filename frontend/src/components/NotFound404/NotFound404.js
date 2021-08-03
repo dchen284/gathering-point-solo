@@ -30,7 +30,8 @@ export default function NotFound404() {
                 Whoops, the page or event you are looking for was not found.
             </p>
             <p className='not-found--directions'>
-                If you feel this message is in error, please let us know.
+                <span>If you feel this message is in error, please </span>
+                <a href="mailto:dchen284@gmail.com">let us know</a>.
             </p>
             <div className='not-found--buttons'>
                 <button

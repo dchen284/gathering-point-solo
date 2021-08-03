@@ -9,15 +9,19 @@
     color: #faea11;
     display: flex;
     justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 10px;
 }
 
 .not-found--whoops {
     font-size: 3.5rem;
     line-height: 4rem;
-    font-weight: bolder;
+    font-weight: 900;
     display: flex;
     justify-content: center;
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .not-found--directions {
@@ -25,9 +29,21 @@
     line-height: 2rem;
     display: flex;
     justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.not-found--directions a:hover {
+    text-decoration: underline;
+}
+
+.not-found--directions span {
+    white-space: pre;
 }
 
 .not-found--buttons {
     display: flex;
     justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
 }
