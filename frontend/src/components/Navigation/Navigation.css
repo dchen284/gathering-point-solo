@@ -6,9 +6,10 @@
     justify-content: space-between;
     align-content: center;
     box-sizing: border-box;
-    /* height: 50px; */
+    height: 50px;
     /* position: fixed; */
     padding-inline-start: 0px;
+    /* overflow: hidden; */
 }
 
 
@@ -22,25 +23,29 @@
     justify-content: center;
     align-items: center;
     font-size: 13px;
-    height: 100%;
+    height: 50px;
     padding-left: 20px;
     padding-right: 20px;
     margin-left: 5px;
     margin-right: 5px;
     cursor: pointer;
+    color: black;
 }
 
-.nav__button:hover {
+.nav__button:hover,
+.dropdown:hover,
+.dropdown__content-item:hover {
     background-color: #F6F5F8;
 }
 
-.nav__button--create_event {
+.nav__button--create_event,
+.nav__button--demo {
     color: #3D64FF;
 }
 
-.nav__button--likes, .nav__button--tickets {
+/* .nav__button--likes, .nav__button--tickets {
     color: black;
-}
+} */
 
 .nav__button i {
     font-size: 20px;
@@ -97,8 +102,52 @@
     margin-left: 3px;
 }
 
+
+
 /*
 @font-face {
     font-family: "Mayeka Demi Bold";
     src: url("../../fonts/mayeka/Mayeka\ Demi\ Bold\ Demo.otf") format("opentype"),
   } */
+
+  .dropdown {
+      /* overflow: visible; */
+      float: right;
+      position: relative;
+      cursor: pointer;
+      /* bottom: 50px; */
+
+  }
+
+  .dropdown__text {
+    height: 50px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .dropdown__username {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+.dropdown__content {
+    display: none;
+    overflow: visible;
+}
+
+.dropdown__content-item {
+    width: inherit;
+    padding: 10px;
+    background-color: white;
+    color: black;
+}
+
+.dropdown:hover .dropdown__content {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    /* z-index: 2; */
+}

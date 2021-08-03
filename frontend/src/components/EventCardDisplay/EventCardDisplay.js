@@ -1,6 +1,7 @@
 //external imports
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// import { useHistory } from 'react-router-dom';
 
 //internal imports
 import './EventCardDisplay.css';
@@ -12,6 +13,7 @@ export default function EventCardDisplay() {
 
     //hooks
     const dispatch = useDispatch();
+    // const history = useHistory();
     const arrEvents = useSelector((state) => Object.values(state.events) );
     const arrCategories = useSelector((state) => Object.values(state.categories));
     const [shownCategoryId, setShownCategoryId] = useState(0);
@@ -42,8 +44,18 @@ export default function EventCardDisplay() {
 
     return (
         <>
+            <div className='event-card-splash-image'>
+                <button onClick={()=>window.location.replace('/#tournaments')}>
+                    test
+                </button>
+            </div>
             <div className='event-card-display'>
-                <h2 className='event-card-display--title'>Tournaments in Houston</h2>
+                <h2
+                id="tournaments"
+                className='event-card-display--title'
+                >
+                    Tournaments in Houston
+                </h2>
                 <div className='event-card-display--category-bar'>
                     <div
                     id='category-bar-tag#0'

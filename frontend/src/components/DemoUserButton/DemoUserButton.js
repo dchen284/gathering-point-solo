@@ -1,6 +1,7 @@
 //external imports
 import React from "react";
 import { useDispatch } from "react-redux";
+import '../Navigation/Navigation.css';
 
 //internal imports
 import * as sessionActions from "../../store/session";
@@ -22,6 +23,6 @@ export default function DemoUserButton({setShowModal}) {
     }
 
     return (
-        <button className="pure-button" onClick={loginDemoUser} >Demo User</button>
+        <div className="nav__button nav__button--demo" onClick={loginDemoUser} >Log In as Demo User</div>
     )
 }
