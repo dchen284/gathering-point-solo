@@ -1,5 +1,5 @@
 //external imports
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 //internal imports
@@ -14,7 +14,8 @@ export default function EventCardDisplay() {
     const dispatch = useDispatch();
     const arrEvents = useSelector((state) => Object.values(state.events) );
     const arrCategories = useSelector((state) => Object.values(state.categories));
-    const reversed = arrEvents.reverse();
+    const [shownCategoryId, setShownCategoryId] = useState(0);
+
     // const numEventsToShow = 8;
     // let arrEventsToShow;
     // if (reversed.length < numEventsToShow) {
@@ -22,13 +23,22 @@ export default function EventCardDisplay() {
     // } else {
     //     arrEventsToShow = reversed.slice(0, numEventsToShow);
     // }
-    let arrEventsToShow = reversed;
+
 
     useEffect( () => {
         dispatch(eventsActions.fetchEvents());
         dispatch(categoriesActions.fetchGetCategories());
     }, [dispatch])
 
+    let arrEventsToShow;
+    shownCategoryId ?
+        arrEventsToShow = arrEvents.filter(event => event.categoryId === shownCategoryId).reverse() :
+        arrEventsToShow = arrEvents.reverse();
+
+    function showEventsByCategory(e) {
+        const clickedCategoryId = +(e.target.id).slice('category-bar-tag#'.length);
+        setShownCategoryId(clickedCategoryId);
+    }
 
     return (
         <>
@@ -36,15 +46,19 @@ export default function EventCardDisplay() {
                 <h2 className='event-card-display--title'>Tournaments in Houston</h2>
                 <div className='event-card-display--category-bar'>
                     <div
-                    className='event-card-display--category selected'
+                    id='category-bar-tag#0'
+                    className={shownCategoryId === 0 ? 'event-card-display--category selected' : 'event-card-display--category'}
+                    onClick={(e) => showEventsByCategory(e)}
                     >
                         All
                     </div>
                     {arrCategories.map( (category) => {
                             return (
                                 <div
+                                id={`category-bar-tag#${category.id}`}
                                 key={category.id}
-                                className='event-card-display--category'
+                                className={shownCategoryId === category.id ? 'event-card-display--category selected' : 'event-card-display--category'}
+                                onClick={(e) => showEventsByCategory(e)}
                                 >
                                     {category.categoryName}
                                 </div>
@@ -55,6 +69,10 @@ export default function EventCardDisplay() {
                     {arrEventsToShow.map( (event) => {
                         return <EventCard key={`${event.id}`} event={event}/>
                     })}
+                    {
+                        arrEventsToShow.length ? null :
+                        <div className="event-card-display--empty">No events of that category can be found.</div>
+                    }
                 </div>
 
             </div>
