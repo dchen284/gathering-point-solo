@@ -7,25 +7,32 @@ a {
 } */
 
 .event-card {
-    width: 270px;
+    /* width: 270px; */
+    width: 90%;
     background-color: white;
     /* border: black solid 2px; */
     padding: 5px 10px;
     margin: 5px;
     overflow: hidden;
-    height: 310px;
+    height: 300px;
+}
+
+.event-card:hover {
+    box-shadow: 1px 1px 20px -10px rgba(0, 0, 0, 0.2),
+                -1px 1px 20px -10px rgba(0, 0, 0, 0.2);
 }
 
 .event-card__bookmark-button-container {
     display: flex;
     justify-content: flex-end;
     position: relative;
-    bottom: 40px;
+    bottom: 20px;
+    right: 40px;
 }
 
 .event-card__data {
     position: relative;
-    bottom: 80px;
+    bottom: 40px;
     width: 225px;
     /* z-index: -1; */
 }
@@ -35,13 +42,20 @@ a {
     height: 190px;
 }
 
+.event-card__organizer {
+    color: #6f7287
+}
+
 .event-card__start-time {
     color: #d1410c;
-
+    box-sizing: border-box;
+    margin-bottom: 5px;
 }
 
 .event-card__title {
+    box-sizing: border-box;
     font-weight: bold;
     padding-top: 8px;
     padding-bottom: 4px;
+    color: black;
 }
