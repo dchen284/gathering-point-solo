@@ -1,6 +1,6 @@
 @import '../../fonts/font-stylesheet.css';
 
-.category-bar {
+.event-card-display--category-bar {
     display: flex;
 }
 
