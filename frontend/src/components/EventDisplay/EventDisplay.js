@@ -2,14 +2,14 @@
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 //internal imports
 import './EventDisplay.css';
 import * as eventsActions from '../../store/events';
 // import * as ticketsActions from '../../store/tickets';
 import BookmarkButton from '../BookmarkButton';
-import DeleteEventButton from '../DeleteEventButton';
+// import DeleteEventButton from '../DeleteEventButton';
 import EventFormModal from '../EventFormModal';
 import formatTime from '../../utils/format-time'
 import LoginFormModal from '../LoginFormModal';
@@ -20,6 +20,7 @@ export default function EventDisplay() {
 
     //hooks
     const dispatch = useDispatch();
+    const history = useHistory();
     const { eventId } = useParams();
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -44,10 +45,11 @@ export default function EventDisplay() {
 
     //JavaScript
 
-    let boolOwnsEvent = false;
-    if (sessionUser && event) {
-        if (sessionUser.id === event.ownerId)
-            {boolOwnsEvent = true}
+    function activateDeleteButton() {
+        // dispatch(ticketsActions.fetchTicketsToDeleteFromStore(eventId));
+        dispatch(eventsActions.fetchEventToDelete(eventId));
+        history.push('/');
+        // setIsDeleted(true);
     }
 
     return (
@@ -82,10 +84,15 @@ export default function EventDisplay() {
                         <br/>
                         <br/>
                         {
-                            boolOwnsEvent ?
+                            (sessionUser?.id === event.ownerId) ?
                             <>
                                 <EventFormModal formAction='Update'/>
-                                <DeleteEventButton />
+                                <button
+                                className={`pure-button`}
+                                onClick={activateDeleteButton}
+                                >
+                                    Delete Event
+                                </button>
                             </>
                             : null
                         }
