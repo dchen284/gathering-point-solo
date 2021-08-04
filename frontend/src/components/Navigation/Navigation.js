@@ -81,13 +81,15 @@ function Navigation({ isLoaded }){
   return (
     <>
       <ul className='nav'>
-        <li className='nav__logo'>
-          <NavLink exact to="/">
-            <div className='nav__logo__text'>gathering-point</div>
-          </NavLink>
-        </li>
-        <li className='nav__search-container'>
-          <SearchBar />
+        <li className='nav__left-side-items'>
+          <div className='nav__logo'>
+            <NavLink exact to="/">
+              <div className='nav__logo__text'>gathering-point</div>
+            </NavLink>
+          </div>
+          <div className='nav__search-container'>
+            <SearchBar />
+          </div>
         </li>
         <li>
           {isLoaded && sessionLinks}
