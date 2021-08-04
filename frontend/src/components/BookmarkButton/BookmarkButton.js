@@ -5,10 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import LoginForm from '../LoginFormModal/LoginForm';
 import * as sessionActions from '../../store/session';
-// import * as ticketsActions from '../../store/tickets';
 import './BookmarkButton.css'
 
-export default function BookmarkButton({ eventId }) {
+export default function BookmarkButton({ borderStyle, eventId }) {
 
     //hooks
     const dispatch = useDispatch();
@@ -43,7 +42,7 @@ export default function BookmarkButton({ eventId }) {
     return (
         <>
             <div
-            className="bookmark-button"
+            className={borderStyle === "grey" ? "bookmark-button border-grey" : "bookmark-button"}
             onClick={clickBookmarkButton}
             >
                 <i className={hasBookmark ? "fas fa-heart" : "far fa-heart"}></i>

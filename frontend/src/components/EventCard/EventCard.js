@@ -42,7 +42,7 @@ export default function EventCard({event}) {
 
 
                 <div className='event-card__bookmark-button-container'>
-                    <BookmarkButton className='bookmark-button' eventId={event.id}/>
+                    <BookmarkButton borderStyle="grey" eventId={event.id}/>
                 </div>
 
                 <div className="event-card__data">

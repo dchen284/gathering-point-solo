@@ -2,21 +2,19 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //internal imports
-import './TicketButton.css';
+import { Modal } from '../../context/Modal';
+import LoginForm from '../LoginFormModal/LoginForm';
 import * as sessionActions from '../../store/session';
-// import * as ticketsActions from '../../store/tickets';
+import './TicketButton.css';
+
 
 export default function TicketButton({ eventId }) {
 
     //hooks
     const dispatch = useDispatch();
-
-    const sessionUser = useSelector( (state) => state.session.user );
-    // const ticket = useSelector( (state) => state.session.user.UserTickets[eventId] );
-    // let ticket = null;
-
+    const [showModal, setShowModal] = useState(false);
     const [hasTicket, setHasTicket] = useState(false);
-
+    const sessionUser = useSelector( (state) => state.session.user );
 
     //useEffects
     useEffect( () => {
@@ -29,28 +27,31 @@ export default function TicketButton({ eventId }) {
 
         // button callback function toggle
     function clickTicketButton() {
+        if (sessionUser) {
+            if (!hasTicket) {dispatch(sessionActions.fetchAddTicket(eventId, sessionUser.id))}
+            else {dispatch(sessionActions.fetchRemoveTicket(eventId, sessionUser.id))}
+            setHasTicket((prevHasTicket) => !prevHasTicket);
+        }
+        else {
+            setShowModal(true);
+        }
 
-        if (!hasTicket) {dispatch(sessionActions.fetchAddTicket(eventId, sessionUser.id))}
-        else {dispatch(sessionActions.fetchRemoveTicket(eventId, sessionUser.id))}
-        setHasTicket((prevHasTicket) => !prevHasTicket);
     }
 
-    //     //button callback function options
-    // function cancelTicket() {
-        // dispatch(ticketsActions.fetchTicketToRemove(eventId, ticketId, userId));
-
-    // }
-
-    // function registerForEvent() {
-        // dispatch(ticketsActions.fetchTicketToAdd(eventId, userId));
-    // }
 
     return (
-        <button
-            onClick={clickTicketButton}
-            className={ hasTicket ? `btn-secondary btn-register-cancel` : `btn-register`}
-        >
-            {hasTicket ? 'Cancel Ticket' : 'Register'}
-        </button>
+        <>
+            <button
+                onClick={clickTicketButton}
+                className={ hasTicket ? `btn-secondary btn-register-cancel` : `btn-register`}
+            >
+                {hasTicket ? 'Cancel Ticket' : 'Register'}
+            </button>
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <LoginForm setShowModal={setShowModal}/>
+                </Modal>
+            )}
+        </>
     );
 }

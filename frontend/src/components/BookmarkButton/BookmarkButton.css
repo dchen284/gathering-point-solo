@@ -13,7 +13,6 @@
     /* color: #d1410c; */
 
     background-color: white;
-    border: 1px solid grey;
     color: black;
     width: 40px;
     height: 40px;
@@ -26,6 +25,14 @@
     /* font-size: 14px; */
 }
 
+.bookmark-button:hover {
+    background-color: #f8f7fa;
+}
+
 .bookmark-button > .fas {
     color: #d1410c;
+}
+
+.bookmark-button.border-grey {
+    border: 1px solid grey;
 }

@@ -1,6 +1,7 @@
 .event-display-exterior {
     display: flex;
     justify-content: center;
+    padding-bottom: 50px;
 }
 
 .background-blur {
@@ -27,24 +28,26 @@
     background-color: white;
     display: grid;
     grid-template-areas:
-      "image        grey-data-box"
-      "button-bar   button-bar"
-      "description  white-data-box";
+      "image          grey-data-box"
+      "button-bar     button-bar"
+      "description    white-data-box"
+      "other-events   other-events";
     grid-template-columns: 3fr 2fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
 }
 
 .time-display {
     font-weight: bold;
     background-color: #ececec;
 }
-
+/* Area - image */
 .event-display__image {
     grid-area: image;
     width: 100%;
     height: 100%;
 }
 
+/* Area - grey-data-box */
 .event-display__grey-data-box {
     grid-area: grey-data-box;
     background-color: #ececec;
@@ -72,6 +75,11 @@
     font-size: 15px;
 }
 
+.event-display__owner-buttons {
+    padding-top: 20px;
+}
+
+/* Area - button-bar */
 .event-display__button-bar {
     grid-area: button-bar;
     box-sizing: border-box;
@@ -83,4 +91,60 @@
     align-items: center;
     border-top: 1px solid #DBDAE3;
     border-bottom: 1px solid #DBDAE3;
+}
+
+/* Area - description */
+.event-display__description {
+    grid-area: description;
+    box-sizing: border-box;
+    color: #39364F;
+    padding-left: 20px;
+    padding-right: 50px;
+    padding-bottom: 20px;
+}
+
+.event-display__description h2 {
+    padding-top: 50px;
+    font-size: 20px;
+}
+
+.event-display__description p {
+    padding-top: 50px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Area - white-data-box */
+.event-display__white-data-box {
+    grid-area: white-data-box;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.event-display__white-data-box h3 {
+    padding-top: 50px;
+    font-size: 16px;
+}
+
+.event-display__white-data-box div,
+.event-display__white-data-box p {
+    padding-top: 15px;
+    font-size: 14px;
+}
+
+/* Area - other-events */
+.event-display__other-events {
+    grid-area: other-events;
+    /* height: 150px; */
+    border-top: 1px solid #DBDAE3;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.event-display__other-events h2 {
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
