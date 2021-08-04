@@ -19,13 +19,12 @@ function EventFormModal({ formAction }) {
         </div>
       }
       {formAction === 'Update' &&
-        <div
-        className="nav__button nav__button--create_event"
+        <button
+        className="btn-secondary"
         onClick={() => setShowModal(true)}
         >
-            <i className="fas fa-plus"></i>
             <div>Update Event</div>
-        </div>
+        </button>
       }
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>

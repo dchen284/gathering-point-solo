@@ -46,10 +46,8 @@ export default function EventDisplay() {
     //JavaScript
 
     function activateDeleteButton() {
-        // dispatch(ticketsActions.fetchTicketsToDeleteFromStore(eventId));
         dispatch(eventsActions.fetchEventToDelete(eventId));
         history.push('/');
-        // setIsDeleted(true);
     }
 
     return (
@@ -57,47 +55,74 @@ export default function EventDisplay() {
             {!isLoaded && null}
             {isLoaded && !event && <NotFound404 />}
             {isLoaded && event && (
-                <div className="event-display-container">
-                    <div>
-                        <img src={event.imgUrl ? event.imgUrl : '/images/thb-278-plains.jpeg'} alt="Event Splash"/>
-                        <div>Event Description: {event.eventBody}</div>
-                        <div>Event Category: {event.Category.categoryName}</div>
+                <div className="event-display-exterior">
+                    <img
+                     alt="background-blur"
+                     className='background-blur'
+                     src={event.imgUrl ? event.imgUrl : '/images/thb-278-plains.jpeg'}
+                    />
+                    <div className="white-blocker"></div>
+                    <div className="event-display-container">
+                        <div>
+                            <img src={event.imgUrl ? event.imgUrl : '/images/thb-278-plains.jpeg'} alt="Event Splash"/>
+                            <div>Event Description: {event.eventBody}</div>
+                            <div>Event Category: {event.Category.categoryName}</div>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
+                            <p>test</p>
 
-                    </div>
-                    <div>
-                        <div className="time-display">Event Start Time: {formatTime(event.startTime)}</div>
-                        <div className="time-display">Event End Time: {formatTime(event.endTime)}</div>
-                        <br />
-                        <div>{event.title}</div>
-                        <div>By: {event.organizerName}</div>
-                        <br />
-                        {sessionUser ?
-                        <TicketButton
-                            eventId={eventId}
-                        />
-                        :
-                        <>
-                            <div>Login to Register!</div>
-                            <LoginFormModal />
-                        </>
-                        }
-                        <br/>
-                        <br/>
-                        {
-                            (sessionUser?.id === event.ownerId) ?
+                        </div>
+                        <div>
+                            <div className="time-display">Event Start Time: {formatTime(event.startTime)}</div>
+                            <div className="time-display">Event End Time: {formatTime(event.endTime)}</div>
+                            <br />
+                            <div>{event.title}</div>
+                            <div>By: {event.organizerName}</div>
+                            <br />
+                            {sessionUser ?
+                            <TicketButton
+                                eventId={eventId}
+                            />
+                            :
                             <>
-                                <EventFormModal formAction='Update'/>
-                                <button
-                                className={`pure-button`}
-                                onClick={activateDeleteButton}
-                                >
-                                    Delete Event
-                                </button>
+                                <div>Login to Register!</div>
+                                <LoginFormModal />
                             </>
-                            : null
-                        }
-                        <BookmarkButton />
+                            }
+                            <br/>
+                            <br/>
+                            {
+                                (sessionUser?.id === event.ownerId) ?
+                                <>
+                                    <EventFormModal formAction='Update'/>
+                                    <button
+                                    className={`btn-secondary`}
+                                    onClick={activateDeleteButton}
+                                    >
+                                        Delete Event
+                                    </button>
+                                </>
+                                : null
+                            }
+                            <BookmarkButton />
+                        </div>
                     </div>
+
                 </div>
             )}
         </>

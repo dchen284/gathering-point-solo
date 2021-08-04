@@ -24,10 +24,19 @@ button {
     border: none;
 }
 
+.btn-primary:hover {
+    background-color: #F05537;
+}
+
+
 .btn-secondary {
     background-color: white;
-    color: black;
-    border: 2px solid grey;
+    color: #39364F;
+    border: 2px solid #A9A8B3;
+}
+
+.btn-secondary:hover {
+    border-color: #6F7287;
 }
 
 .page-wrapper {

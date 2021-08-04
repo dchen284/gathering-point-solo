@@ -1,8 +1,34 @@
-.event-display-container {
-    margin: 20px;
+.event-display-exterior {
     display: flex;
+    justify-content: center;
+}
+
+.event-display-container {
+    width: 80%;
+    margin-top: 50px;
+    display: flex;
+    background-color: white;
 }
 
 .time-display {
     font-weight: bold;
+    background-color: #ececec;
+}
+
+.background-blur {
+    filter: blur(3.0rem);
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+    width: 100%;
+    height: 80vh;
+}
+
+.white-blocker {
+    width: 100%;
+    height: 200px;
+    background-color: white;
+    position: absolute;
+    top: 75vh;
+    z-index: -1;
 }

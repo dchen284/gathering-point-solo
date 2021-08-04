@@ -1,3 +1,13 @@
-.orange {
-    background-color: orange;
+.btn-register {
+    background-color: #0D8547;
+    color: white;
+    width: 256px;
+}
+
+.btn-register:hover {
+    background-color: #179C55;
+}
+
+.btn-register-cancel {
+    width: 256px;
 }

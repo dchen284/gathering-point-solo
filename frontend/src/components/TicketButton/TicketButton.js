@@ -1,5 +1,5 @@
 //external imports
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //internal imports
 import './TicketButton.css';
@@ -13,28 +13,16 @@ export default function TicketButton({ eventId }) {
 
     const sessionUser = useSelector( (state) => state.session.user );
     // const ticket = useSelector( (state) => state.session.user.UserTickets[eventId] );
-    let ticket = null;
-    if (sessionUser && sessionUser.UserTickets) {ticket = sessionUser.UserTickets[eventId]}
-    const [hasTicket, setHasTicket] = useState(!!ticket);
-    // let arrTicketsOfSessionUser = useSelector( (state) => Object.values(state.tickets) );
+    // let ticket = null;
 
-    // console.log('array', arrTicketsOfSessionUser);
+    const [hasTicket, setHasTicket] = useState(false);
 
-    // arrTicketsOfSessionUser.forEach( ticket => {
-    //     // if (+ticket.id === +ticketId) {hasTicket = true}
-    //     if (+ticket.id === +ticketId) {setHasTicket(true)}
-    // });
 
     //useEffects
-    // useEffect( () => {
-    //     dispatch(ticketsActions.fetchTicketsOfSessionUser(sessionUser));
-
-    //     arrTicketsOfSessionUser.forEach( ticket => {
-    //         // if (+ticket.id === +ticketId) {hasTicket = true}
-    //         if (+ticket.id === +ticketId) {setHasTicket(true)}
-    //     });
-
-    // }, [dispatch, sessionUser, ticketId])
+    useEffect( () => {
+        if (!sessionUser) {setHasTicket(false)}
+        if (sessionUser?.UserTickets) {setHasTicket(sessionUser.UserTickets[eventId])}
+    }, [dispatch, eventId, sessionUser])
 
     //JavaScript
 
@@ -60,9 +48,9 @@ export default function TicketButton({ eventId }) {
     return (
         <button
             onClick={clickTicketButton}
-            className={ hasTicket ? `pure-button orange` : `pure-button`}
+            className={ hasTicket ? `btn-secondary btn-register-cancel` : `btn-register`}
         >
-            {hasTicket ? 'Cancel Ticket' : 'Register for Event'}
+            {hasTicket ? 'Cancel Ticket' : 'Register'}
         </button>
     );
 }
