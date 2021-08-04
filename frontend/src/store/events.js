@@ -109,7 +109,7 @@ const initialState = {}
       case ADD_EVENT:
         newState = {...state};
         const eventToAdd = action.payload;
-        console.log('in reducer', eventToAdd);
+        // console.log('in reducer', eventToAdd);
         newState[eventToAdd.id] = eventToAdd;
         newState[eventToAdd.id].Category = eventToAdd.Category;
         return newState;

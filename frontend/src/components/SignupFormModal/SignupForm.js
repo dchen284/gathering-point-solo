@@ -19,9 +19,22 @@ function SignupForm({setShowModal}) {
 
 //   if (sessionUser) return <Redirect to="/" />;
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
+
+    let errorsToPrint = [];
+    if (!email.includes('@'))
+      {errorsToPrint.push('Please provide a valid email.')}
+    if (username.length < 4 || username.length > 30)
+      {errorsToPrint.push('Username must have between 4 to 30 characters.')}
+    if (password.length < 5)
+      {errorsToPrint.push('Password must have 5 characters or more.')}
+    if (password !== confirmPassword)
+      {errorsToPrint.push('Password and Confirm Password do not match.')}
+
+    if (!errorsToPrint.length) {
       setErrors([]);
       return dispatch(sessionActions.signup({ email, username, password }))
         .catch(async (res) => {
@@ -29,7 +42,7 @@ function SignupForm({setShowModal}) {
           if (data && data.errors) setErrors(data.errors);
         });
     }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    return setErrors(errorsToPrint);
   };
 
   return (

@@ -30,7 +30,7 @@ export const login = (userData) => async (dispatch) => {
     });
     const data = await res.json();
     if (res.ok) {
-        console.log('returned data', data);
+        // console.log('returned data', data);
         dispatch(setSessionUser(data.user));
         // console.log('tickets?', data.user.UserTickets)
 
