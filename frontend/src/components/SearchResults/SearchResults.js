@@ -1,9 +1,9 @@
+//external imports
 import React, { useState, useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-// import ProductDisplay from "../Listings/ProductDisplay";
-// import { getReviews } from "../../store/reviews";
-// import ListingFilters from "../Listings/ListingFilters";
+//internal imports
+import EventCardDisplay from '../EventCardDisplay';
+import './SearchResults.css';
 
 const SearchResults = () => {
     // const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const SearchResults = () => {
 
             if (res.ok) {
                 const data = await res.json();
-                console.log('++++++++', data);
+                // console.log('++++++++', data);
                 setSearchResults(data);
             }
         })();
@@ -30,10 +30,23 @@ const SearchResults = () => {
 
     return (
         <>
-            <h1> Search Term: {searchTerm} </h1>
+            <h1 className='search_term'> Search Term: {searchTerm} </h1>
             <ul>
                 {
                     searchResults.length ?
+                    <EventCardDisplay arrInput={searchResults}/>
+                    :
+                    <div className='search_none'>Sorry, no results found.</div>
+                }
+            </ul>
+
+        </>
+    )
+}
+
+export default SearchResults;
+
+/*
                     searchResults.map( result => {
                         return (
                             <div key={result.id}>
@@ -41,31 +54,4 @@ const SearchResults = () => {
                             </div>
                         );
                     })
-                    :
-                    <div>Sorry, no results found.</div>
-                }
-            </ul>
-            {/* <div className='listingsPage__container'>
-                {searchResults.length ?
-                <>
-                    <ListingFilters />
-                    <div className='listingGrid__container'>
-                        {searchResults?.map( result => {
-                            const indReviews = reviews.filter(review => review.productId === result.id);
-                            return <ProductDisplay product={result} reviews={indReviews} key={result.id}/>
-                            }
-                        )}
-
-                    </div>
-                </>
-                :
-                <h2>Sorry, no results found.</h2>
-                {searchResults.length ? null : <h2>Sorry, no results found.</h2>}
-
-                }
-            </div> */}
-        </>
-    )
-}
-
-export default SearchResults;
+*/

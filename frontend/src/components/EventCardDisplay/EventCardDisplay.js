@@ -9,12 +9,15 @@ import EventCard from '../EventCard';
 import * as categoriesActions from '../../store/category';
 import * as eventsActions from '../../store/events';
 
-export default function EventCardDisplay() {
+export default function EventCardDisplay({ arrInput }) {
 
     //hooks
     const dispatch = useDispatch();
-    // const history = useHistory();
-    const arrEvents = useSelector((state) => Object.values(state.events) );
+
+    let arrEvents = useSelector((state) => Object.values(state.events) );
+
+    if (arrInput) {arrEvents = arrInput}
+
     const arrCategories = useSelector((state) => Object.values(state.categories));
     const [shownCategoryId, setShownCategoryId] = useState(0);
 
@@ -44,20 +47,23 @@ export default function EventCardDisplay() {
 
     return (
         <>
-            <div className='event-card-splash-image'>
-                <div>
-                    <p>
-                        Welcome to Gathering Point, a place where users can Create, get Tickets, and Like tournaments for the game Magic: the Gathering.
-                    </p>
-                    <button
-                    className='btn-primary'
-                    onClick={()=>window.location.replace('/#tournaments')}
-                    >
-                        Find your next event
-                    </button>
+            {
+                !arrInput &&
+                <div className='event-card-splash-image'>
+                    <div>
+                        <p>
+                            Welcome to Gathering Point, a place where users can Create, get Tickets, and Like tournaments for the game Magic: the Gathering.
+                        </p>
+                        <button
+                        className='btn-primary'
+                        onClick={()=>window.location.replace('/#tournaments')}
+                        >
+                            Find your next event
+                        </button>
+                    </div>
                 </div>
+            }
 
-            </div>
             <div className='event-card-display'>
                 <h2
                 id="tournaments"
