@@ -1,0 +1,123 @@
+.user_items_display_container {
+    display: flex;
+}
+
+.user_data_container {
+    color: black;
+    /* background-color: lightgray; */
+    height: 100%;
+    width: 300px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    top: 20px;
+}
+
+.user_data__circle {
+    /* border: 1px solid black; */
+    box-shadow: 1px 1px 15px -10px rgba(0, 0, 0, 0.6),
+                -1px 1px 15px -10px rgba(0, 0, 0, 0.6);
+    width: 122px;
+    height: 122px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: #6f7287;
+    margin: 15px;
+}
+
+.user_data__username {
+    font-size: 18px;
+    color: #39364f;
+    padding-top: 24px;
+    padding-bottom: 12px;
+}
+
+.user_data__user_text {
+    color: #4b4d63;
+    font-size: 14px;
+}
+
+.user_data__user_link {
+    color: #4b4d63;
+    font-size: 14px;
+}
+
+.user_data__user_link:hover {
+    color: #3659e3;
+    text-decoration: underline;
+}
+
+.event_long_card {
+    width: 660px;
+    height: 200px;
+    padding: 20px;
+    margin: 20px;
+    /* border: 1px solid black; */
+    display: flex;
+
+}
+
+.event_long_card_container__title {
+    font-size: 18px;
+    margin-top: 30px;
+}
+
+.event_long_card:hover {
+    box-shadow: 1px 1px 20px -10px rgba(0, 0, 0, 0.2),
+                -1px 1px 20px -10px rgba(0, 0, 0, 0.2);
+}
+
+.event__left_date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-right: 5px;
+}
+
+.event__month {
+    color: #d1410c;
+}
+
+.event__day {
+    color: #6f7287;
+}
+
+.event__image {
+    box-sizing: border-box;
+    border: 1px solid #6f7287;
+    width: 390px;
+    height: 200px;
+    object-fit: fill;
+}
+
+.event__text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.event__title {
+    font-size: 18px;
+    color: black;
+    margin-bottom: 15px;
+    word-wrap: break-word;
+}
+
+.event__start-time {
+    font-size: 12px;
+    color: #6f7287;
+    margin-bottom: 5px;
+    word-wrap: break-word;
+}
+
+.event__order-time {
+    font-size: 12px;
+    color: #6f7287;
+    word-wrap: break-word;
+}
