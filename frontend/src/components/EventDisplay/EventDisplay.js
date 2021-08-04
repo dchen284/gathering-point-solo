@@ -40,10 +40,30 @@ export default function EventDisplay() {
             })
     }, [dispatch, eventId]);
 
-    // console.log('++++++++isLoaded', isLoaded);
-    // console.log('++++++++event', event);
-
     //JavaScript
+
+    const objMonths = {
+        0: 'Jan',
+        1: 'Feb',
+        2: 'Mar',
+        3: 'Apr',
+        4: 'May',
+        5: 'Jun',
+        6: 'Jul',
+        7: 'Aug',
+        8: 'Sept',
+        9: 'Oct',
+        10: 'Nov',
+        11: 'Dec',
+    }
+
+    function getMonth(strTime) {
+        return objMonths[(new Date(strTime)).getUTCMonth()];
+    }
+
+    function getDay(strTime) {
+        return (new Date(strTime)).getUTCDate();
+    }
 
     function activateDeleteButton() {
         dispatch(eventsActions.fetchEventToDelete(eventId));
@@ -63,8 +83,24 @@ export default function EventDisplay() {
                     />
                     <div className="white-blocker"></div>
                     <div className="event-display-container">
+                        <img
+                        className='event-display__image'
+                        src={event.imgUrl ? event.imgUrl : '/images/thb-278-plains.jpeg'}
+                        alt="Event Splash"
+                        />
+                        <div className='event-display__grey-data-box'>
+                            <div className='event-display__calendar-date'>
+                                <div>{getMonth(event.startTime)}</div>
+                                <div>{getDay(event.startTime)}</div>
+                            </div>
+                            <div className='event-display__title'>{event.title}</div>
+                            <div className='event-display__organizer'>by {event.organizerName}</div>
+                        </div>
+                        <div className='event-display__button-bar'>
+                            <BookmarkButton />
+                            <TicketButton eventId={eventId}/>
+                        </div>
                         <div>
-                            <img src={event.imgUrl ? event.imgUrl : '/images/thb-278-plains.jpeg'} alt="Event Splash"/>
                             <div>Event Description: {event.eventBody}</div>
                             <div>Event Category: {event.Category.categoryName}</div>
                             <p>test</p>
