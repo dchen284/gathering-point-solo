@@ -36,6 +36,7 @@
     /* background-color: rgb(86, 11, 98); */
     flex-flow: row wrap;
     padding-bottom: 20px;
+    min-height: 370px;
 }
 
 .event-card-display--empty {
