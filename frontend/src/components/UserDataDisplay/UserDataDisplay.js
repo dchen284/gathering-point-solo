@@ -17,27 +17,36 @@ export default function UserDataDisplay({strDataType}) {
     //hooks
     const dispatch = useDispatch();
     const sessionUser = useSelector( (state) => state.session.user );
+    const objEvents = useSelector((state) => state.events );
     let arrEventsToDisplay;
     if (sessionUser) {
         if (strDataType === "tickets") {arrEventsToDisplay = Object.values(sessionUser.UserTickets)}
         if (strDataType === "likes") {arrEventsToDisplay = Object.values(sessionUser.UserBookmarks)}
+        if (strDataType === "events") {
+            arrEventsToDisplay = Object.values(objEvents).filter(event => +event.ownerId === +sessionUser.id);
+        }
     }
-    const objEvents = useSelector((state) => state.events );
     const { userId } = useParams();
 
-
+   
     //useEffects
-    //For each ticket, if that ticket's event is not in the store, fetch that event
+    //For each ticket/bookmark/like, if that item's event is not in the store, fetch that event
     useEffect( () => {
-        if (arrEventsToDisplay) {
+        if (arrEventsToDisplay && strDataType !== "events") {
             arrEventsToDisplay.forEach(event => {
                 if(!objEvents[event.eventId]) {
                     dispatch(eventsActions.fetchEventById(event.eventId));
                 }
             });
         }
-    }, [dispatch, arrEventsToDisplay, objEvents])
+    }, [dispatch, arrEventsToDisplay, strDataType, objEvents])
 
+    //If the
+    useEffect( () => {
+        if (arrEventsToDisplay && !arrEventsToDisplay.length && strDataType === "events") {
+            dispatch(eventsActions.fetchEvents());
+        }
+    }, [dispatch, arrEventsToDisplay, strDataType])
 
     const objMonths = {
         0: 'Jan',
@@ -99,7 +108,11 @@ export default function UserDataDisplay({strDataType}) {
 
                 </div>
                 <div className='event_long_card_container'>
-                        <div className="event_long_card_container__title">Orders</div>
+                        <div className="event_long_card_container__title">
+                            {strDataType === 'tickets' && 'Orders'}
+                            {strDataType === 'likes' && 'Likes'}
+                            {strDataType === 'events' && 'Events Created By You!'}
+                        </div>
                         {
                             arrEventsToDisplay.map( (event) => {
                                 if (objEvents[event.eventId]) {
@@ -136,6 +149,47 @@ export default function UserDataDisplay({strDataType}) {
                                                         <div className='event__order-time'>
                                                             <span>Order placed at </span>
                                                             {formatTime(objEvents[event.eventId].createdAt)}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    )
+                                }
+                                else if (strDataType === "events") {
+                                    return (
+                                        <div key={`${objEvents[event.id].id}`}>
+                                            <Link to={`/events/${objEvents[event.id].id}`}>
+                                                <div className='event_long_card'>
+                                                    <div className='event__left_date'>
+                                                        <div className='event__month'>
+                                                            {getMonth(objEvents[event.id].startTime)}
+                                                        </div>
+                                                        <div className='event__day'>
+                                                            {getDay(objEvents[event.id].startTime)}
+                                                        </div>
+                                                    </div>
+
+                                                    <img
+                                                    alt='Event Splash'
+                                                    className='event__image'
+                                                    src=
+                                                        {
+                                                            objEvents[event.id].imgUrl ?
+                                                            objEvents[event.id].imgUrl :
+                                                            "/images/thb-278-plains.jpeg"
+                                                        }
+                                                    />
+                                                    <div className='event__text'>
+                                                        <div className='event__title'>
+                                                            {objEvents[event.id].title}
+                                                        </div>
+                                                        <div className='event__start-time'>
+                                                            {formatTime(objEvents[event.id].startTime)}
+                                                        </div>
+                                                        <div className='event__order-time'>
+                                                            <span>Order placed at </span>
+                                                            {formatTime(objEvents[event.id].createdAt)}
                                                         </div>
                                                     </div>
                                                 </div>

@@ -44,19 +44,17 @@ function App() {
                 <EventDisplay />
               </Route>
               <Route path={`/users/:userId(\\d+)/tickets`}>
-                {/* <TicketsDisplay /> */}
                 <UserDataDisplay strDataType={'tickets'}/>
               </Route>
               <Route path={`/users/:userId(\\d+)/likes`}>
-                {/* <BookmarksDisplay /> */}
                 <UserDataDisplay strDataType={'likes'}/>
               </Route>
               <Route path={`/search/:searchTerm`}>
                 <SearchResults />
               </Route>
-              {/* <Route exact path={`/test`}>
-                <CreateUser />
-              </Route> */}
+              <Route path={`/users/:userId(\\d+)/events`}>
+                <UserDataDisplay strDataType={'events'}/>
+              </Route>
               <Route>
                 <NotFound404 />
               </Route>

@@ -51,7 +51,9 @@ function Navigation({ isLoaded }){
                 <i className="fa fa-caret-down" />
               </div>
               <div className='dropdown__content'>
-                <div className='dropdown__content-item'>My Events</div>
+                <Link to={`/users/${sessionUser?.id}/events`}>
+                  <div className='dropdown__content-item'>My Events</div>
+                </Link>
                 <Link to={`/users/${sessionUser?.id}/tickets`}>
                   <div className='dropdown__content-item'>My Tickets</div>
                 </Link>
