@@ -8,7 +8,7 @@ import * as sessionActions from "../../store/session";
 import DemoUserButton from "../DemoUserButton";
 
 
-function SignupForm() {
+function SignupForm({setShowModal}) {
   const dispatch = useDispatch();
 //   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");

@@ -147,6 +147,7 @@ module.exports = (sequelize, DataTypes) => {
   };
     //create new user, return new user
   User.signup = async function ({ username, email, password, profileImageUrl }) {
+    const { Event, UserBookmark, UserTicket } = require('../models');
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
       username,
@@ -154,7 +155,9 @@ module.exports = (sequelize, DataTypes) => {
       hashedPassword,
       profileImageUrl,
     });
-    return await User.scope('currentUser').findByPk(user.id);
+    return await User.scope('currentUser').findByPk(user.id, {
+      include: [UserBookmark, UserTicket],
+    });
   };
 
   return User;

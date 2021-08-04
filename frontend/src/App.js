@@ -8,8 +8,9 @@ import EventDisplay from './components/EventDisplay';
 import Footer from './components/Footer';
 // import LoginFormPage from './components/LoginFormPage';
 import Navigation from "./components/Navigation";
-import TicketsDisplay from "./components/TicketsDisplay";
-import BookmarksDisplay from "./components/BookmarksDisplay";
+// import TicketsDisplay from "./components/TicketsDisplay";
+// import BookmarksDisplay from "./components/BookmarksDisplay";
+import UserDataDisplay from './components/UserDataDisplay/UserDataDisplay';
 import SearchResults from "./components/SearchResults";
 import NotFound404 from './components/NotFound404';
 // import SignupFormPage from './components/SignupFormPage';
@@ -43,10 +44,12 @@ function App() {
                 <EventDisplay />
               </Route>
               <Route path={`/users/:userId(\\d+)/tickets`}>
-                <TicketsDisplay />
+                {/* <TicketsDisplay /> */}
+                <UserDataDisplay strDataType={'tickets'}/>
               </Route>
               <Route path={`/users/:userId(\\d+)/likes`}>
-                <BookmarksDisplay />
+                {/* <BookmarksDisplay /> */}
+                <UserDataDisplay strDataType={'likes'}/>
               </Route>
               <Route path={`/search/:searchTerm`}>
                 <SearchResults />

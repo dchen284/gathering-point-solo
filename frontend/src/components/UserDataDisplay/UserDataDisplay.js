@@ -9,34 +9,34 @@ import { useDispatch, useSelector } from 'react-redux';
 // import * as ticketsActions from '../../store/tickets';
 import * as eventsActions from '../../store/events';
 import formatTime from '../../utils/format-time';
-import './TicketsDisplay.css';
+import NotFound404 from '../NotFound404';
+import './UserDataDisplay.css';
 
-export default function TicketsDisplay() {
+export default function UserDataDisplay({strDataType}) {
 
     //hooks
     const dispatch = useDispatch();
     const sessionUser = useSelector( (state) => state.session.user );
-    let arrTickets;
-    if (sessionUser) {arrTickets = Object.values(sessionUser.UserTickets)}
-    // const arrTickets = useSelector( (state) => Object.values(state.session.user.UserTickets) );
+    let arrEventsToDisplay;
+    if (sessionUser) {
+        if (strDataType === "tickets") {arrEventsToDisplay = Object.values(sessionUser.UserTickets)}
+        if (strDataType === "likes") {arrEventsToDisplay = Object.values(sessionUser.UserBookmarks)}
+    }
     const objEvents = useSelector((state) => state.events );
     const { userId } = useParams();
-    // const [isLoaded, setIsLoaded] = useState(false);
 
-    // console.log('>>>>>>arrTickets', arrTickets);
-    // console.log('+++++++objEvents', objEvents);
-    // console.log('@@@@@', isLoaded);
 
     //useEffects
     //For each ticket, if that ticket's event is not in the store, fetch that event
     useEffect( () => {
-        arrTickets.forEach(ticket => {
-            if(!objEvents[ticket.eventId]) {
-                dispatch(eventsActions.fetchEventById(ticket.eventId));
-            }
-        });
-
-    }, [dispatch, arrTickets, objEvents])
+        if (arrEventsToDisplay) {
+            arrEventsToDisplay.forEach(event => {
+                if(!objEvents[event.eventId]) {
+                    dispatch(eventsActions.fetchEventById(event.eventId));
+                }
+            });
+        }
+    }, [dispatch, arrEventsToDisplay, objEvents])
 
 
     const objMonths = {
@@ -73,7 +73,7 @@ export default function TicketsDisplay() {
     //if the user attempts to access another user's page, provide a 404 message
     else if (+userId !== sessionUser.id) {
         return (
-            <div>404: Not Found</div>
+            <NotFound404 />
         )
     }
     else {
@@ -101,18 +101,18 @@ export default function TicketsDisplay() {
                 <div className='event_long_card_container'>
                         <div className="event_long_card_container__title">Orders</div>
                         {
-                            arrTickets.map( (ticket) => {
-                                if (objEvents[ticket.eventId]) {
+                            arrEventsToDisplay.map( (event) => {
+                                if (objEvents[event.eventId]) {
                                     return (
-                                        <div key={`${objEvents[ticket.eventId].id}`}>
-                                            <Link to={`/events/${objEvents[ticket.eventId].id}`}>
+                                        <div key={`${objEvents[event.eventId].id}`}>
+                                            <Link to={`/events/${objEvents[event.eventId].id}`}>
                                                 <div className='event_long_card'>
                                                     <div className='event__left_date'>
                                                         <div className='event__month'>
-                                                            {getMonth(objEvents[ticket.eventId].startTime)}
+                                                            {getMonth(objEvents[event.eventId].startTime)}
                                                         </div>
                                                         <div className='event__day'>
-                                                            {getDay(objEvents[ticket.eventId].startTime)}
+                                                            {getDay(objEvents[event.eventId].startTime)}
                                                         </div>
                                                     </div>
 
@@ -121,21 +121,21 @@ export default function TicketsDisplay() {
                                                     className='event__image'
                                                     src=
                                                         {
-                                                            objEvents[ticket.eventId].imgUrl ?
-                                                            objEvents[ticket.eventId].imgUrl :
+                                                            objEvents[event.eventId].imgUrl ?
+                                                            objEvents[event.eventId].imgUrl :
                                                             "/images/thb-278-plains.jpeg"
                                                         }
                                                     />
                                                     <div className='event__text'>
                                                         <div className='event__title'>
-                                                            {objEvents[ticket.eventId].title}
+                                                            {objEvents[event.eventId].title}
                                                         </div>
                                                         <div className='event__start-time'>
-                                                            {formatTime(objEvents[ticket.eventId].startTime)}
+                                                            {formatTime(objEvents[event.eventId].startTime)}
                                                         </div>
                                                         <div className='event__order-time'>
                                                             <span>Order placed at </span>
-                                                            {formatTime(objEvents[ticket.eventId].createdAt)}
+                                                            {formatTime(objEvents[event.eventId].createdAt)}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -155,44 +155,3 @@ export default function TicketsDisplay() {
     }
 
 }
-
-/*
-                <table className="pure-table pure-table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Event ID#</th>
-                            <th>Event Title</th>
-                            <th>Event Start Time</th>
-                            <th>Cancel Ticket</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        arrTickets.map( (ticket) => {
-                            if (objEvents[ticket.eventId]) {
-                                return (
-                                    <tr key={`${objEvents[ticket.eventId].id}`}>
-                                        <td>{objEvents[ticket.eventId].id}</td>
-                                        <td>
-                                            <Link to={`/events/${objEvents[ticket.eventId].id}`}>
-                                                {objEvents[ticket.eventId].title}
-                                            </Link>
-                                        </td>
-                                        <td>{formatTime(objEvents[ticket.eventId].startTime)}</td>
-                                        <td>
-                                            <TicketButton
-                                                eventId={ticket.eventId}
-                                            />
-                                        </td>
-                                    </tr>
-                                )
-                            }
-                            else {
-                                return null;
-                            }
-
-                        })
-                    }
-                    </tbody>
-                </table>
-*/

@@ -6,7 +6,7 @@ import './LoginForm.css';
 import * as sessionActions from "../../store/session";
 import DemoUserButton from "../DemoUserButton";
 
-function LoginForm({setShowModal}) {
+function LoginForm({ setShowModal }) {
   const dispatch = useDispatch();
     // const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
