@@ -263,13 +263,18 @@ function EventForm({ formAction, setShowModal }) {
               required
             />
           </label>
-          <button className="pure-button" type="submit">{`${formAction} Event`}</button>
+          <button className="btn-primary" type="submit">{`${formAction} Event`}</button>
         </form>
 
         <div className='form-container__side-section'>
+          <div className='form-container__side-X' onClick={() => setShowModal(false)}>
+            <i className="fas fa-times" />
+          </div>
             <img className='form-container__side-image' alt="quill" src="/images/eld-248-tournament-grounds.jpeg" />
-            <div className='form-container__side-image-caption'>Tournament Grounds, illustrated by Cristi Balanescu</div>
-            <div className='form-container__side-image-caption'>From Magic: the Gathering, by Wizards of the Coast</div>
+            <div className='form-container__side-image-caption'>
+              <p>Tournament Grounds, illustrated by Cristi Balanescu</p>
+              <p>From Magic: the Gathering, by Wizards of the Coast</p>
+            </div>
         </div>
 
       </div>

@@ -67,6 +67,10 @@
     margin-top: 30px;
 }
 
+.event_long_card__no-data {
+    margin-top: 30px;
+}
+
 .event_long_card:hover {
     box-shadow: 1px 1px 20px -10px rgba(0, 0, 0, 0.2),
                 -1px 1px 20px -10px rgba(0, 0, 0, 0.2);

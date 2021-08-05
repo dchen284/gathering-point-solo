@@ -59,8 +59,8 @@
     width: 100%;
     height: 50vw;
     max-height: 600px;
-    background-color: lightgreen;
-    background-image: url("./eld-248-tournament-grounds.jpeg");
+    background-color: lightgray;
+    background-image: url("./background3.jpeg");
     background-size: 100%;
     display: flex;
     align-items: center;
@@ -71,10 +71,10 @@
 
 .event-card-splash-image div {
     overflow-wrap: break-word;
-    width: 33%;
+    width: 30%;
     color: white;
     font-size: 20px;
-    margin-left: 50px;
+    margin-left: 60px;
     line-height: 150%;
 
 }

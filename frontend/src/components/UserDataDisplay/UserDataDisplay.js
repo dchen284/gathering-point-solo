@@ -28,7 +28,7 @@ export default function UserDataDisplay({strDataType}) {
     }
     const { userId } = useParams();
 
-   
+
     //useEffects
     //For each ticket/bookmark/like, if that item's event is not in the store, fetch that event
     useEffect( () => {
@@ -113,6 +113,7 @@ export default function UserDataDisplay({strDataType}) {
                             {strDataType === 'likes' && 'Likes'}
                             {strDataType === 'events' && 'Events Created By You!'}
                         </div>
+                        {arrEventsToDisplay.length ? null : <div className="event_long_card__no-data">No events to display.</div>}
                         {
                             arrEventsToDisplay.map( (event) => {
                                 if (objEvents[event.eventId]) {

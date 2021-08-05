@@ -40,7 +40,7 @@ router.get(
     restoreUser,
     async (req, res) => {
       const { user } = req;
-      console.log('in api route for restore session user', JSON.stringify(user, null, 4));
+      // console.log('in api route for restore session user', JSON.stringify(user, null, 4));
       if (user) {
         const result = await User.scope('currentUser').findByPk(user.id, {
           include: [UserBookmark, UserTicket],

@@ -25,12 +25,20 @@
 
 .form-container__side-image-caption {
     font-size: 12px;
-    margin: 0px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: white;
 }
 
-/* form {
-    display: block;
-} */
+.form-container__side-X {
+    font-size: 18px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    cursor: pointer;
+}
 
 .form-container__side-image {
     height: 95%;

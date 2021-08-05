@@ -1,10 +1,10 @@
-.profile-dropdown {
+/* .profile-dropdown {
     color: gold;
     display: flex;
     flex-direction: column;
-    /* z-index: 10; */
-    /* overflow: visible; */
-}
+    z-index: 10;
+    overflow: visible;
+} */
 
 /* .profile-dropdown li a {
     color: gold;

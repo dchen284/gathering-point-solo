@@ -88,13 +88,18 @@ function SignupForm({setShowModal}) {
             required
           />
         </label>
-        <button className="pure-button" type="submit">Sign Up</button>
+        <button className="btn-primary" type="submit">Sign Up</button>
         <DemoUserButton />
       </form>
       <div className='form-container__side-section'>
+          <div className='form-container__side-X' onClick={() => setShowModal(false)}>
+            <i className="fas fa-times" />
+          </div>
           <img className='form-container__side-image' alt="quill" src="/images/stx-198-lorehold-apprentice.jpeg" />
-          <div className='form-container__side-image-caption'>Lorehold Apprentice, illustrated by Manuel Castañón</div>
-          <div className='form-container__side-image-caption'>From Magic: the Gathering, by Wizards of the Coast</div>
+          <div className='form-container__side-image-caption'>
+            <p>Lorehold Apprentice, illustrated by Manuel Castañón</p>
+            <p>From Magic: the Gathering, by Wizards of the Coast</p>
+          </div>
       </div>
     </div>
   );

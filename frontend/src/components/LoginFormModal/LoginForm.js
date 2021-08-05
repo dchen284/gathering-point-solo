@@ -61,13 +61,19 @@ function LoginForm({ setShowModal }) {
               required
             />
           </label>
-          <button className="pure-button" type="submit">Log In</button>
+          <button className="btn-primary" type="submit">Log In</button>
           <DemoUserButton setShowModal={setShowModal}/>
         </form>
+
         <div className='form-container__side-section'>
+          <div className='form-container__side-X' onClick={() => setShowModal(false)}>
+            <i className="fas fa-times" />
+          </div>
           <img className='form-container__side-image' alt="quill" src="/images/stx-82-poet-s-quill.jpeg" />
-          <div className='form-container__side-image-caption'>Poet's Quill, illustrated by Anna Fehr</div>
-          <div className='form-container__side-image-caption'>From Magic: the Gathering, by Wizards of the Coast</div>
+          <div className='form-container__side-image-caption'>
+            <p>Poet's Quill, illustrated by Anna Fehr</p>
+            <p>From Magic: the Gathering, by Wizards of the Coast</p>
+          </div>
         </div>
       </div>
 
