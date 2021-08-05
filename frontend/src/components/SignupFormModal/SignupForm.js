@@ -16,7 +16,6 @@ function SignupForm({setShowModal}) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const [focusOnInput, setFocusOnInput] = useState(false);
 //   if (sessionUser) return <Redirect to="/" />;
 
 
@@ -52,11 +51,7 @@ function SignupForm({setShowModal}) {
           {errors.map((error, idx) => <li className="errors" key={idx}>{error}</li>)}
         </ul>
         <h2>Sign Up</h2>
-        <div
-          className={focusOnInput ? 'form-input form-input--border_on_focus' : 'form-input'}
-          onBlur={()=>setFocusOnInput(false)}
-          onFocus={()=>setFocusOnInput(true)}
-        >
+        <div className='form-input'>
           <label>
             Email
             <input
@@ -67,11 +62,7 @@ function SignupForm({setShowModal}) {
             />
           </label>
         </div>
-        <div
-          className={focusOnInput ? 'form-input form-input--border_on_focus' : 'form-input'}
-          onBlur={()=>setFocusOnInput(false)}
-          onFocus={()=>setFocusOnInput(true)}
-        >
+        <div className='form-input'>
           <label>
             Username
             <input
@@ -82,11 +73,7 @@ function SignupForm({setShowModal}) {
             />
           </label>
         </div>
-        <div
-          className={focusOnInput ? 'form-input form-input--border_on_focus' : 'form-input'}
-          onBlur={()=>setFocusOnInput(false)}
-          onFocus={()=>setFocusOnInput(true)}
-        >
+        <div className='form-input'>
           <label>
             Password
             <input
@@ -97,11 +84,7 @@ function SignupForm({setShowModal}) {
             />
           </label>
         </div>
-        <div
-          className={focusOnInput ? 'form-input form-input--border_on_focus' : 'form-input'}
-          onBlur={()=>setFocusOnInput(false)}
-          onFocus={()=>setFocusOnInput(true)}
-        >
+        <div className='form-input'>
           <label>
             Confirm Password
             <input

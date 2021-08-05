@@ -12,7 +12,7 @@ function LoginForm({ setShowModal, loginWarning }) {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState(loginWarning ? [loginWarning] : []);
-  const [focusOnInput, setFocusOnInput] = useState(false);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,11 +44,7 @@ function LoginForm({ setShowModal, loginWarning }) {
             ))}
           </ul>
           <h2>Log In</h2>
-          <div
-          className={focusOnInput ? 'form-input form-input--border_on_focus' : 'form-input'}
-          onBlur={()=>setFocusOnInput(false)}
-          onFocus={()=>setFocusOnInput(true)}
-          >
+          <div className='form-input'>
             <label>
               Username or Email
               <input
@@ -59,11 +55,7 @@ function LoginForm({ setShowModal, loginWarning }) {
               />
             </label>
           </div>
-          <div
-          className={focusOnInput ? 'form-input form-input--border_on_focus' : 'form-input'}
-          onBlur={()=>setFocusOnInput(false)}
-          onFocus={()=>setFocusOnInput(true)}
-          >
+          <div className='form-input'>
             <label>
               Password
               <input

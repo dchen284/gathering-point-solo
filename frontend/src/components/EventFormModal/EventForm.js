@@ -182,99 +182,123 @@ function EventForm({ formAction, setShowModal }) {
     <>
       <div className="form-container">
         <form className="form-container__inputs" onSubmit={cb}>
-          {/* {
-            formAction === 'Update' ? <div>Update Event</div> : <div>Create Event</div>
-          } */}
+          { formAction === 'Create' && <h2>Create Event</h2> }
+          { formAction === 'Update' && <h2>Update Event</h2> }
           <ul>
             {errors.map((error, idx) => <li className="errors" key={idx}>{error}</li>)}
           </ul>
-          <label>
-            Title
-            <input
-              type="text"
-              value={formTitle}
-              onChange={(e) => setFormTitle(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Category:
-            <select
-              value={formCategoryId}
-              onChange={(e) => setFormCategoryId(e.target.value)}
-            >
-              {arrCategories.map(category => {
-                return (
-                  <option key={category.id} value={category.id}>
-                    {category.categoryName}
-                  </option>
-                )
-              })}
-            </select>
-          </label>
-          <label className="green">
-            Event Description (optional)
+          <div className='form-input'>
+            <label>
+              Title
+              <input
+                type="text"
+                value={formTitle}
+                onChange={(e) => setFormTitle(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <div className='form-input'>
+            <div className='form-input--select-container'>
+              <label>
+                Category:
+              </label>
+              <select
+                className='form-input--select'
+                value={formCategoryId}
+                onChange={(e) => setFormCategoryId(e.target.value)}
+              >
+                {arrCategories.map(category => {
+                  return (
+                    <option key={category.id} value={category.id}>
+                      {category.categoryName}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+          </div>
+
+          <div className='form-input form-input--textarea'>
+            <label>Event Description (optional)</label>
             <textarea
               value={formEventBody}
               onChange={(e) => setFormEventBody(e.target.value)}
             />
-          </label>
-          <label>
-            Start Time:
-            <input
-              type="datetime-local"
-              value={formStartTime}
-              onChange={(e) => setFormStartTime(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            End Time:
-            <input
-              type="datetime-local"
-              value={formEndTime}
-              onChange={(e) => setFormEndTime(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Image URL (optional):
-            <input
-              type="url"
-              value={formImgUrl}
-              onChange={(e) => setFormImgUrl(e.target.value)}
-            />
-          </label>
-          <label>
-            Location:
-            <input
-              type="text"
-              value={formLocation}
-              onChange={(e) => setFormLocation(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Organizer Name:
-            <input
-              type="text"
-              value={formOrganizerName}
-              onChange={(e) => setFormOrganizerName(e.target.value)}
-              required
-            />
-          </label>
+          </div>
+
+          <div className='form-input'>
+            <label>
+              Start Time:
+              <input
+                type="datetime-local"
+                value={formStartTime}
+                onChange={(e) => setFormStartTime(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+
+          <div className='form-input'>
+            <label>
+              End Time:
+              <input
+                type="datetime-local"
+                value={formEndTime}
+                onChange={(e) => setFormEndTime(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+
+          <div className='form-input'>
+            <label>
+              Image URL (optional):
+              <input
+                type="url"
+                value={formImgUrl}
+                onChange={(e) => setFormImgUrl(e.target.value)}
+              />
+            </label>
+          </div>
+
+          <div className='form-input'>
+            <label>
+              City, State:
+              <input
+                type="text"
+                value={formLocation}
+                placeholder="e.g. Houston, TX"
+                onChange={(e) => setFormLocation(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+
+          <div className='form-input'>
+            <label>
+              Organizer Name:
+              <input
+                type="text"
+                value={formOrganizerName}
+                onChange={(e) => setFormOrganizerName(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+
           <button className="btn-primary" type="submit">{`${formAction} Event`}</button>
         </form>
 
         <div className='form-container__side-section'>
-          <div className='form-container__side-X' onClick={() => setShowModal(false)}>
+          <div className='form-container__side-X-black' onClick={() => setShowModal(false)}>
             <i className="fas fa-times" />
           </div>
-            <img className='form-container__side-image' alt="quill" src="/images/eld-248-tournament-grounds.jpeg" />
-            <div className='form-container__side-image-caption'>
+            <img className='form-container__side-image' alt="quill" src="/images/teyo-wots2.jpeg" />
+            {/* <div className='form-container__side-image-caption'>
               <p>Tournament Grounds, illustrated by Cristi Balanescu</p>
               <p>From Magic: the Gathering, by Wizards of the Coast</p>
-            </div>
+            </div> */}
         </div>
 
       </div>

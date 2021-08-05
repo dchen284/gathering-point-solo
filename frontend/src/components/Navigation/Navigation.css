@@ -41,11 +41,11 @@
 .nav__button i {
     font-size: 20px;
     margin: 5px;
-    color: #6f7287;
+    color: #39364f;
 }
 
 .nav__button--text {
-    color: #6f7287;
+    color: #39364f;
 }
 
 .nav__button--create_event,
@@ -139,7 +139,7 @@
     margin-left: 10px;
     margin-right: 10px;
     font-size: 13px;
-    color: #6f7287;
+    color: #39364f;
   }
 
 .dropdown__content {
@@ -164,5 +164,5 @@
 
 
 .dropdown__text i {
-    color: #6f7287;
+    color: #39364f;
 }
