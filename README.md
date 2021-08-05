@@ -51,10 +51,11 @@ https://gathering-point.herokuapp.com/
 * Once logged in, a user can view that user's Likes via buttons on the Navigation bar.
 
 #### Categories
-
+![Imgur](https://i.imgur.com/0KsXebN.gif)
 * Events on the home page and search page can be filtered by Category, using the clickable bar.
 
 #### Search
+![Imgur](https://i.imgur.com/VF5QiRR.png)
 The search bar can be used to search by the Event name and/or Event description.
 
 ## Challenges
