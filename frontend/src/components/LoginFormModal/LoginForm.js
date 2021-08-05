@@ -6,12 +6,13 @@ import './LoginForm.css';
 import * as sessionActions from "../../store/session";
 import DemoUserButton from "../DemoUserButton";
 
-function LoginForm({ setShowModal }) {
+function LoginForm({ setShowModal, loginWarning }) {
   const dispatch = useDispatch();
     // const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(loginWarning ? [loginWarning] : []);
+  const [focusOnInput, setFocusOnInput] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,24 +44,36 @@ function LoginForm({ setShowModal }) {
             ))}
           </ul>
           <h2>Log In</h2>
-          <label>
-            Username or Email
-            <input
-              type="text"
-              value={credential}
-              onChange={(e) => setCredential(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Password
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
+          <div
+          className={focusOnInput ? 'form-input form-input--border_on_focus' : 'form-input'}
+          onBlur={()=>setFocusOnInput(false)}
+          onFocus={()=>setFocusOnInput(true)}
+          >
+            <label>
+              Username or Email
+              <input
+                type="text"
+                value={credential}
+                onChange={(e) => setCredential(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <div
+          className={focusOnInput ? 'form-input form-input--border_on_focus' : 'form-input'}
+          onBlur={()=>setFocusOnInput(false)}
+          onFocus={()=>setFocusOnInput(true)}
+          >
+            <label>
+              Password
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
+          </div>
           <button className="btn-primary" type="submit">Log In</button>
           <DemoUserButton setShowModal={setShowModal}/>
         </form>

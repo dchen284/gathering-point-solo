@@ -16,7 +16,7 @@ function SignupForm({setShowModal}) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
-
+  const [focusOnInput, setFocusOnInput] = useState(false);
 //   if (sessionUser) return <Redirect to="/" />;
 
 
@@ -52,42 +52,66 @@ function SignupForm({setShowModal}) {
           {errors.map((error, idx) => <li className="errors" key={idx}>{error}</li>)}
         </ul>
         <h2>Sign Up</h2>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label className="green">
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Confirm Password
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </label>
+        <div
+          className={focusOnInput ? 'form-input form-input--border_on_focus' : 'form-input'}
+          onBlur={()=>setFocusOnInput(false)}
+          onFocus={()=>setFocusOnInput(true)}
+        >
+          <label>
+            Email
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+        <div
+          className={focusOnInput ? 'form-input form-input--border_on_focus' : 'form-input'}
+          onBlur={()=>setFocusOnInput(false)}
+          onFocus={()=>setFocusOnInput(true)}
+        >
+          <label>
+            Username
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+        <div
+          className={focusOnInput ? 'form-input form-input--border_on_focus' : 'form-input'}
+          onBlur={()=>setFocusOnInput(false)}
+          onFocus={()=>setFocusOnInput(true)}
+        >
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+        <div
+          className={focusOnInput ? 'form-input form-input--border_on_focus' : 'form-input'}
+          onBlur={()=>setFocusOnInput(false)}
+          onFocus={()=>setFocusOnInput(true)}
+        >
+          <label>
+            Confirm Password
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </label>
+        </div>
         <button className="btn-primary" type="submit">Sign Up</button>
         <DemoUserButton />
       </form>

@@ -37,18 +37,21 @@
     background-color: #F6F5F8;
 }
 
-.nav__button--create_event,
-.nav__button--demo {
-    color: #3D64FF;
-}
-
-/* .nav__button--likes, .nav__button--tickets {
-    color: black;
-} */
 
 .nav__button i {
     font-size: 20px;
     margin: 5px;
+    color: #6f7287;
+}
+
+.nav__button--text {
+    color: #6f7287;
+}
+
+.nav__button--create_event,
+.nav__button--demo,
+.nav__button--create_event i {
+    color: #3D64FF;
 }
 
 .nav__left-side-items {
@@ -112,11 +115,7 @@
 
 
 
-/*
-@font-face {
-    font-family: "Mayeka Demi Bold";
-    src: url("../../fonts/mayeka/Mayeka\ Demi\ Bold\ Demo.otf") format("opentype"),
-  } */
+/* dropdown */
 
   .dropdown {
       /* overflow: visible; */
@@ -139,6 +138,8 @@
   .dropdown__username {
     margin-left: 10px;
     margin-right: 10px;
+    font-size: 13px;
+    color: #6f7287;
   }
 
 .dropdown__content {
@@ -150,7 +151,8 @@
     width: inherit;
     padding: 10px;
     background-color: white;
-    color: black;
+    color: #6f7287;
+    font-size: 13px;
 }
 
 .dropdown:hover .dropdown__content {
@@ -158,4 +160,9 @@
     flex-direction: column;
     overflow: visible;
     /* z-index: 2; */
+}
+
+
+.dropdown__text i {
+    color: #6f7287;
 }

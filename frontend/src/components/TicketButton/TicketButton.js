@@ -45,11 +45,14 @@ export default function TicketButton({ eventId }) {
                 onClick={clickTicketButton}
                 className={ hasTicket ? `btn-secondary btn-register-cancel` : `btn-register`}
             >
-                {hasTicket ? 'Cancel Ticket' : 'Register'}
+                {hasTicket ? 'Registered! (Cancel Ticket)' : 'Register'}
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <LoginForm setShowModal={setShowModal}/>
+                    <LoginForm
+                    setShowModal={setShowModal}
+                    loginWarning='Please Log In to Register a Ticket.'
+                    />
                 </Modal>
             )}
         </>

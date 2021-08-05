@@ -44,6 +44,30 @@
     margin: 0;
 }
 
-input {
+.form-input {
+    box-sizing: border-box;
+    border: 1px solid #dbdae3;
     width: 100%;
+    min-width: 300px;
+    height: 45px;
+    padding-left: 10px;
+    padding-top: 5px;
+    margin: 5px;
+}
+
+.form-input:hover {
+    border: 1px solid #a9a8b3;
+}
+
+.form-input input {
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    width: 100%;
+
+}
+
+.form-input label {
+    font-size: 12px;
+    color: #898c9f;
 }

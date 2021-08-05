@@ -49,7 +49,10 @@ export default function BookmarkButton({ borderStyle, eventId }) {
             </div>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <LoginForm setShowModal={setShowModal}/>
+                    <LoginForm
+                    setShowModal={setShowModal}
+                    loginWarning='Please Log In to save Likes.'
+                    />
                 </Modal>
             )}
         </>

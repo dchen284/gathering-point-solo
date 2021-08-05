@@ -34,13 +34,13 @@ function Navigation({ isLoaded }){
             <Link to={`/users/${sessionUser?.id}/likes`}>
               <div className="nav__button nav__button--likes">
                 <i className="far fa-heart"></i>
-                <div>Likes</div>
+                <div className="nav__button--text">Likes</div>
               </div>
             </Link>
             <Link to={`/users/${sessionUser?.id}/tickets`}>
               <div className="nav__button nav__button--tickets">
                 <i className="fas fa-ticket-alt"></i>
-                <div>Tickets</div>
+                <div className="nav__button--text">Tickets</div>
               </div>
             </Link>
 
