@@ -24,7 +24,7 @@ https://gathering-point.herokuapp.com/
 [User Stories](https://github.com/dchen284/gathering-point-solo/wiki/User-Stories)
 
 ### Database Schema
-![Database Structure](https://i.imgur.com/rAnEwkA.png)
+![Database Structure](https://i.imgur.com/kqfWS50.png)
 
 ## Features
 
