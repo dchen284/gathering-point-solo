@@ -43,13 +43,15 @@ https://gathering-point.herokuapp.com/
 * Once logged in, a user can view that user's Tickets via buttons on the Navigation bar.
 
 #### Likes
+![Imgur](https://i.imgur.com/jX79tzJ.gif)
 * On each Event page, the home page, and the search page, there is a Like button for creating a Like for the user.
 * If a user that is not logged-in clicks the Like button, the log-in modal appears.
 * Once logged in, when the user does not have a Like, clicking the Register button creates a Like.
 * Once logged in, when the user does have a Like, the Like button is highlighted, which can be clicked to delete a Like.
-* Once logged in, a user can view that user's Tickets via buttons on the Navigation bar.
+* Once logged in, a user can view that user's Likes via buttons on the Navigation bar.
 
 #### Categories
+
 * Events on the home page and search page can be filtered by Category, using the clickable bar.
 
 #### Search
