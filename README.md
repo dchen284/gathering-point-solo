@@ -29,6 +29,7 @@ https://gathering-point.herokuapp.com/
 ## Features
 
 #### Events
+![Imgur](https://i.imgur.com/Zh1bUTf.png)
 * Events are divided into Categories (by tournament type).
 * Users can click Events to go to individual Event pages for more details on that Event.
 * Once logged in, Events can be created using the "Create an event" button on the Navigation bar.
@@ -36,6 +37,7 @@ https://gathering-point.herokuapp.com/
 * Deleting an Event will cascade-delete the connected Tickets and Likes.
 
 #### Registration/Tickets
+![Imgur](https://i.imgur.com/veJ9QtZ.gif)
 * On each Event page, there is a Register button for creating a Ticket for the user.
 * If a user that is not logged-in clicks the Register button, the log-in modal appears.
 * Once logged in, when the user does not have a Ticket, clicking the Register button creates a Ticket.
