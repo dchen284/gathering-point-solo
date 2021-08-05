@@ -13,6 +13,7 @@
     margin-left: 5px;
     margin-right: 5px;
     color: #6f7287;
+    cursor: pointer;
 }
 
 .event-card-display--category:hover {
@@ -20,7 +21,7 @@
     color: #39364f;
 }
 
-.event-card-display--category.selected {
+.event-card-display--category-selected {
     font-weight: bold;
     color: #3D64FF;
     border-bottom: 2px solid #3D64FF;
@@ -29,6 +30,7 @@
 .event-card-display {
     background-color: rgb(245, 245, 245);
     padding-top: 20px;
+    padding-left: 20px;
 }
 
 .event-card-display--grid {

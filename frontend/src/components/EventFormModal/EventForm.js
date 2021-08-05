@@ -255,7 +255,7 @@ function EventForm({ formAction, setShowModal }) {
             <label>
               Image URL (optional):
               <input
-                type="url"
+                type="text"
                 value={formImgUrl}
                 onChange={(e) => setFormImgUrl(e.target.value)}
               />

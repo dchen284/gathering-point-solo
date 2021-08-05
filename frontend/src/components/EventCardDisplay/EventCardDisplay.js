@@ -74,7 +74,7 @@ export default function EventCardDisplay({ arrInput }) {
                 <div className='event-card-display--category-bar'>
                     <div
                     id='category-bar-tag#0'
-                    className={shownCategoryId === 0 ? 'event-card-display--category selected' : 'event-card-display--category'}
+                    className={shownCategoryId === 0 ? 'event-card-display--category event-card-display--category-selected' : 'event-card-display--category'}
                     onClick={(e) => showEventsByCategory(e)}
                     >
                         All
@@ -84,7 +84,7 @@ export default function EventCardDisplay({ arrInput }) {
                                 <div
                                 id={`category-bar-tag#${category.id}`}
                                 key={category.id}
-                                className={shownCategoryId === category.id ? 'event-card-display--category selected' : 'event-card-display--category'}
+                                className={shownCategoryId === category.id ? 'event-card-display--category event-card-display--category-selected' : 'event-card-display--category'}
                                 onClick={(e) => showEventsByCategory(e)}
                                 >
                                     {category.categoryName}
