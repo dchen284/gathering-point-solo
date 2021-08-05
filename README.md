@@ -58,11 +58,78 @@ https://gathering-point.herokuapp.com/
 
 #### Search
 ![Imgur](https://i.imgur.com/VF5QiRR.png)
-The search bar can be used to search by the Event name and/or Event description.
+* The search bar can be used to search by the Event name and/or Event description.
 
 ## Challenges
 
 #### Like Button
+The Like button for this website handles a number of cases:
+1) If there is no user logged in, clicking the button opens the log-in modal with a message.
+2) Upon login, the button is highlighted if the user has an existing Like, or not highlighted if the user does not have an existing Like.
+3) When logged in, clicking the button toggles if there is an existing Like.  This button state needs to appear on the home page and the Event page.
+4) Upon logout, all buttons need to be not highlighted.
+5) If the button is on the Event card on the home/search page, have a bordered circle.  If the button is on the Event page, do not have a bordered circle.
+
+Cases are addressed as follows:
+1) Take login status from the Redux store, use if statements to open the modal with a message if there is no user logged in.
+2) Use React's useEffect hook to check for changes in Like status, such as when logging in.
+3) Use React's useEffect hook and Redux store to check for changes in Like status, such as when clicking the button.
+4) Use React's useEffect hook to check for changes in Like status, such as when logging out.
+5) Pass in a prop for the BookmarkButton React component, which can set the border property.
+
+Code snippet of the BookmarkButton React component:
+
+```js
+export default function BookmarkButton({ borderStyle, eventId }) { 
+// 5) borderStyle prop to control border color
+
+    const dispatch = useDispatch();
+    const [showModal, setShowModal] = useState(false);
+    const [hasBookmark, setHasBookmark] = useState(false);
+    const sessionUser = useSelector( (state) => state.session.user );
+    
+    // 2), 3) and 4) useEffect triggers on changes in logged-in status and bookmark status
+    useEffect(()=>{
+        if (!sessionUser) {setHasBookmark(false)}
+        else {
+            if (sessionUser?.UserBookmarks[eventId]) {setHasBookmark(true)}
+        }
+    },[eventId, sessionUser])
+
+    //1) Opens login modal if no one is logged in, and 3) Store Like status in Redux store
+    function clickBookmarkButton() {
+        if (sessionUser) {
+            if (!hasBookmark) {dispatch(sessionActions.fetchAddBookmark(eventId, sessionUser.id))}
+            else {dispatch(sessionActions.fetchRemoveBookmark(eventId, sessionUser.id))}
+            setHasBookmark((prevHasBookmark) => !prevHasBookmark);
+        }
+        else {
+            setShowModal(true); 
+            // 1) No user logged in, so open modal.
+        }
+    }
+
+    return (
+        <>
+            <div
+            className={borderStyle === "grey" ? "bookmark-button border-grey" : "bookmark-button"}
+            onClick={clickBookmarkButton}
+            >
+                <i className={hasBookmark ? "fas fa-heart" : "far fa-heart"}></i>
+            </div>
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <LoginForm
+                    setShowModal={setShowModal}
+                    loginWarning='Please Log In to save Likes.' 
+                    // 1) Message if button is clicked without being logged in
+                    />
+                </Modal>
+            )}
+        </>
+    );
+}
+```
 
 ## Future Features
 * Implementing AWS for uploading images, without the need for an external image hosting service.
