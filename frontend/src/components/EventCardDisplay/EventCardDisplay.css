@@ -60,7 +60,7 @@
     height: 50vw;
     max-height: 600px;
     background-color: lightgray;
-    background-image: url("./background3.jpeg");
+    background-image: url("../../images/background3.jpeg");
     background-size: 100%;
     display: flex;
     align-items: center;
