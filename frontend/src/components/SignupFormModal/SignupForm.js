@@ -16,24 +16,39 @@ function SignupForm({setShowModal}) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
-//   if (sessionUser) return <Redirect to="/" />;
 
+  const [errEmail, setErrEmail] = useState("");
+  const [errUsername, setErrUsername] = useState("");
+  const [errPassword, setErrPassword] = useState("");
+  const [errConfirmPassword, setErrConfirmPassword] = useState("");
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     let errorsToPrint = [];
-    // if (!email.includes('@'))
-    //   {errorsToPrint.push('Please provide a valid email.')}
-    // if (username.length < 4 || username.length > 30)
-    //   {errorsToPrint.push('Username must have between 4 to 30 characters.')}
-    // if (password.length < 5)
-    //   {errorsToPrint.push('Password must have 5 characters or more.')}
-    // if (password !== confirmPassword)
-    //   {errorsToPrint.push('Password and Confirm Password do not match.')}
+    setErrEmail("");
+    setErrUsername("");
+    setErrPassword("");
+    setErrConfirmPassword("");
 
-    if (!errorsToPrint.length) {
+    const conditions = [
+      !email.includes('@'),
+      (username.length < 4 || username.length > 30),
+      password.length < 5,
+      password !== confirmPassword,
+    ];
+
+    if (conditions[0])
+      {setErrEmail('Please provide a valid email.')}
+    if (conditions[1])
+      {setErrUsername('Username must have between 4 to 30 characters.')}
+    if (conditions[2])
+      {setErrPassword('Password must have 5 characters or more.')}
+    if (conditions[3])
+      {setErrConfirmPassword('Password and Confirm Password do not match.')}
+
+    if (!errorsToPrint.length && conditions.every(el => !el)) {
       setErrors([]);
       return dispatch(sessionActions.signup({ email, username, password, confirmPassword }))
         .catch(async (res) => {
@@ -51,50 +66,67 @@ function SignupForm({setShowModal}) {
           {errors.map((error, idx) => <li className="errors" key={idx}>{error}</li>)}
         </ul>
         <h2>Sign Up</h2>
-        <div className='form-input'>
-          <label>
-            Email
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              // required
-            />
-          </label>
+
+        <div className='form-input-container'>
+          <div className={errEmail ? 'form-input--error': 'form-input'}>
+            <label>
+              Email
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                // required
+              />
+            </label>
+          </div>
+          <div className='form-frontend-error'>{errEmail}</div>
         </div>
-        <div className='form-input'>
-          <label>
-            Username
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              // required
-            />
-          </label>
+
+        <div className='form-input-container'>
+          <div className={errUsername ? 'form-input--error': 'form-input'}>
+            <label>
+              Username
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                // required
+              />
+            </label>
+          </div>
+          <div className='form-frontend-error'>{errUsername}</div>
         </div>
-        <div className='form-input'>
-          <label>
-            Password
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              // required
-            />
-          </label>
+
+        <div className='form-input-container'>
+          <div className={errPassword ? 'form-input--error': 'form-input'}>
+            <label>
+              Password
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                // required
+              />
+            </label>
+          </div>
+          <div className='form-frontend-error'>{errPassword}</div>
         </div>
-        <div className='form-input'>
-          <label>
-            Confirm Password
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              // required
-            />
-          </label>
+
+        <div className='form-input-container'>
+          <div className={errConfirmPassword ? 'form-input--error': 'form-input'}>
+            <label>
+              Confirm Password
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                // required
+              />
+            </label>
+          </div>
+          <div className='form-frontend-error'>{errConfirmPassword}</div>
         </div>
+
         <button className="btn-primary" type="submit">Sign Up</button>
         <DemoUserButton />
       </form>
