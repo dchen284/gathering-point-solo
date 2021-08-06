@@ -24,18 +24,18 @@ function SignupForm({setShowModal}) {
     e.preventDefault();
 
     let errorsToPrint = [];
-    if (!email.includes('@'))
-      {errorsToPrint.push('Please provide a valid email.')}
-    if (username.length < 4 || username.length > 30)
-      {errorsToPrint.push('Username must have between 4 to 30 characters.')}
-    if (password.length < 5)
-      {errorsToPrint.push('Password must have 5 characters or more.')}
-    if (password !== confirmPassword)
-      {errorsToPrint.push('Password and Confirm Password do not match.')}
+    // if (!email.includes('@'))
+    //   {errorsToPrint.push('Please provide a valid email.')}
+    // if (username.length < 4 || username.length > 30)
+    //   {errorsToPrint.push('Username must have between 4 to 30 characters.')}
+    // if (password.length < 5)
+    //   {errorsToPrint.push('Password must have 5 characters or more.')}
+    // if (password !== confirmPassword)
+    //   {errorsToPrint.push('Password and Confirm Password do not match.')}
 
     if (!errorsToPrint.length) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, password }))
+      return dispatch(sessionActions.signup({ email, username, password, confirmPassword }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
@@ -58,7 +58,7 @@ function SignupForm({setShowModal}) {
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
+              // required
             />
           </label>
         </div>
@@ -69,7 +69,7 @@ function SignupForm({setShowModal}) {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              required
+              // required
             />
           </label>
         </div>
@@ -80,7 +80,7 @@ function SignupForm({setShowModal}) {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
+              // required
             />
           </label>
         </div>
@@ -91,7 +91,7 @@ function SignupForm({setShowModal}) {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              required
+              // required
             />
           </label>
         </div>

@@ -194,7 +194,7 @@ function EventForm({ formAction, setShowModal }) {
                 type="text"
                 value={formTitle}
                 onChange={(e) => setFormTitle(e.target.value)}
-                required
+                // required
               />
             </label>
           </div>
@@ -234,7 +234,7 @@ function EventForm({ formAction, setShowModal }) {
                 type="datetime-local"
                 value={formStartTime}
                 onChange={(e) => setFormStartTime(e.target.value)}
-                required
+                // required
               />
             </label>
           </div>
@@ -246,7 +246,7 @@ function EventForm({ formAction, setShowModal }) {
                 type="datetime-local"
                 value={formEndTime}
                 onChange={(e) => setFormEndTime(e.target.value)}
-                required
+                // required
               />
             </label>
           </div>
@@ -270,7 +270,7 @@ function EventForm({ formAction, setShowModal }) {
                 value={formLocation}
                 placeholder="e.g. Houston, TX"
                 onChange={(e) => setFormLocation(e.target.value)}
-                required
+                // required
               />
             </label>
           </div>
@@ -282,7 +282,7 @@ function EventForm({ formAction, setShowModal }) {
                 type="text"
                 value={formOrganizerName}
                 onChange={(e) => setFormOrganizerName(e.target.value)}
-                required
+                // required
               />
             </label>
           </div>
@@ -361,7 +361,7 @@ function EventForm({ formAction, setShowModal }) {
 //         type="text"
 //         value={credential}
 //         onChange={(e) => setCredential(e.target.value)}
-//         required
+        // required
 //       />
 //     </label>
 //     <label>

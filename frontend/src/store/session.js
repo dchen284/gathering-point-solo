@@ -22,26 +22,22 @@ const REMOVE_BOOKMARK = 'session/REMOVE_BOOKMARK';
 
   //login and signup
 export const login = (userData) => async (dispatch) => {
-    // const { credential, password } = userData;
-    // console.log('userData', userData);
+
     const res = await csrfFetch('/api/session', {
         method: 'POST',
         body: JSON.stringify(userData),
     });
-    const data = await res.json();
-    if (res.ok) {
-        // console.log('returned data', data);
-        dispatch(setSessionUser(data.user));
-        // console.log('tickets?', data.user.UserTickets)
 
-        // dispatch(ticketsActions.loadTickets(data.user.UserTickets));
-        // const copyOfTickets = JSON.parse(JSON.stringify(data.user.UserTickets));
-        // console.log('copyOfTickets', copyOfTickets);
-        // dispatch(ticketsActions.loadTickets(copyOfTickets));
+
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(setSessionUser(data.user));
         return data.user;
     }
     else {
-        throw res;
+        console.log('errors', res);
+        return res;
     }
 }
 
@@ -55,14 +51,15 @@ export const restoreSessionUser = () => async (dispatch) => {
 
 //from example
 export const signup = (user) => async (dispatch) => {
-  const { username, email, password } = user;
+  // const { username, email, password } = user;
   const response = await csrfFetch("/api/users", {
     method: "POST",
-    body: JSON.stringify({
-      username,
-      email,
-      password,
-    }),
+    body: JSON.stringify(user)
+    // body: JSON.stringify({
+    //   username,
+    //   email,
+    //   password,
+    // }),
   });
   const data = await response.json();
   dispatch(setSessionUser(data.user));

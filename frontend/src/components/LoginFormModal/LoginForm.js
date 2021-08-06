@@ -23,14 +23,16 @@ function LoginForm({ setShowModal, loginWarning }) {
     //     if (data && data.errors) setErrors(data.errors);
     //   }
     // );
-    setShowModal(false);
-    dispatch(sessionActions.login({ credential, password })).catch(
-      async (res) => {
-        // console.log('eeba', res);
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
+
+
+    dispatch(sessionActions.login({ credential, password }))
+      .then( ()=> setShowModal(false) )
+      .catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        }
+      );
 
   };
 
@@ -51,7 +53,7 @@ function LoginForm({ setShowModal, loginWarning }) {
                 type="text"
                 value={credential}
                 onChange={(e) => setCredential(e.target.value)}
-                required
+                // required
               />
             </label>
           </div>
@@ -62,7 +64,7 @@ function LoginForm({ setShowModal, loginWarning }) {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
+                // required
               />
             </label>
           </div>

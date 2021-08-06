@@ -14,11 +14,13 @@ const { Event, User, UserBookmark, UserTicket } = require('../../db/models');
 
 const validateSignup = [
     check('email')
-      .exists({ checkFalsy: true })
+      // .exists({ checkFalsy: true })
+      // .withMessage('Email cannot be blank.')
       .isEmail()
       .withMessage('Please provide a valid email.'),
     check('username')
-      .exists({ checkFalsy: true })
+      // .exists({ checkFalsy: true })
+      // .withMessage('Username cannot be blank.')
       .isLength({ min: 4 })
       .withMessage('Please provide a username with at least 4 characters.'),
     check('username')
@@ -26,9 +28,21 @@ const validateSignup = [
       .isEmail()
       .withMessage('Username cannot be an email.'),
     check('password')
-      .exists({ checkFalsy: true })
-      .isLength({ min: 6 })
-      .withMessage('Password must be 6 characters or more.'),
+      // .exists({ checkFalsy: true })
+      // .withMessage('Password cannot be blank.')
+      // .isLength({ min: 8 })
+      // .withMessage('Password must be 8 characters or more.')
+      .isStrongPassword()
+      .withMessage("Password must be minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character."),
+    check('confirmPassword')
+      // .exists({ checkFalsy: true })
+      // .withMessage('Confirm Password cannot be blank.')
+      .custom((value, { req }) => {
+        if (value !== req.body.password) {
+          throw new Error('Confirm Password does not match Password');
+        }
+        return true;
+      }),
     handleValidationErrors,
   ];
 

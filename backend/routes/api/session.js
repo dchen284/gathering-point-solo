@@ -14,7 +14,7 @@ const { User, Event, UserBookmark, UserTicket } = require('../../db/models');
 const validateLogin = [
     check('credential')
       .exists({ checkFalsy: true })
-      .notEmpty()
+      // .notEmpty()
       .withMessage('Please provide a valid email or username.'),
     check('password')
       .exists({ checkFalsy: true })
