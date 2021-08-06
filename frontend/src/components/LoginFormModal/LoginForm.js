@@ -23,8 +23,8 @@ function LoginForm({ setShowModal, loginWarning }) {
     setErrCredential("");
     setErrPassword("");
 
-    if (!credential) {setErrCredential("Please enter a valid Username or Email.")}
-    if (!password) {setErrPassword("Password is required.")}
+    if (!credential) {setErrCredential('Please provide a valid email or username.')}
+    if (!password) {setErrPassword('Please provide a password.')}
 
     if (credential && password) {
       dispatch(sessionActions.login({ credential, password }))

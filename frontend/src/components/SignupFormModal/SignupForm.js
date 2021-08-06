@@ -32,11 +32,15 @@ function SignupForm({setShowModal}) {
     setErrPassword("");
     setErrConfirmPassword("");
 
+    const regexPassword = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$');
+    const regexEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
+
     const errorConditions = [
       !email.includes('@'),
       (username.length < 4 || username.length > 30),
-      password.length < 5,
+      !password || !regexPassword.test(password),
       password !== confirmPassword,
+      regexEmail.test(username),
     ];
 
     if (errorConditions[0])
@@ -44,9 +48,11 @@ function SignupForm({setShowModal}) {
     if (errorConditions[1])
       {setErrUsername('Username must have between 4 to 30 characters.')}
     if (errorConditions[2])
-      {setErrPassword('Password must have 5 characters or more.')}
+      {setErrPassword("Password must be minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character.")}
     if (errorConditions[3])
-      {setErrConfirmPassword('Password and Confirm Password do not match.')}
+      {setErrConfirmPassword('Confirm Password does not match Password.')}
+    if (errorConditions[4])
+      {setErrUsername('Username cannot be an email.')}
 
     if (!errorsToPrint.length && errorConditions.every(condition => condition === false)) {
       setErrors([]);
