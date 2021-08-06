@@ -93,7 +93,7 @@ export default function EventCardDisplay({ arrInput }) {
                     })}
                 </div>
                 <div className="event-card-display--grid">
-                    {arrEventsToShow.map( (event) => {
+                    {arrEventsToShow.sort((a, b) => (new Date(a.startTime)).getTime() - (new Date(b.startTime)).getTime() ).map( (event) => {
                         return <EventCard key={`${event.id}`} event={event}/>
                     })}
                     {

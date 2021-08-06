@@ -15,7 +15,8 @@ module.exports = {
       return queryInterface.bulkInsert('UserTickets',
       [
         {userId: 1, eventId: 1},
-        {userId: 1, eventId: 3},
+        {userId: 1, eventId: 10},
+        {userId: 1, eventId: 16},
         {userId: 2, eventId: 2},
         {userId: 2, eventId: 3},
       ], {});

@@ -27,7 +27,7 @@ export default function EventDisplay() {
     const sessionUser = useSelector(state => state.session.user);
     const events = useSelector( state => state.events );
     const event = events[eventId];
-    const arrEventsToShow = Object.values(events).filter(el => +el.categoryId === +event.categoryId);
+    const arrEventsToShow = Object.values(events).filter(el => (+el.categoryId === +event.categoryId) && (+el.id !== +event.id));
 
     //useEffects
     useEffect( () => {
@@ -138,7 +138,7 @@ export default function EventDisplay() {
                         <div className='event-display__other-events'>
                             <h2>Other {event.Category.categoryName} events</h2>
                             <div className="event-card-display--grid">
-                                {arrEventsToShow.map( (event) => {
+                            {arrEventsToShow.sort((a, b) => (new Date(a.startTime)).getTime() - (new Date(b.startTime)).getTime() ).map( (event) => {
                                     return <EventCard key={`${event.id}`} event={event}/>
                                 })}
                                 {
