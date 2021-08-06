@@ -55,7 +55,73 @@ function EventForm({ formAction, setShowModal }) {
   const [formCategoryId, setFormCategoryId] = useState(initialStateForForm.categoryId);
   const [errors, setErrors] = useState([]);
 
+  const [errTitle, setErrTitle] = useState("");
+  const [errStartTime, setErrStartTime] = useState("");
+  const [errEndTime, setErrEndTime] = useState("");
+  const [errOrganizerName, setErrOrganizerName] = useState("");
 //   if (sessionUser) return <Redirect to="/" />;
+
+  const errorConditions = [
+    false, //object keys start at 1, this is here to provide the offset from starting index 0 to starting index 1
+    !formTitle,
+    (formTitle.length < 3 || formTitle.length > 255),
+    !formStartTime,
+    !formEndTime,
+    ( !!(formStartTime && formEndTime) && (formStartTime > formEndTime)),
+    !formOrganizerName,
+    (formOrganizerName.length < 3 || formOrganizerName.length > 255),
+  ];
+
+  const objFrontendErrors = {
+    1:
+      {
+        condition: errorConditions[1],
+        errorCallback: () => setErrTitle('Please provide a title.'),
+      },
+    2:
+      {
+        condition: errorConditions[2],
+        errorCallback: () => setErrTitle('Please provide a title that is between 3 and 255 letters long.'),
+      },
+    3:
+      {
+        condition: errorConditions[3],
+        errorCallback: () => setErrStartTime('Please provide a start time.'),
+      },
+    4:
+      {
+        condition: errorConditions[4],
+        errorCallback: () => setErrEndTime('Please provide a end time.'),
+      },
+    5:
+      {
+        condition: errorConditions[5],
+        errorCallback: () => setErrEndTime('The event start time is after the event end time.'),
+      },
+    6:
+      {
+        condition: errorConditions[6],
+        errorCallback: () => setErrOrganizerName('Please provide an organizer name.'),
+      },
+    7:
+      {
+        condition: errorConditions[7],
+        errorCallback: () => setErrOrganizerName('Please provide an organizer name that is between 3 and 255 letters long.'),
+      }
+  }
+
+  function doFrontEndValidations() {
+    setErrTitle("");
+    setErrStartTime("");
+    setErrEndTime("");
+    setErrOrganizerName("");
+
+    for (let i = 1; i <= Object.keys(objFrontendErrors).length ; i++) {
+      if (objFrontendErrors[i].condition) {
+        objFrontendErrors[i].errorCallback()
+      }
+    }
+  }
 
   const handleSubmitForUpdate = async (e) => {
     e.preventDefault();
@@ -77,23 +143,9 @@ function EventForm({ formAction, setShowModal }) {
     // console.log('updatedEventData', updatedEventData);
 
     let errorsToPrint = [];
+    doFrontEndValidations();
 
-    if (!formTitle)
-        {errorsToPrint.push('Please provide a title.')}
-    if (formTitle.length < 3 || formTitle.length > 255)
-        {errorsToPrint.push('Please provide a title that is between 3 and 255 letters long.')}
-    if (!formStartTime)
-        {errorsToPrint.push('Please provide a start time.')}
-    if (!formEndTime)
-        {errorsToPrint.push('Please provide an end time.')}
-    if (formStartTime > formEndTime)
-        {errorsToPrint.push('The event start time is after the event end time.')}
-    if (!formOrganizerName)
-        {errorsToPrint.push('Please provide an organizer name.')}
-    if (formOrganizerName.length < 3 || formOrganizerName.length > 255)
-        {errorsToPrint.push('Please provide an organizer name that is between 3 and 255 letters long.')}
-
-    if (errorsToPrint.length === 0) {
+    if (!errorsToPrint.length && errorConditions.every(condition => condition === false)) {
       // console.log(newEventData);
 
       setShowModal(false);
@@ -112,6 +164,7 @@ function EventForm({ formAction, setShowModal }) {
 
 
   const handleSubmitForPost = async (e) => {
+
     e.preventDefault();
     // console.log('inside post!')
     const newEventData = {
@@ -131,39 +184,17 @@ function EventForm({ formAction, setShowModal }) {
     // alert(newEventData);
 
     //validators
+
     let errorsToPrint = [];
+    doFrontEndValidations();
 
-    if (!formTitle)
-        {errorsToPrint.push('Please provide a title.')}
-    if (formTitle.length < 3 || formTitle.length > 255)
-        {errorsToPrint.push('Please provide a title that is between 3 and 255 letters long.')}
-    if (!formStartTime)
-        {errorsToPrint.push('Please provide a start time.')}
-    if (!formEndTime)
-        {errorsToPrint.push('Please provide an end time.')}
-    if (formStartTime > formEndTime)
-        {errorsToPrint.push('The event start time is after the event end time.')}
-    if (!formOrganizerName)
-        {errorsToPrint.push('Please provide an organizer name.')}
-    if (formOrganizerName.length < 3 || formOrganizerName.length > 255)
-        {errorsToPrint.push('Please provide an organizer name that is between 3 and 255 letters long.')}
-    if (!formLocation)
-        {errorsToPrint.push('Please provide a location.')}
-
-    if (!errorsToPrint.length) {
-      // console.log(newEventData);
-
-      // setShowModal(false);
-
-      // const postedEvent = await dispatch(eventsActions.fetchEventToAdd(newEventData));
+    if (!errorsToPrint.length && errorConditions.every(condition => condition === false)) {
       const postedEvent = await dispatch(eventsActions.fetchEventToAdd(newEventData)).catch(
         async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         }
       );
-
-      // console.log('postedEvent', postedEvent);
 
       history.push(`/events/${postedEvent.id}`);
       setShowModal(false);
@@ -187,17 +218,22 @@ function EventForm({ formAction, setShowModal }) {
           <ul>
             {errors.map((error, idx) => <li className="errors" key={idx}>{error}</li>)}
           </ul>
-          <div className='form-input'>
-            <label>
-              Title
-              <input
-                type="text"
-                value={formTitle}
-                onChange={(e) => setFormTitle(e.target.value)}
-                // required
-              />
-            </label>
+
+          <div className='form-input-container'>
+            <div className={errTitle ? 'form-input--error': 'form-input'}>
+              <label>
+                Title
+                <input
+                  type="text"
+                  value={formTitle}
+                  onChange={(e) => setFormTitle(e.target.value)}
+                  // required
+                />
+              </label>
+            </div>
+            <div className='form-frontend-error'>{errTitle}</div>
           </div>
+
           <div className='form-input'>
             <div className='form-input--select-container'>
               <label>
@@ -227,29 +263,36 @@ function EventForm({ formAction, setShowModal }) {
             />
           </div>
 
-          <div className='form-input'>
-            <label>
-              Start Time:
-              <input
-                type="datetime-local"
-                value={formStartTime}
-                onChange={(e) => setFormStartTime(e.target.value)}
-                // required
-              />
-            </label>
+          <div className='form-input-container'>
+            <div className={errStartTime ? 'form-input--error': 'form-input'}>
+              <label>
+                Start Time:
+                <input
+                  type="datetime-local"
+                  value={formStartTime}
+                  onChange={(e) => setFormStartTime(e.target.value)}
+                  // required
+                />
+              </label>
+            </div>
+            <div className='form-frontend-error'>{errStartTime}</div>
           </div>
 
-          <div className='form-input'>
-            <label>
-              End Time:
-              <input
-                type="datetime-local"
-                value={formEndTime}
-                onChange={(e) => setFormEndTime(e.target.value)}
-                // required
-              />
-            </label>
+          <div className='form-input-container'>
+            <div className={errEndTime ? 'form-input--error': 'form-input'}>
+              <label>
+                End Time:
+                <input
+                  type="datetime-local"
+                  value={formEndTime}
+                  onChange={(e) => setFormEndTime(e.target.value)}
+                  // required
+                />
+              </label>
+            </div>
+            <div className='form-frontend-error'>{errEndTime}</div>
           </div>
+
 
           <div className='form-input'>
             <label>
@@ -264,7 +307,7 @@ function EventForm({ formAction, setShowModal }) {
 
           <div className='form-input'>
             <label>
-              City, State:
+              City, State (optional):
               <input
                 type="text"
                 value={formLocation}
@@ -275,17 +318,21 @@ function EventForm({ formAction, setShowModal }) {
             </label>
           </div>
 
-          <div className='form-input'>
-            <label>
-              Organizer Name:
-              <input
-                type="text"
-                value={formOrganizerName}
-                onChange={(e) => setFormOrganizerName(e.target.value)}
-                // required
-              />
-            </label>
+          <div className='form-input-container'>
+            <div className={errOrganizerName ? 'form-input--error': 'form-input'}>
+              <label>
+                Organizer Name:
+                <input
+                  type="text"
+                  value={formOrganizerName}
+                  onChange={(e) => setFormOrganizerName(e.target.value)}
+                  // required
+                />
+              </label>
+            </div>
+            <div className='form-frontend-error'>{errOrganizerName}</div>
           </div>
+
 
           <button className="btn-primary" type="submit">{`${formAction} Event`}</button>
         </form>
@@ -304,6 +351,11 @@ function EventForm({ formAction, setShowModal }) {
       </div>
     </>
   );
+
+}
+
+export default EventForm;
+
 // const dispatch = useDispatch();
 // const [credential, setCredential] = useState("");
 // const [password, setPassword] = useState("");
@@ -432,6 +484,20 @@ function EventForm({ formAction, setShowModal }) {
 //   </form>
 
 // );
-}
 
-export default EventForm;
+    // if (!formTitle)
+    //     {errorsToPrint.push('Please provide a title.')}
+    // if (formTitle.length < 3 || formTitle.length > 255)
+    //     {errorsToPrint.push('Please provide a title that is between 3 and 255 letters long.')}
+    // if (!formStartTime)
+    //     {errorsToPrint.push('Please provide a start time.')}
+    // if (!formEndTime)
+    //     {errorsToPrint.push('Please provide an end time.')}
+    // if (formStartTime > formEndTime)
+    //     {errorsToPrint.push('The event start time is after the event end time.')}
+    // if (!formOrganizerName)
+    //     {errorsToPrint.push('Please provide an organizer name.')}
+    // if (formOrganizerName.length < 3 || formOrganizerName.length > 255)
+    //     {errorsToPrint.push('Please provide an organizer name that is between 3 and 255 letters long.')}
+    // if (!formLocation)
+    //     {errorsToPrint.push('Please provide a location.')}

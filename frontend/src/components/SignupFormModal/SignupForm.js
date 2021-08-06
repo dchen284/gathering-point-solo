@@ -32,23 +32,23 @@ function SignupForm({setShowModal}) {
     setErrPassword("");
     setErrConfirmPassword("");
 
-    const conditions = [
+    const errorConditions = [
       !email.includes('@'),
       (username.length < 4 || username.length > 30),
       password.length < 5,
       password !== confirmPassword,
     ];
 
-    if (conditions[0])
+    if (errorConditions[0])
       {setErrEmail('Please provide a valid email.')}
-    if (conditions[1])
+    if (errorConditions[1])
       {setErrUsername('Username must have between 4 to 30 characters.')}
-    if (conditions[2])
+    if (errorConditions[2])
       {setErrPassword('Password must have 5 characters or more.')}
-    if (conditions[3])
+    if (errorConditions[3])
       {setErrConfirmPassword('Password and Confirm Password do not match.')}
 
-    if (!errorsToPrint.length && conditions.every(el => !el)) {
+    if (!errorsToPrint.length && errorConditions.every(condition => condition === false)) {
       setErrors([]);
       return dispatch(sessionActions.signup({ email, username, password, confirmPassword }))
         .catch(async (res) => {

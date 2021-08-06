@@ -49,7 +49,7 @@ export default function EventCard({event}) {
                     <Link to={`/events/${event.id}`}>
                         <p className="event-card__title">{event.title.toUpperCase()}</p>
                         <p className="event-card__start-time">{formatTime(event.startTime)}</p>
-                        <p className="event-card__organizer">{event.organizerName} • {event.location}</p>
+                        <p className="event-card__organizer">{event.organizerName} {event.location && "•"} {event.location}</p>
                     </Link>
                 </div>
 

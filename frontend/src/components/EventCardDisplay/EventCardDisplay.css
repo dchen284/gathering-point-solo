@@ -21,7 +21,8 @@
     color: #39364f;
 }
 
-.event-card-display--category-selected {
+.event-card-display--category-selected,
+.event-card-display--category-selected:hover {
     font-weight: bold;
     color: #3D64FF;
     border-bottom: 2px solid #3D64FF;

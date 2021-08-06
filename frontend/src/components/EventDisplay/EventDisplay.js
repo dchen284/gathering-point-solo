@@ -132,7 +132,7 @@ export default function EventDisplay() {
                             </div>
 
                             <h3>Location</h3>
-                            <p>{event.location}</p>
+                            <p>{event.location ? event.location : '-'}</p>
                         </div>
 
                         <div className='event-display__other-events'>
