@@ -18,10 +18,6 @@ module.exports = {
       {categoryName: 'Historic'},
       {categoryName: 'Commander - Casual'},
       {categoryName: 'Draft'},
-      {categoryName: 'Sealed'},
-      {categoryName: 'Modern'},
-      {categoryName: 'Legacy'},
-      {categoryName: 'Commander - Competitive'},
       {categoryName: 'Other'},
     ], {});
   },
