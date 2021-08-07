@@ -111,6 +111,7 @@
     color: black;
     margin-bottom: 15px;
     word-wrap: break-word;
+    max-width: 230px;
 }
 
 .event__start-time {

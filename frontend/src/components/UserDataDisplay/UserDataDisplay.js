@@ -71,6 +71,12 @@ export default function UserDataDisplay({strDataType}) {
         return (new Date(strTime)).getUTCDate();
     }
 
+    function truncateString(strInput, numStringLength) {
+        return strInput.length > numStringLength ?
+                 strInput.slice(0, numStringLength - 3) + '...' :
+                 strInput;
+     }
+
     //JSX
     //if the user is not logged in, or the user is attempting to access another user's page
     //if the user is not logged in, redirect to home page
@@ -142,7 +148,7 @@ export default function UserDataDisplay({strDataType}) {
                                                     />
                                                     <div className='event__text'>
                                                         <div className='event__title'>
-                                                            {objEvents[event.eventId].title}
+                                                            {truncateString(objEvents[event.eventId].title, 42)}
                                                         </div>
                                                         <div className='event__start-time'>
                                                             {formatTime(objEvents[event.eventId].startTime)}
@@ -183,7 +189,7 @@ export default function UserDataDisplay({strDataType}) {
                                                     />
                                                     <div className='event__text'>
                                                         <div className='event__title'>
-                                                            {objEvents[event.id].title}
+                                                            {truncateString(objEvents[event.id].title, 42)}
                                                         </div>
                                                         <div className='event__start-time'>
                                                             {formatTime(objEvents[event.id].startTime)}

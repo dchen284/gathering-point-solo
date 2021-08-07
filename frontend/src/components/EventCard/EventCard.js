@@ -28,10 +28,10 @@ export default function EventCard({event}) {
     //     strStartTime = `${strDate}, ${+strHour-12}:${strMinutes} PM`;
     // }
 
-    function truncateString(strTitle, numStringLength) {
-       return strTitle.length > numStringLength ?
-                strTitle.slice(0, numStringLength - 3) + '...' :
-                strTitle;
+    function truncateString(strInput, numStringLength) {
+       return strInput.length > numStringLength ?
+                strInput.slice(0, numStringLength - 3) + '...' :
+                strInput;
     }
 
     return (
