@@ -68,11 +68,15 @@
 .event-display__title {
     margin-bottom: 10px;
     font-size: 20px;
+    overflow-wrap: break-word;
+    max-width: 355px;
 }
 
 .event-display__organizer {
     color: #6f7287;
     font-size: 15px;
+    overflow-wrap: break-word;
+    max-width: 355px;
 }
 
 .event-display__owner-buttons {
@@ -132,6 +136,8 @@
 .event-display__white-data-box p {
     padding-top: 15px;
     font-size: 14px;
+    overflow-wrap: break-word;
+    max-width: 355px;
 }
 
 /* Area - other-events */

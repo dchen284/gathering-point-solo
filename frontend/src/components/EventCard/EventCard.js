@@ -28,6 +28,11 @@ export default function EventCard({event}) {
     //     strStartTime = `${strDate}, ${+strHour-12}:${strMinutes} PM`;
     // }
 
+    function truncateString(strTitle, numStringLength) {
+       return strTitle.length > numStringLength ?
+                strTitle.slice(0, numStringLength - 3) + '...' :
+                strTitle;
+    }
 
     return (
         // <Link key={event.id} to={`/events/${event.id}`}>
@@ -47,9 +52,9 @@ export default function EventCard({event}) {
 
                 <div className="event-card__data">
                     <Link to={`/events/${event.id}`}>
-                        <p className="event-card__title">{event.title.toUpperCase()}</p>
+                        <p className="event-card__title">{truncateString(event.title.toUpperCase(), 42)}</p>
                         <p className="event-card__start-time">{formatTime(event.startTime)}</p>
-                        <p className="event-card__organizer">{event.organizerName} {event.location && "•"} {event.location}</p>
+                        <p className="event-card__organizer">{truncateString(`${event.organizerName} ${event.location && "•"} ${event.location}`, 28)}</p>
                     </Link>
                 </div>
 
